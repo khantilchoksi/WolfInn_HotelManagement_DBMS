@@ -8,6 +8,7 @@ package backend;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,7 +30,7 @@ public class Hotels {
             pscreate.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
-            //JOptionPane.showMessageDialog(null,ex);
+            JOptionPane.showMessageDialog(null,ex);
         }
 
         return 1;
@@ -40,11 +41,11 @@ public class Hotels {
         try
         {
             Statement statement = Connect.connection.createStatement();
-            resultSet = statement.executeQuery("select * from hotels order by hotelID");
+            resultSet = statement.executeQuery("select * from hotels order by hotelName");
             
         }catch(Exception ex){
             ex.printStackTrace();
-            //JOptionPane.showMessageDialog(null,ex);
+            JOptionPane.showMessageDialog(null,ex);
         }
         
         return resultSet;
