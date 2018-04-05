@@ -117,9 +117,9 @@ public class EditHotelJFrame extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Edit / Update Hotel Details");
 
-        jLabel2.setText("Enter Hotel Name:");
+        jLabel2.setText("Edit Hotel Name:");
 
-        jLabel3.setText("Enter Hotel Street Address:");
+        jLabel3.setText("Edit Hotel Street Address:");
 
         jLabel4.setText("Select City:");
 
@@ -161,7 +161,7 @@ public class EditHotelJFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setText("Enter Hotel Name:");
+        jLabel8.setText("Select Hotel:");
 
         citiesJComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -192,11 +192,11 @@ public class EditHotelJFrame extends javax.swing.JFrame {
                 .addGap(54, 54, 54)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(citiesJComboBox, 0, 301, Short.MAX_VALUE)
+                        .addComponent(citiesJComboBox, 0, 309, Short.MAX_VALUE)
                         .addGap(114, 114, 114))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(phoneNumberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
+                            .addComponent(phoneNumberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -205,7 +205,7 @@ public class EditHotelJFrame extends javax.swing.JFrame {
                                     .addComponent(statesJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(zipCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap(76, Short.MAX_VALUE))
+                        .addContainerGap(80, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(hotelsJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)

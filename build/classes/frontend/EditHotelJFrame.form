@@ -67,12 +67,12 @@
                   <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="citiesJComboBox" pref="301" max="32767" attributes="0"/>
+                          <Component id="citiesJComboBox" pref="309" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="phoneNumberTextField" pref="339" max="32767" attributes="0"/>
+                              <Component id="phoneNumberTextField" pref="343" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -85,7 +85,7 @@
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="76" max="32767" attributes="0"/>
+                          <EmptySpace pref="80" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -157,12 +157,12 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Enter Hotel Name:"/>
+            <Property name="text" type="java.lang.String" value="Edit Hotel Name:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Enter Hotel Street Address:"/>
+            <Property name="text" type="java.lang.String" value="Edit Hotel Street Address:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
@@ -236,7 +236,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Enter Hotel Name:"/>
+            <Property name="text" type="java.lang.String" value="Select Hotel:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="citiesJComboBox">
