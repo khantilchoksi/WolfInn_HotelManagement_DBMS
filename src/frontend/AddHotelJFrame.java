@@ -86,11 +86,11 @@ public class AddHotelJFrame extends javax.swing.JFrame {
         hotelNameTextField = new javax.swing.JTextField();
         zipCodeTextField = new javax.swing.JTextField();
         phoneNumberTextField = new javax.swing.JTextField();
-        citiesJComboBox = new javax.swing.JComboBox<>();
+        citiesJComboBox = new javax.swing.JComboBox<City>();
         addHotelButton = new javax.swing.JButton();
         closeButton = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        statesJComboBox = new javax.swing.JComboBox<>();
+        statesJComboBox = new javax.swing.JComboBox<State>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -299,14 +299,15 @@ public class AddHotelJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddHotelJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddStaffJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddHotelJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddStaffJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddHotelJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddStaffJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddHotelJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddStaffJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
