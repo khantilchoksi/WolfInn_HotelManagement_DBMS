@@ -15,6 +15,14 @@ import java.util.ArrayList;
  */
 public class City {
 
+    public String getCityName() {
+        return cityName;
+    }
+
+    public int getStateID() {
+        return stateID;
+    }
+
     public int getCityID() {
         return cityID;
     }

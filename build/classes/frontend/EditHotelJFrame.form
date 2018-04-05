@@ -48,7 +48,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  <Component id="addHotelButton" min="-2" max="-2" attributes="0"/>
+                  <Component id="updateHotelButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                   <Component id="closeButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
@@ -140,7 +140,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="addHotelButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="updateHotelButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="closeButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
@@ -205,12 +205,12 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Hotel&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JButton" name="addHotelButton">
+        <Component class="javax.swing.JButton" name="updateHotelButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Add Hotel"/>
+            <Property name="text" type="java.lang.String" value="Update Hotel"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addHotelButtonMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="updateHotelButtonMouseClicked"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="closeButton">

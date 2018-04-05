@@ -59,6 +59,11 @@ public class HotelsJFrame extends javax.swing.JFrame {
         deleteHotelButton.setText("Delete Hotel");
 
         editHotelButton.setText("Edit Hotels");
+        editHotelButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editHotelButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -142,6 +147,18 @@ public class HotelsJFrame extends javax.swing.JFrame {
         int screenWidth = screenSize.width;
         viewHotelsJFrame.setLocation(screenWidth/4,screenHeight/4);
     }//GEN-LAST:event_viewHotelButtonMouseClicked
+
+    private void editHotelButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editHotelButtonMouseClicked
+        // TODO add your handling code here:
+        EditHotelJFrame editHotelJFrame = new EditHotelJFrame();
+        editHotelJFrame.setVisible(true);
+        editHotelJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        editHotelJFrame.setLocation(screenWidth/4,screenHeight/4);
+    }//GEN-LAST:event_editHotelButtonMouseClicked
 
     /**
      * @param args the command line arguments
