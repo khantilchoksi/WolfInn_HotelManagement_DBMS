@@ -111,6 +111,23 @@ public class Hotel {
         
     }
     
+    public static boolean deleteHotel(int hotelID) {
+
+        try {
+            PreparedStatement pscreate = Connect.connection.prepareStatement("DELETE from Hotels WHERE hotelID = ?");
+            pscreate.setInt(1, hotelID);
+
+            pscreate.executeUpdate();
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null,ex);
+            return false;
+        }
+
+        
+    }
+    
     public static ResultSet viewAllHotels(){
         ResultSet resultSet = null;
         try
