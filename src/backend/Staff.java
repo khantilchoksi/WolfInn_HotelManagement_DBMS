@@ -5,10 +5,9 @@
  */
 package backend;
 
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,15 +17,23 @@ import javax.swing.JOptionPane;
 public class Staff {
     
     
-    public static boolean createStaff(String hotelName, String hotelStreetAddress, int cityID, int zipCode, String phoneNumber) {
+    public static boolean createStaff(int hotelID, int staffTypeID, String staffFirstName, String staffLastName, Date birthDate,
+            String phoneNumber, String streetAddress, int cityID, int zipCode) {
+        
+        java.sql.Date sqlBirthDate = new java.sql.Date(birthDate.getTime());
 
         try {
-            PreparedStatement pscreate = Connect.connection.prepareStatement("insert into Hotels(hotelName, hotelStreetAddress, cityID, zipCode, phoneNumber) values(?,?,?,?,?)");
-            pscreate.setString(1, hotelName);
-            pscreate.setString(2, hotelStreetAddress);
-            pscreate.setInt(3, cityID);
-            pscreate.setInt(4, zipCode);
-            pscreate.setString(5, phoneNumber);
+            PreparedStatement pscreate = Connect.connection.prepareStatement("insert into Staffs(hotelID, stafftypeID, staffFirstName, staffLastName, "+
+                    "birthDate, phoneNumber, streetAddress, cityID, zipCode) values(?,?,?,?,?,?,?,?,?)");
+            pscreate.setInt(1, hotelID);
+            pscreate.setInt(2, staffTypeID);
+            pscreate.setString(3, staffFirstName);
+            pscreate.setString(4, staffLastName);
+            pscreate.setDate(5, sqlBirthDate);
+            pscreate.setString(6, phoneNumber);
+            pscreate.setString(7, streetAddress);
+            pscreate.setInt(8, cityID);
+            pscreate.setInt(9, zipCode);
 
             pscreate.executeUpdate();
             return true;
