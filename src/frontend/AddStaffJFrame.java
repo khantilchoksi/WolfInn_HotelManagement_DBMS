@@ -5,6 +5,9 @@
  */
 package frontend;
 
+import backend.Hotel;
+
+
 /**
  *
  * @author Dax Amin
@@ -14,7 +17,10 @@ public class AddStaffJFrame extends javax.swing.JFrame {
     /**
      * Creates new form AddStaffJFrame
      */
-    public AddStaffJFrame() {
+    
+    Hotel selectedHotel;
+    public AddStaffJFrame(Hotel selectedhotel) {
+        this.selectedHotel = selectedHotel;
         initComponents();
     }
 
@@ -46,6 +52,7 @@ public class AddStaffJFrame extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -71,12 +78,13 @@ public class AddStaffJFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+    /*    java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddStaffJFrame().setVisible(true);
+                new AddStaffJFrame(selectedHotel).setVisible(true);
             }
-        });
+        });*/
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
