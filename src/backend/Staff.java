@@ -21,6 +21,10 @@ public class Staff {
         return staffID;
     }
     
+    public int getDepartmentID(){
+        return departmentID;
+    }
+    
     public String getStaffFirstName(){
         return staffFirstName;
     }
@@ -66,11 +70,12 @@ public class Staff {
         return "" + staffID + " - " + staffFirstName + " " + staffLastName;
     }
     
-    public Staff(int staffID, int hotelID, int staffTypeID, String staffFirstName, String staffLastName, Date birthDate,
+    public Staff(int staffID, int hotelID, int staffTypeID, int departmentID, String staffFirstName, String staffLastName, Date birthDate,
             String phoneNumber, String streetAddress, int cityID, int zipCode) {
         this.staffID = staffID;
         this.hotelID = hotelID;
         this.staffTypeID = staffTypeID;
+        this.departmentID = departmentID;
         this.staffFirstName = staffFirstName;
         this.staffLastName = staffLastName;
         this.birthDate = birthDate;
@@ -84,6 +89,7 @@ public class Staff {
     int staffID;
     int hotelID;
     int staffTypeID;
+    int departmentID;
     String staffFirstName;
     String staffLastName;
     Date birthDate;
@@ -93,23 +99,24 @@ public class Staff {
     int zipCode;
     
     
-    public static boolean createStaff(int hotelID, int staffTypeID, String staffFirstName, String staffLastName, Date birthDate,
+    public static boolean createStaff(int hotelID, int staffTypeID, int departmentID, String staffFirstName, String staffLastName, Date birthDate,
             String phoneNumber, String streetAddress, int cityID, int zipCode) {
         
         java.sql.Date sqlBirthDate = new java.sql.Date(birthDate.getTime());
 
         try {
-            PreparedStatement pscreate = Connect.connection.prepareStatement("insert into Staffs(hotelID, stafftypeID, staffFirstName, staffLastName, "+
-                    "birthDate, phoneNumber, streetAddress, cityID, zipCode) values(?,?,?,?,?,?,?,?,?)");
+            PreparedStatement pscreate = Connect.connection.prepareStatement("insert into Staffs(hotelID, stafftypeID, departmentID, staffFirstName, staffLastName, "+
+                    "birthDate, phoneNumber, streetAddress, cityID, zipCode) values(?,?,?,?,?,?,?,?,?,?)");
             pscreate.setInt(1, hotelID);
             pscreate.setInt(2, staffTypeID);
-            pscreate.setString(3, staffFirstName);
-            pscreate.setString(4, staffLastName);
-            pscreate.setDate(5, sqlBirthDate);
-            pscreate.setString(6, phoneNumber);
-            pscreate.setString(7, streetAddress);
-            pscreate.setInt(8, cityID);
-            pscreate.setInt(9, zipCode);
+            pscreate.setInt(3, departmentID);
+            pscreate.setString(4, staffFirstName);
+            pscreate.setString(5, staffLastName);
+            pscreate.setDate(6, sqlBirthDate);
+            pscreate.setString(7, phoneNumber);
+            pscreate.setString(8, streetAddress);
+            pscreate.setInt(9, cityID);
+            pscreate.setInt(10, zipCode);
 
             pscreate.executeUpdate();
             return true;
@@ -155,7 +162,7 @@ public class Staff {
         
         public static ArrayList<Staff> getAllStaffsList(int hotelID){
         ArrayList<Staff> StaffsList = new ArrayList<Staff>();
-        int tempStaffID, tempHotelID, tempStaffTypeID, tempCityID, tempZipCode;
+        int tempStaffID, tempHotelID, tempStaffTypeID, tempDepartmentID, tempCityID, tempZipCode;
         String tempFirstName, tempStreetAddress, tempPhoneNumber, tempLastName;
         Date tempBirthDate;
         ResultSet resultSet = null;
@@ -171,6 +178,7 @@ public class Staff {
                 tempStaffID = resultSet.getInt("staffID");
                 tempHotelID = resultSet.getInt("hotelID");
                 tempStaffTypeID = resultSet.getInt("staffTypeID");
+                tempDepartmentID = resultSet.getInt("departmentID");
                 tempFirstName = resultSet.getString("staffFirstName");
                 tempLastName = resultSet.getString("staffLastName");
                 tempBirthDate = resultSet.getDate("birthDate");
@@ -179,7 +187,7 @@ public class Staff {
                 tempCityID = resultSet.getInt("cityID");
                 tempZipCode = resultSet.getInt("zipCode");
                 
-                StaffsList.add(new Staff(tempStaffID, tempHotelID, tempStaffTypeID, tempFirstName, tempLastName, tempBirthDate, 
+                StaffsList.add(new Staff(tempStaffID, tempHotelID, tempStaffTypeID, tempDepartmentID, tempFirstName, tempLastName, tempBirthDate, 
                         tempPhoneNumber, tempStreetAddress, tempCityID, tempZipCode));
             }
         }catch(Exception ex){
