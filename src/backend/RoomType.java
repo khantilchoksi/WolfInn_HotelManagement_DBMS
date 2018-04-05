@@ -66,12 +66,11 @@ public class RoomType {
     
     
     //Return Newly created room Type id or return -1 if error  
-    public static boolean createRoomType(int roomTypeID, String roomTypeName) {
+    public static boolean createRoomType(String roomTypeName) {
 
         try {
-            PreparedStatement pscreate = Connect.connection.prepareStatement("insert into RoomTypes(roomTypeID,roomTypeName) values(?,?,?,?,?)");
-            pscreate.setInt(1, roomTypeID);
-            pscreate.setString(2, roomTypeName);
+            PreparedStatement pscreate = Connect.connection.prepareStatement("insert into RoomTypes(roomTypeName) values(?)");
+            pscreate.setString(1, roomTypeName);
 
             pscreate.executeUpdate();
             return true;
