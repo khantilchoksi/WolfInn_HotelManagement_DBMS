@@ -18,15 +18,33 @@ import javax.swing.JOptionPane;
  *
  * @author khantil
  */
-public class AddHotelJFrame extends javax.swing.JFrame {
+public class EditHotelJFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form AddHotelJFrame
      */
-    public AddHotelJFrame() {
+    public EditHotelJFrame() {
         initComponents();
         populateStates();
+        populateHotels();
     }
+    
+    private void populateHotels() {
+        hotelsJComboBox.removeAllItems();
+        //statesJComboBox.addItem("");
+        //statesJComboBox.addItem("All States");
+
+        try {
+            ArrayList<Hotel> hotelsList = Hotel.getAllHotelsList();
+            for (Hotel hotel : hotelsList) {
+                hotelsJComboBox.addItem(hotel);
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
 
     private void populateStates() {
         statesJComboBox.removeAllItems();
@@ -45,7 +63,7 @@ public class AddHotelJFrame extends javax.swing.JFrame {
     }
 
     private void populateCities() {
-        citiesJComboBox.removeAllItems();
+        hotelsJComboBox.removeAllItems();
         //statesJComboBox.addItem("");
         //statesJComboBox.addItem("All States");
 
@@ -53,7 +71,7 @@ public class AddHotelJFrame extends javax.swing.JFrame {
             State selectedState = (State) statesJComboBox.getSelectedItem();
             ArrayList<City> citiesList = City.getAllCitiesInStateList(selectedState.getStateID());
             for (City city : citiesList) {
-                citiesJComboBox.addItem(city);
+                hotelsJComboBox.addItem(city);
             }
 
         } catch (Exception ex) {
@@ -86,16 +104,18 @@ public class AddHotelJFrame extends javax.swing.JFrame {
         hotelNameTextField = new javax.swing.JTextField();
         zipCodeTextField = new javax.swing.JTextField();
         phoneNumberTextField = new javax.swing.JTextField();
-        citiesJComboBox = new javax.swing.JComboBox<>();
+        hotelsJComboBox = new javax.swing.JComboBox<>();
         addHotelButton = new javax.swing.JButton();
         closeButton = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         statesJComboBox = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        citiesJComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Add New Hotel To WolfInns Chain System");
+        jLabel1.setText("Edit / Update Hotel Details");
 
         jLabel2.setText("Enter Hotel Name:");
 
@@ -113,9 +133,9 @@ public class AddHotelJFrame extends javax.swing.JFrame {
 
         phoneNumberTextField.setToolTipText("xxx-xxx-xxxx");
 
-        citiesJComboBox.addActionListener(new java.awt.event.ActionListener() {
+        hotelsJComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                citiesJComboBoxActionPerformed(evt);
+                hotelsJComboBoxActionPerformed(evt);
             }
         });
 
@@ -141,35 +161,18 @@ public class AddHotelJFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setText("Enter Hotel Name:");
+
+        citiesJComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                citiesJComboBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(187, 187, 187)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel6))
-                        .addGap(54, 54, 54)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(phoneNumberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(hotelNameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
-                                        .addComponent(addressTextField))
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(statesJComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(citiesJComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, 301, Short.MAX_VALUE))
-                                    .addComponent(zipCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap(76, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(addHotelButton)
@@ -179,25 +182,54 @@ public class AddHotelJFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel8)
                     .addComponent(jLabel5)
                     .addComponent(jLabel4)
                     .addComponent(jLabel7))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(54, 54, 54)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(citiesJComboBox, 0, 301, Short.MAX_VALUE)
+                        .addGap(114, 114, 114))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(phoneNumberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(hotelNameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
+                                        .addComponent(addressTextField))
+                                    .addComponent(statesJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(zipCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap(76, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(hotelsJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(hotelNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addGap(17, 17, 17)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(hotelsJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hotelNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(addressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(statesJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -251,7 +283,7 @@ public class AddHotelJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         String hotelName = hotelNameTextField.getText();
         String hotelStreetAddress = addressTextField.getText();
-        City selectedCity = (City)citiesJComboBox.getSelectedItem();
+        City selectedCity = (City)hotelsJComboBox.getSelectedItem();
         int cityID = (int) selectedCity.getCityID();
         int zipCode = Integer.parseInt(zipCodeTextField.getText());
         String phoneNumber = phoneNumberTextField.getText();
@@ -277,9 +309,22 @@ public class AddHotelJFrame extends javax.swing.JFrame {
         populateCities();
     }//GEN-LAST:event_statesJComboBoxActionPerformed
 
+    private void hotelsJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hotelsJComboBoxActionPerformed
+        // TODO add your handling code here:
+        System.out.println("\n SELECTED HOTEL: " + (Hotel) hotelsJComboBox.getSelectedItem());
+        Hotel selectedHotel = (Hotel) hotelsJComboBox.getSelectedItem();
+        
+        hotelNameTextField.setText(selectedHotel.getHotelName());
+        addressTextField.setText(selectedHotel.getHotelStreetAddress());
+        City selectedCity = City.getCity(selectedHotel.getCityID());
+        citiesJComboBox.setSelectedItem(selectedCity);
+        zipCodeTextField.setText(Integer.toString(selectedHotel.getZipCode()));
+        phoneNumberTextField.setText(selectedHotel.getPhoneNumber());
+        
+    }//GEN-LAST:event_hotelsJComboBoxActionPerformed
+
     private void citiesJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_citiesJComboBoxActionPerformed
         // TODO add your handling code here:
-        System.out.println("\n SELECTED CITY: " + (City) citiesJComboBox.getSelectedItem());
     }//GEN-LAST:event_citiesJComboBoxActionPerformed
 
     /**
@@ -299,20 +344,21 @@ public class AddHotelJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddHotelJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditHotelJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddHotelJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditHotelJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddHotelJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditHotelJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddHotelJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditHotelJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddHotelJFrame().setVisible(true);
+                new EditHotelJFrame().setVisible(true);
             }
         });
     }
@@ -323,6 +369,7 @@ public class AddHotelJFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox<City> citiesJComboBox;
     private javax.swing.JButton closeButton;
     private javax.swing.JTextField hotelNameTextField;
+    private javax.swing.JComboBox<Hotel> hotelsJComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -330,6 +377,7 @@ public class AddHotelJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField phoneNumberTextField;
     private javax.swing.JComboBox<State> statesJComboBox;

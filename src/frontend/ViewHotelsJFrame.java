@@ -5,7 +5,7 @@
  */
 package frontend;
 
-import backend.Hotels;
+import backend.Hotel;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -25,7 +25,7 @@ public class ViewHotelsJFrame extends javax.swing.JFrame {
     public ViewHotelsJFrame() {
         initComponents();
         try{
-            jTable1.setModel(buildTableModel(Hotels.viewAllHotels()));
+            jTable1.setModel(buildTableModel(Hotel.viewAllHotels()));
             jScrollPane1.setViewportView(jTable1);
             pack();
         }catch(Exception ex){

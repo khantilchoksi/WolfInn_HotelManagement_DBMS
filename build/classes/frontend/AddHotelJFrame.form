@@ -69,8 +69,8 @@
                                           <Component id="addressTextField" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="statesJComboBox" alignment="0" pref="301" max="32767" attributes="0"/>
-                                          <Component id="cititeJComboBox" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="statesJComboBox" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="citiesJComboBox" alignment="0" pref="301" max="32767" attributes="0"/>
                                       </Group>
                                       <Component id="zipCodeTextField" alignment="0" min="-2" pref="215" max="-2" attributes="0"/>
                                   </Group>
@@ -83,7 +83,7 @@
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  <Component id="addButton" min="-2" max="-2" attributes="0"/>
+                  <Component id="addHotelButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                   <Component id="closeButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
@@ -122,7 +122,7 @@
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cititeJComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="citiesJComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -136,7 +136,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="addButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="addHotelButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="closeButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
@@ -193,27 +193,20 @@
             <Property name="toolTipText" type="java.lang.String" value="xxx-xxx-xxxx"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cititeJComboBox">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-              </StringArray>
-            </Property>
-          </Properties>
+        <Component class="javax.swing.JComboBox" name="citiesJComboBox">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="citiesJComboBoxActionPerformed"/>
+          </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;City&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JButton" name="addButton">
+        <Component class="javax.swing.JButton" name="addHotelButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Add Hotel"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addButtonMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addHotelButtonMouseClicked"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="closeButton">
@@ -230,18 +223,11 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="statesJComboBox">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-              </StringArray>
-            </Property>
-          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="statesJComboBoxActionPerformed"/>
+          </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;State&gt;"/>
           </AuxValues>
         </Component>
       </SubComponents>

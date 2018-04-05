@@ -15,6 +15,19 @@ import java.util.ArrayList;
  */
 public class State {
 
+    public int getStateID() {
+        return stateID;
+    }
+
+    public String getStateName() {
+        return stateName;
+    }
+
+    @Override
+    public String toString() {
+        return this.stateName;
+    }
+
     public State(int stateID, String stateName) {
         this.stateID = stateID;
         this.stateName = stateName;
@@ -23,21 +36,21 @@ public class State {
     int stateID;
     String stateName;
     
-    public static ResultSet getAllStates(){
-        ResultSet resultSet = null;
-        try
-        {
-            Statement statement = Connect.connection.createStatement();
-            resultSet = statement.executeQuery("select * from states order by stateName");
-            
-        }catch(Exception ex){
-            ex.printStackTrace();
-            //JOptionPane.showMessageDialog(null,ex);
-        }
-        
-        return resultSet;
-        
-    }
+//    public static ResultSet getAllStates(){
+//        ResultSet resultSet = null;
+//        try
+//        {
+//            Statement statement = Connect.connection.createStatement();
+//            resultSet = statement.executeQuery("select * from States order by stateName");
+//            
+//        }catch(Exception ex){
+//            ex.printStackTrace();
+//            //JOptionPane.showMessageDialog(null,ex);
+//        }
+//        
+//        return resultSet;
+//        
+//    }
     
         public static ArrayList<State> getAllStatesList(){
         ResultSet resultSet = null;
@@ -47,7 +60,7 @@ public class State {
         try
         {
             Statement statement = Connect.connection.createStatement();
-            resultSet = statement.executeQuery("select * from states order by stateName");
+            resultSet = statement.executeQuery("select * from States order by stateName");
             
             while(resultSet.next()){
                 tempStateID = resultSet.getInt("stateID");
