@@ -8,6 +8,7 @@ import backend.Connect;
 import backend.DropWolfInn;
 import backend.WolfInn;
 import frontend.HotelsJFrame;
+import frontend.MainJFrame;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 /**
@@ -29,7 +30,8 @@ public class Main {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                HotelsJFrame n = new HotelsJFrame();
+                //HotelsJFrame n = new HotelsJFrame();
+                MainJFrame n = new MainJFrame();
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                 n.setSize(screenSize.width/2, screenSize.height/2);
                 n.setVisible(true);
