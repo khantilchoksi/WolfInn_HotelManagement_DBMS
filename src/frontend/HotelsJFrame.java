@@ -121,7 +121,14 @@ public class HotelsJFrame extends javax.swing.JFrame {
 
     private void addHotelButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addHotelButtonMouseClicked
         // TODO add your handling code here:
-        
+        AddHotelJFrame addHotelJFrame = new AddHotelJFrame();
+        addHotelJFrame.setVisible(true);
+        addHotelJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        addHotelJFrame.setLocation(screenWidth/4,screenHeight/4);
     }//GEN-LAST:event_addHotelButtonMouseClicked
 
     private void viewHotelButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewHotelButtonMouseClicked

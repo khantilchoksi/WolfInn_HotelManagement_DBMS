@@ -24,7 +24,7 @@ public class Main {
         Connect.getConnection();
         
         //DropWolfInn.droptTables();
-        WolfInn.populateData();
+        //WolfInn.populateData();
         
         
         java.awt.EventQueue.invokeLater(new Runnable() {
