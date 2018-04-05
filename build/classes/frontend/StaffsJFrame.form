@@ -95,23 +95,16 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Manage Staffs"/>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Manage Staffs"/>
-      </AccessibilityProperties>
     </Component>
     <Component class="javax.swing.JButton" name="editStaffButton">
       <Properties>
         <Property name="actionCommand" type="java.lang.String" value="Edit Staff"/>
         <Property name="label" type="java.lang.String" value="Edit Staffs"/>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Edit Staffs"/>
-      </AccessibilityProperties>
     </Component>
     <Component class="javax.swing.JButton" name="viewStaffButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="View Staffs"/>
-        <Property name="actionCommand" type="java.lang.String" value="View Staffs"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="viewStaffButtonMouseClicked"/>
@@ -122,6 +115,9 @@
         <Property name="actionCommand" type="java.lang.String" value="Delete Staff"/>
         <Property name="label" type="java.lang.String" value="Delete Staff"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="deleteStaffButtonMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -136,7 +132,6 @@
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
-        <Property name="selectedIndex" type="int" value="-1"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
       <Events>

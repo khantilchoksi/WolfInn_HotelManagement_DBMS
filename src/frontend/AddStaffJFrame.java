@@ -168,6 +168,11 @@ public class AddStaffJFrame extends javax.swing.JFrame {
         });
 
         closeJButton.setText("Close");
+        closeJButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                closeJButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -303,6 +308,12 @@ public class AddStaffJFrame extends javax.swing.JFrame {
         WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
     }//GEN-LAST:event_addStaffJButtonMouseClicked
+
+    private void closeJButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeJButtonMouseClicked
+        // TODO add your handling code here:
+        WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+    }//GEN-LAST:event_closeJButtonMouseClicked
 
     /**
      * @param args the command line arguments
