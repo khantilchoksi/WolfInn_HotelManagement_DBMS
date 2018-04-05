@@ -123,6 +123,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Edit Hotels"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="editHotelButtonMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

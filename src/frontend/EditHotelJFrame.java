@@ -63,7 +63,7 @@ public class EditHotelJFrame extends javax.swing.JFrame {
     }
 
     private void populateCities() {
-        hotelsJComboBox.removeAllItems();
+        citiesJComboBox.removeAllItems();
         //statesJComboBox.addItem("");
         //statesJComboBox.addItem("All States");
 
@@ -71,7 +71,7 @@ public class EditHotelJFrame extends javax.swing.JFrame {
             State selectedState = (State) statesJComboBox.getSelectedItem();
             ArrayList<City> citiesList = City.getAllCitiesInStateList(selectedState.getStateID());
             for (City city : citiesList) {
-                hotelsJComboBox.addItem(city);
+                citiesJComboBox.addItem(city);
             }
 
         } catch (Exception ex) {
@@ -105,7 +105,7 @@ public class EditHotelJFrame extends javax.swing.JFrame {
         zipCodeTextField = new javax.swing.JTextField();
         phoneNumberTextField = new javax.swing.JTextField();
         hotelsJComboBox = new javax.swing.JComboBox<>();
-        addHotelButton = new javax.swing.JButton();
+        updateHotelButton = new javax.swing.JButton();
         closeButton = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         statesJComboBox = new javax.swing.JComboBox<>();
@@ -139,10 +139,10 @@ public class EditHotelJFrame extends javax.swing.JFrame {
             }
         });
 
-        addHotelButton.setText("Add Hotel");
-        addHotelButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        updateHotelButton.setText("Update Hotel");
+        updateHotelButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addHotelButtonMouseClicked(evt);
+                updateHotelButtonMouseClicked(evt);
             }
         });
 
@@ -175,7 +175,7 @@ public class EditHotelJFrame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(addHotelButton)
+                .addComponent(updateHotelButton)
                 .addGap(63, 63, 63)
                 .addComponent(closeButton)
                 .addGap(37, 37, 37))
@@ -247,7 +247,7 @@ public class EditHotelJFrame extends javax.swing.JFrame {
                     .addComponent(phoneNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addHotelButton)
+                    .addComponent(updateHotelButton)
                     .addComponent(closeButton))
                 .addGap(15, 15, 15))
         );
@@ -279,34 +279,39 @@ public class EditHotelJFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_closeButtonMouseClicked
 
-    private void addHotelButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addHotelButtonMouseClicked
+    private void updateHotelButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateHotelButtonMouseClicked
         // TODO add your handling code here:
+        Hotel selectedHotel = (Hotel) hotelsJComboBox.getSelectedItem();
+        int hotelID = selectedHotel.getHotelID();
+        
         String hotelName = hotelNameTextField.getText();
         String hotelStreetAddress = addressTextField.getText();
-        City selectedCity = (City)hotelsJComboBox.getSelectedItem();
+        City selectedCity = (City)citiesJComboBox.getSelectedItem();
         int cityID = (int) selectedCity.getCityID();
         int zipCode = Integer.parseInt(zipCodeTextField.getText());
         String phoneNumber = phoneNumberTextField.getText();
-        boolean warning = false;
         
-        boolean newHotelCreated = Hotel.createHotel(hotelName, hotelStreetAddress, cityID, zipCode, phoneNumber);
+        
+        boolean hotelUpdated = Hotel.updateHotelDetails(hotelID, hotelName, hotelStreetAddress, cityID, zipCode, phoneNumber);
         String showMessage = "";
-        if(newHotelCreated){
-            showMessage = "Your new hotel has been successfully created!";
+        if(hotelUpdated){
+            showMessage = "Your hotel details have been successfully updated!";
         }else{
-            showMessage = "Oops! Some error occured while inserting new hotel!";
+            showMessage = "Oops! Some error occured while updating hotel details!";
         }
         
         JOptionPane.showMessageDialog(null,showMessage);
+        
         WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
         
-    }//GEN-LAST:event_addHotelButtonMouseClicked
+    }//GEN-LAST:event_updateHotelButtonMouseClicked
 
     private void statesJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statesJComboBoxActionPerformed
         // TODO add your handling code here:
         System.out.println("\n SELECTED STATE: " + (State) statesJComboBox.getSelectedItem());
         populateCities();
+        System.out.println("\n Populate");
     }//GEN-LAST:event_statesJComboBoxActionPerformed
 
     private void hotelsJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hotelsJComboBoxActionPerformed
@@ -317,6 +322,11 @@ public class EditHotelJFrame extends javax.swing.JFrame {
         hotelNameTextField.setText(selectedHotel.getHotelName());
         addressTextField.setText(selectedHotel.getHotelStreetAddress());
         City selectedCity = City.getCity(selectedHotel.getCityID());
+        State selectedState = State.getState(selectedCity.getStateID());
+        System.out.println("\n GOT HOTEL STATE: "+selectedState.getStateName());
+        System.out.println("\n GOT HOTEL CITY: "+selectedCity.getCityName());
+        statesJComboBox.setSelectedItem(selectedState);
+        populateCities();
         citiesJComboBox.setSelectedItem(selectedCity);
         zipCodeTextField.setText(Integer.toString(selectedHotel.getZipCode()));
         phoneNumberTextField.setText(selectedHotel.getPhoneNumber());
@@ -364,7 +374,6 @@ public class EditHotelJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addHotelButton;
     private javax.swing.JTextField addressTextField;
     private javax.swing.JComboBox<City> citiesJComboBox;
     private javax.swing.JButton closeButton;
@@ -381,6 +390,7 @@ public class EditHotelJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField phoneNumberTextField;
     private javax.swing.JComboBox<State> statesJComboBox;
+    private javax.swing.JButton updateHotelButton;
     private javax.swing.JTextField zipCodeTextField;
     // End of variables declaration//GEN-END:variables
 }

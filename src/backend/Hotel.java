@@ -17,6 +17,30 @@ import javax.swing.JOptionPane;
  */
 public class Hotel {
 
+    public int getHotelID() {
+        return hotelID;
+    }
+
+    public String getHotelName() {
+        return hotelName;
+    }
+
+    public String getHotelStreetAddress() {
+        return hotelStreetAddress;
+    }
+
+    public int getCityID() {
+        return cityID;
+    }
+
+    public int getZipCode() {
+        return zipCode;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
     @Override
     public String toString() {
         return "" + hotelID + " - " + hotelName;
@@ -51,6 +75,30 @@ public class Hotel {
             pscreate.setInt(3, cityID);
             pscreate.setInt(4, zipCode);
             pscreate.setString(5, phoneNumber);
+
+            pscreate.executeUpdate();
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null,ex);
+            return false;
+        }
+
+        
+    }
+    
+    public static boolean updateHotelDetails(int hotelID, String hotelName, String hotelStreetAddress, int cityID, int zipCode, String phoneNumber) {
+
+        try {
+            PreparedStatement pscreate = Connect.connection.prepareStatement("UPDATE Hotels "+
+                    "SET hotelName = ?, hotelStreetAddress = ?, cityID = ?, zipCode = ?, phoneNumber = ?"+
+                    "WHERE hotelID = ?");
+            pscreate.setString(1, hotelName);
+            pscreate.setString(2, hotelStreetAddress);
+            pscreate.setInt(3, cityID);
+            pscreate.setInt(4, zipCode);
+            pscreate.setString(5, phoneNumber);
+            pscreate.setInt(6, hotelID);
 
             pscreate.executeUpdate();
             return true;
