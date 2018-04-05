@@ -74,7 +74,6 @@ public class StaffsJFrame extends javax.swing.JFrame {
         editStaffButton.setLabel("Edit Staffs");
 
         viewStaffButton.setText("View Staffs");
-        viewStaffButton.setActionCommand("View Staffs");
         viewStaffButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 viewStaffButtonMouseClicked(evt);
@@ -83,10 +82,14 @@ public class StaffsJFrame extends javax.swing.JFrame {
 
         deleteStaffButton.setActionCommand("Delete Staff");
         deleteStaffButton.setLabel("Delete Staff");
+        deleteStaffButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deleteStaffButtonMouseClicked(evt);
+            }
+        });
 
         jLabel2.setText("Select Hotel:");
 
-        selectHotelJBox.setSelectedIndex(-1);
         selectHotelJBox.setToolTipText("");
         selectHotelJBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,8 +146,6 @@ public class StaffsJFrame extends javax.swing.JFrame {
                 .addGap(78, 78, 78))
         );
 
-        jLabel1.getAccessibleContext().setAccessibleName("Manage Staffs");
-        editStaffButton.getAccessibleContext().setAccessibleName("Edit Staffs");
         jLabel2.getAccessibleContext().setAccessibleName("Select Hotel");
 
         pack();
@@ -180,6 +181,18 @@ public class StaffsJFrame extends javax.swing.JFrame {
         Hotel selectedHotel = (Hotel) selectHotelJBox.getSelectedItem();
         
     }//GEN-LAST:event_selectHotelJBoxActionPerformed
+
+    private void deleteStaffButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteStaffButtonMouseClicked
+        // TODO add your handling code here:
+        DeleteStaffJFrame deleteStaffJFrame = new DeleteStaffJFrame((Hotel) selectHotelJBox.getSelectedItem());
+        deleteStaffJFrame.setVisible(true);
+        deleteStaffJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        deleteStaffJFrame.setLocation(screenWidth/4,screenHeight/4);
+    }//GEN-LAST:event_deleteStaffButtonMouseClicked
     
     /**
      * @param args the command line arguments
