@@ -8,7 +8,7 @@ package backend;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -46,6 +46,48 @@ public class Report {
                     + "AND Rooms.roomTypeID = RoomTypes.roomTypeID AND (checkOutDateTime = '0000-00-00 00:00:00' OR NULL) "
                     + "GROUP BY RoomTypes.roomTypeName "
                     + "ORDER BY RoomTypes.roomTypeName;");
+            
+        }catch(Exception ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null,ex);
+        }
+        
+        return resultSet;
+    }
+    
+    public static ResultSet occupancyCity(){
+        ResultSet resultSet = null;
+        try
+        {
+            Statement statement = Connect.connection.createStatement();
+            resultSet = statement.executeQuery("SELECT Cities.cityName, COUNT(*) AS TotalOccupied "
+                    + "FROM CheckIns, Hotels, Cities "
+                    + "WHERE CheckIns.hotelID = Hotels.hotelID AND Hotels.cityID = Cities.cityID "
+                    + "AND (checkOutDateTime = '0000-00-00 00:00:00' OR NULL) "
+                    + "GROUP BY Cities.cityID "
+                    + "ORDER BY Cities.cityName;");
+            
+        }catch(Exception ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null,ex);
+        }
+        
+        return resultSet;
+    }
+    
+    public static ResultSet checkInDateRange(Date startDate, Date endDate){
+        java.sql.Date sqlStartDate = new java.sql.Date(startDate.getTime());
+        java.sql.Date sqlEndDate = new java.sql.Date(endDate.getTime());
+        ResultSet resultSet = null;
+        try
+        {
+            PreparedStatement pstatement = Connect.connection.prepareStatement("SELECT COUNT(*) AS TotalCheckIns FROM CheckIns "
+                    + "WHERE checkInDateTime BETWEEN ? AND ?;");
+            
+            pstatement.setDate(1, sqlStartDate);
+            pstatement.setDate(2, sqlEndDate);
+            
+            resultSet = pstatement.executeQuery();
             
         }catch(Exception ex){
             ex.printStackTrace();

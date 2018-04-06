@@ -56,11 +56,9 @@
                           <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="staffGroupedButton" max="32767" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="occupancyCityButton" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="occupancyHotelButton" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="occupancyCityButton" alignment="0" max="32767" attributes="0"/>
+                              <Component id="occupancyHotelButton" alignment="0" max="32767" attributes="0"/>
+                              <Component id="checkInsDateButton" alignment="0" max="32767" attributes="0"/>
                               <Component id="OccupancyRoomTypeButton" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -81,7 +79,7 @@
                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   <Component id="OccupancyRoomTypeButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  <Component id="checkInsDateButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   <Component id="staffGroupedButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="130" max="32767" attributes="0"/>
@@ -107,6 +105,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Occupancy by City"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="occupancyCityButtonMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="OccupancyRoomTypeButton">
           <Properties>
@@ -116,10 +117,13 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="OccupancyRoomTypeButtonMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="checkInsDateButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Occupancy By Date Range"/>
+            <Property name="text" type="java.lang.String" value="CheckIns between Date Range"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="checkInsDateButtonMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="staffGroupedButton">
           <Properties>
