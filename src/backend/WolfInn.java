@@ -17,7 +17,10 @@ public class WolfInn {
 //    // URL
 //    private static final String jdbcURL = "jdbc:mariadb://classdb2.csc.ncsu.edu:3306/"+user; // Using SERVICE_NAME
 
-
+    public static void main(String args[])
+    {
+        populateData();
+    }
     //public static void main(String[] args) {
     public static void populateData() {
         //System.out.println("\n Hello:");
