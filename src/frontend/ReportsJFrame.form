@@ -60,6 +60,7 @@
                               <Component id="occupancyHotelButton" alignment="0" max="32767" attributes="0"/>
                               <Component id="checkInsDateButton" alignment="0" max="32767" attributes="0"/>
                               <Component id="OccupancyRoomTypeButton" alignment="0" max="32767" attributes="0"/>
+                              <Component id="revenueButton" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -82,7 +83,9 @@
                   <Component id="checkInsDateButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   <Component id="staffGroupedButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="130" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                  <Component id="revenueButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="71" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -131,6 +134,14 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="staffGroupedButtonMouseClicked"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="revenueButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Revenue"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="revenueButtonMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>

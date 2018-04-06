@@ -38,6 +38,7 @@ public class ReportsJFrame extends javax.swing.JFrame {
         OccupancyRoomTypeButton = new javax.swing.JButton();
         checkInsDateButton = new javax.swing.JButton();
         staffGroupedButton = new javax.swing.JButton();
+        revenueButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,6 +79,13 @@ public class ReportsJFrame extends javax.swing.JFrame {
             }
         });
 
+        revenueButton.setText("Revenue");
+        revenueButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                revenueButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -94,7 +102,8 @@ public class ReportsJFrame extends javax.swing.JFrame {
                             .addComponent(occupancyCityButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(occupancyHotelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(checkInsDateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(OccupancyRoomTypeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(OccupancyRoomTypeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(revenueButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(284, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -112,7 +121,9 @@ public class ReportsJFrame extends javax.swing.JFrame {
                 .addComponent(checkInsDateButton)
                 .addGap(34, 34, 34)
                 .addComponent(staffGroupedButton)
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addComponent(revenueButton)
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -195,6 +206,18 @@ public class ReportsJFrame extends javax.swing.JFrame {
         staffGroupedJFrame.setLocation(screenWidth/4,screenHeight/4);
     }//GEN-LAST:event_staffGroupedButtonMouseClicked
 
+    private void revenueButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_revenueButtonMouseClicked
+        // TODO add your handling code here:
+        dateForRevenueJFrame dateForRevenueJFrame  = new dateForRevenueJFrame();
+        dateForRevenueJFrame.setVisible(true);
+        dateForRevenueJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        dateForRevenueJFrame.setLocation(screenWidth/4,screenHeight/4);
+    }//GEN-LAST:event_revenueButtonMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -237,6 +260,7 @@ public class ReportsJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton occupancyCityButton;
     private javax.swing.JButton occupancyHotelButton;
+    private javax.swing.JButton revenueButton;
     private javax.swing.JButton staffGroupedButton;
     // End of variables declaration//GEN-END:variables
 }

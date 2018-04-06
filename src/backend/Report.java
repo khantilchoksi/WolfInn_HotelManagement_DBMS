@@ -116,4 +116,30 @@ public class Report {
         return resultSet;
     }
     
+    public static ResultSet getRevenue(Date startDate, Date endDate){
+        java.sql.Date sqlStartDate = new java.sql.Date(startDate.getTime());
+        java.sql.Date sqlEndDate = new java.sql.Date(endDate.getTime());
+        ResultSet resultSet = null;
+        try
+        {
+            PreparedStatement pstatement = Connect.connection.prepareStatement("SELECT CheckIns.hotelID, Hotels.hotelName, SUM(Bills.totalAmount) AS TotalRevenue "
+                    + "FROM CheckIns, Hotels, Bills "
+                    + "WHERE Bills.checkInID = CheckIns.checkInID AND CheckIns.hotelID = Hotels.hotelID "
+                    + "AND (CheckIns.checkOutDateTime BETWEEN ? AND ?) "
+                    + "GROUP BY CheckIns.hotelID "
+                    + "ORDER BY CheckIns.hotelID;");
+            
+            pstatement.setDate(1, sqlStartDate);
+            pstatement.setDate(2, sqlEndDate);
+            
+            resultSet = pstatement.executeQuery();
+            
+        }catch(Exception ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null,ex);
+        }
+        
+        return resultSet;
+    }
+    
 }
