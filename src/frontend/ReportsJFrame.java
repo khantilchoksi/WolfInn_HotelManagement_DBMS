@@ -72,6 +72,11 @@ public class ReportsJFrame extends javax.swing.JFrame {
         });
 
         staffGroupedButton.setText("Staff Grouped By Thier Role");
+        staffGroupedButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                staffGroupedButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -177,6 +182,18 @@ public class ReportsJFrame extends javax.swing.JFrame {
         int screenWidth = screenSize.width;
         dateSelectReportJFrame.setLocation(screenWidth/4,screenHeight/4);
     }//GEN-LAST:event_checkInsDateButtonMouseClicked
+
+    private void staffGroupedButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffGroupedButtonMouseClicked
+        // TODO add your handling code here:
+        StaffGroupedJFrame staffGroupedJFrame = new StaffGroupedJFrame();
+        staffGroupedJFrame.setVisible(true);
+        staffGroupedJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        staffGroupedJFrame.setLocation(screenWidth/4,screenHeight/4);
+    }//GEN-LAST:event_staffGroupedButtonMouseClicked
 
     /**
      * @param args the command line arguments

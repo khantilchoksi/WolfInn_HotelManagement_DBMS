@@ -97,4 +97,23 @@ public class Report {
         return resultSet;
     }
     
+    public static ResultSet staffGrouped(){
+        ResultSet resultSet = null;
+        try
+        {
+            Statement statement = Connect.connection.createStatement();
+            resultSet = statement.executeQuery("SELECT StaffTypes.staffTypeName, COUNT(*) AS TotalStaff "
+                    + "FROM Staffs, StaffTypes "
+                    + "WHERE Staffs.staffTypeID = StaffTypes.staffTypeID "
+                    + "GROUP BY StaffTypes.staffTypeName "
+                    + "ORDER BY StaffTypes.staffTypeName;");
+            
+        }catch(Exception ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null,ex);
+        }
+        
+        return resultSet;
+    }
+    
 }

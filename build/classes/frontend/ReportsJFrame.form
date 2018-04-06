@@ -129,6 +129,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Staff Grouped By Thier Role"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="staffGroupedButtonMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
