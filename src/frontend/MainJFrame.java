@@ -36,6 +36,7 @@ public class MainJFrame extends javax.swing.JFrame {
         hotels = new javax.swing.JButton();
         staffs = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        reportJButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,6 +65,13 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        reportJButton.setText("Reports");
+        reportJButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                reportJButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -79,7 +87,9 @@ public class MainJFrame extends javax.swing.JFrame {
                             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
                             .addComponent(hotels, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(83, 83, 83)
-                        .addComponent(staffs, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(staffs, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                            .addComponent(reportJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(87, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -92,7 +102,9 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(staffs, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(hotels, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(47, 47, 47)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(reportJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(107, Short.MAX_VALUE))
         );
 
@@ -141,7 +153,7 @@ public class MainJFrame extends javax.swing.JFrame {
         StaffsJFrame.setLocation(screenWidth/4,screenHeight/4);
     }//GEN-LAST:event_staffsMouseClicked
 
-    private void customersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customersMouseClicked
+    private void customersMouseClicked(java.awt.event.MouseEvent evt) {                                       
         // TODO add your handling code here:
         CustomersJFrame CustomersJFrame = new CustomersJFrame();
         CustomersJFrame.setVisible(true);
@@ -151,7 +163,20 @@ public class MainJFrame extends javax.swing.JFrame {
         int screenHeight = screenSize.height;
         int screenWidth = screenSize.width;
         CustomersJFrame.setLocation(screenWidth/4,screenHeight/4);
-    }//GEN-LAST:event_customersMouseClicked
+    }
+        
+    private void reportJButtonMouseClicked(java.awt.event.MouseEvent evt) {                                           
+        // TODO add your handling code here:
+        ReportsJFrame reportsJFrame = new ReportsJFrame();
+        reportsJFrame.setVisible(true);
+        reportsJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        reportsJFrame.setLocation(screenWidth/4,screenHeight/4);
+    }                                          
+
 
     /**
      * @param args the command line arguments
@@ -193,6 +218,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton reportJButton;
     private javax.swing.JButton staffs;
     // End of variables declaration//GEN-END:variables
 }

@@ -129,7 +129,7 @@ public class Room
         this.roomNo = roomNo;
     }
     
-    //Return Newly created hotel id or return -1 if error 
+    //Return Newly created room id or return -1 if error  
     public static boolean createRoom(int roomNo, int roomTypeID, int hotelID, double roomRates, int maxAllowedOccupancy) {
 
         try {
@@ -155,7 +155,7 @@ public class Room
 
         try {
             PreparedStatement pscreate = Connect.connection.prepareStatement("UPDATE Rooms "+
-                    "SET roomRates = ?, maxAllowedOccupancy = ?, roomTypeID"+
+                    "SET roomRates = ?, maxAllowedOccupancy = ?, roomTypeID = ?"+
                     "WHERE hotelID = ? and roomNo = ?");
             pscreate.setDouble(1, roomRates);
             pscreate.setInt(2, maxAllowedOccupancy);
@@ -179,7 +179,7 @@ public class Room
         try {
             PreparedStatement pscreate = Connect.connection.prepareStatement("DELETE from Rooms WHERE hotelID = ? and roomNo = ?");
             pscreate.setInt(1, hotelID);
-            pscreate.setInt(1, roomNo);
+            pscreate.setInt(2, roomNo);
 
             pscreate.executeUpdate();
             return true;

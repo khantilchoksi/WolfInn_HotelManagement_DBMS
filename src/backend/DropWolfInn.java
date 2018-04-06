@@ -58,6 +58,8 @@ public class DropWolfInn {
 				statement.executeUpdate("DROP TABLE IF EXISTS Staffs");
 				
 				statement.executeUpdate("DROP TABLE IF EXISTS StaffTypes;");
+                                
+                                statement.executeUpdate("DROP TABLE IF EXISTS Departments;");
 				
 				statement.executeUpdate("DROP TABLE IF EXISTS Rooms;");
 				
