@@ -99,12 +99,19 @@ public class WolfInn {
 										"staffTypeName VARCHAR(100) NOT NULL"+
 										");"
 				);
+                                
+                                statement.executeUpdate("CREATE TABLE Departments ("+
+										"departmentID INTEGER PRIMARY KEY AUTO_INCREMENT,"+
+										"departmentName VARCHAR(100) NOT NULL"+
+										");"
+				);
 
 				// 7. Create Staff Table
 				statement.executeUpdate("CREATE TABLE Staffs ("+
 										"staffID INTEGER PRIMARY KEY AUTO_INCREMENT,"+
 										"hotelID INTEGER NOT NULL,"+
 										"staffTypeID INTEGER NOT NULL,"+
+                                                                                "departmentID INTEGER NOT NULL,"+
 										"staffFirstName VARCHAR(100) NOT NULL,"+
 										"staffLastName VARCHAR(100),"+
 										"birthDate DATE,"+
@@ -114,6 +121,7 @@ public class WolfInn {
 										"zipCode INTEGER NOT NULL,"+
 										"CONSTRAINT staffs_hotel_fk FOREIGN KEY(hotelID) REFERENCES Hotels(hotelID),"+
 										"CONSTRAINT staffs_stafftype_fk FOREIGN KEY(staffTypeID) REFERENCES StaffTypes(staffTypeID),"+
+                                                                                "CONSTRAINT staffs_department_fk FOREIGN KEY(departmentID) REFERENCES Departments(departmentID),"+
 										"CONSTRAINT staffs_city_fk FOREIGN KEY(cityID) REFERENCES Cities(cityID)"+
 										");"
 				);
@@ -260,9 +268,13 @@ public class WolfInn {
 				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/StaffTypes.csv\'"+
                                         " INTO TABLE StaffTypes FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (staffTypeName);"
                 );
+                                        
+                                statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/Departments.csv\'"+
+                                        " INTO TABLE Departments FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (departmentName);"
+                );
 				
 				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/Staffs.csv\'"+
-                                        " INTO TABLE Staffs FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (hotelID, staffTypeID, staffFirstName, staffLastName, birthDate, phoneNumber, streetAddress, cityID, zipCode);"
+                                        " INTO TABLE Staffs FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (hotelID, staffTypeID, departmentID, staffFirstName, staffLastName, birthDate, phoneNumber, streetAddress, cityID, zipCode);"
                 );
 				
 				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/Customers.csv\'"+

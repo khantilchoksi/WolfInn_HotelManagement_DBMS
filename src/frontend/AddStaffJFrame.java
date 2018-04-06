@@ -10,6 +10,7 @@ import backend.Hotel;
 import backend.Staff;
 import backend.StaffType;
 import backend.State;
+import backend.Department;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.util.Date;
@@ -34,6 +35,7 @@ public class AddStaffJFrame extends javax.swing.JFrame {
         initComponents();
         populateStates();
         populateStaffTypes();
+        populateDepartments();
     }
     
         private void populateStates() {
@@ -82,6 +84,19 @@ public class AddStaffJFrame extends javax.swing.JFrame {
             }
         }
         
+        private void populateDepartments() {
+            departmentJComboBox.removeAllItems();
+            
+            try{
+                ArrayList<Department> departmentList = Department.getAllDepartmentList();
+                for (Department department : departmentList) {
+                    departmentJComboBox.addItem(department);
+                }
+            } catch (Exception ex) {
+            ex.printStackTrace();
+            }
+        }
+        
         
         
 
@@ -115,6 +130,8 @@ public class AddStaffJFrame extends javax.swing.JFrame {
         addStaffJButton = new javax.swing.JButton();
         closeJButton = new javax.swing.JButton();
         birthDateChooser = new com.toedter.calendar.JDateChooser();
+        departmentJComboBox = new javax.swing.JComboBox();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -174,38 +191,21 @@ public class AddStaffJFrame extends javax.swing.JFrame {
             }
         });
 
+        departmentJComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                departmentJComboBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Department:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(stateJLabel))
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(staffTypeJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(firstNameJTextField)
-                            .addComponent(lastNameJTextField)
-                            .addComponent(phoneNumberJTextField)
-                            .addComponent(streetAddressJTextField)
-                            .addComponent(cityJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(zipCodeJTextField)
-                            .addComponent(stateJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(birthDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(233, 233, 233)
-                        .addComponent(jLabel9)))
+                .addGap(233, 233, 233)
+                .addComponent(jLabel9)
                 .addContainerGap(293, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -213,6 +213,34 @@ public class AddStaffJFrame extends javax.swing.JFrame {
                 .addGap(55, 55, 55)
                 .addComponent(closeJButton)
                 .addGap(146, 146, 146))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addComponent(stateJLabel))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(staffTypeJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(firstNameJTextField)
+                    .addComponent(lastNameJTextField)
+                    .addComponent(phoneNumberJTextField)
+                    .addComponent(streetAddressJTextField)
+                    .addComponent(cityJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(zipCodeJTextField)
+                    .addComponent(stateJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(birthDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
+                .addGap(98, 98, 98)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(departmentJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,7 +250,9 @@ public class AddStaffJFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(staffTypeJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(staffTypeJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(departmentJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -284,7 +314,9 @@ public class AddStaffJFrame extends javax.swing.JFrame {
     private void addStaffJButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStaffJButtonMouseClicked
         // TODO add your handling code here:
         StaffType selectedStaffType = (StaffType)staffTypeJComboBox.getSelectedItem();
+        Department selectedDepartment = (Department) departmentJComboBox.getSelectedItem();
         int staffTypeID = (int) selectedStaffType.getStaffTypeID();
+        int departmentID = (int) selectedDepartment.getDepartmentID();
         int hotelID = selectedHotel.getHotelID();
         String staffFirstName = firstNameJTextField.getText();
         String staffLastName = lastNameJTextField.getText();
@@ -296,7 +328,7 @@ public class AddStaffJFrame extends javax.swing.JFrame {
         String phoneNumber = phoneNumberJTextField.getText();
         boolean warning = false;
         
-        boolean newStaffCreated = Staff.createStaff(hotelID, staffTypeID, staffFirstName, staffLastName, birthDate, phoneNumber, streetAddress, cityID, zipCode);
+        boolean newStaffCreated = Staff.createStaff(hotelID, staffTypeID, departmentID, staffFirstName, staffLastName, birthDate, phoneNumber, streetAddress, cityID, zipCode);
         String showMessage = "";
         if(newStaffCreated){
             showMessage = "Your new staff has been successfully created!";
@@ -314,6 +346,10 @@ public class AddStaffJFrame extends javax.swing.JFrame {
         WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
     }//GEN-LAST:event_closeJButtonMouseClicked
+
+    private void departmentJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departmentJComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_departmentJComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -357,8 +393,10 @@ public class AddStaffJFrame extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser birthDateChooser;
     private javax.swing.JComboBox cityJComboBox;
     private javax.swing.JButton closeJButton;
+    private javax.swing.JComboBox departmentJComboBox;
     private javax.swing.JTextField firstNameJTextField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

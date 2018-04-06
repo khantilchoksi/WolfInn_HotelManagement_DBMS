@@ -72,6 +72,11 @@ public class StaffsJFrame extends javax.swing.JFrame {
 
         editStaffButton.setActionCommand("Edit Staff");
         editStaffButton.setLabel("Edit Staffs");
+        editStaffButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editStaffButtonMouseClicked(evt);
+            }
+        });
 
         viewStaffButton.setText("View Staffs");
         viewStaffButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -193,6 +198,18 @@ public class StaffsJFrame extends javax.swing.JFrame {
         int screenWidth = screenSize.width;
         deleteStaffJFrame.setLocation(screenWidth/4,screenHeight/4);
     }//GEN-LAST:event_deleteStaffButtonMouseClicked
+
+    private void editStaffButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editStaffButtonMouseClicked
+        // TODO add your handling code here:
+        EditStaffJFrame editStaffJFrame = new EditStaffJFrame((Hotel) selectHotelJBox.getSelectedItem());
+        editStaffJFrame.setVisible(true);
+        editStaffJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        editStaffJFrame.setLocation(screenWidth/4,screenHeight/4);
+    }//GEN-LAST:event_editStaffButtonMouseClicked
     
     /**
      * @param args the command line arguments
