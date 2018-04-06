@@ -59,6 +59,11 @@ public class MainJFrame extends javax.swing.JFrame {
         });
 
         jButton3.setText("Customers");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                customersMouseClicked(evt);
+            }
+        });
 
         reportJButton.setText("Reports");
         reportJButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -148,7 +153,19 @@ public class MainJFrame extends javax.swing.JFrame {
         StaffsJFrame.setLocation(screenWidth/4,screenHeight/4);
     }//GEN-LAST:event_staffsMouseClicked
 
-    private void reportJButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportJButtonMouseClicked
+    private void customersMouseClicked(java.awt.event.MouseEvent evt) {                                       
+        // TODO add your handling code here:
+        CustomersJFrame CustomersJFrame = new CustomersJFrame();
+        CustomersJFrame.setVisible(true);
+        CustomersJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        CustomersJFrame.setLocation(screenWidth/4,screenHeight/4);
+    }
+        
+    private void reportJButtonMouseClicked(java.awt.event.MouseEvent evt) {                                           
         // TODO add your handling code here:
         ReportsJFrame reportsJFrame = new ReportsJFrame();
         reportsJFrame.setVisible(true);
@@ -158,7 +175,8 @@ public class MainJFrame extends javax.swing.JFrame {
         int screenHeight = screenSize.height;
         int screenWidth = screenSize.width;
         reportsJFrame.setLocation(screenWidth/4,screenHeight/4);
-    }//GEN-LAST:event_reportJButtonMouseClicked
+    }                                          
+
 
     /**
      * @param args the command line arguments
