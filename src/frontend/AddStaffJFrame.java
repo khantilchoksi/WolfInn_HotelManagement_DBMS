@@ -90,7 +90,7 @@ public class AddStaffJFrame extends javax.swing.JFrame {
             try{
                 ArrayList<Department> departmentList = Department.getAllDepartmentList();
                 for (Department department : departmentList) {
-                    staffTypeJComboBox.addItem(department);
+                    departmentJComboBox.addItem(department);
                 }
             } catch (Exception ex) {
             ex.printStackTrace();

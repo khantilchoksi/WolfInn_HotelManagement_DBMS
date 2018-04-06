@@ -160,6 +160,41 @@ public class Staff {
         }    
     }
         
+        public static boolean updateStaffDetails(int staffID, int hotelID, int staffTypeID, int departmentID, String staffFirstName, String staffLastName,
+                Date birthDate, String phoneNumber, String streetAddress, int cityID, int zipCode) {
+            
+            java.sql.Date sqlBirthDate = new java.sql.Date(birthDate.getTime());
+
+            try {
+                PreparedStatement pscreate = Connect.connection.prepareStatement("UPDATE Staffs "+
+                        "SET hotelID = ?, staffTypeID = ?, departmentID = ?, staffFirstName = ?, staffLastName = ?, "
+                        + "birthDate = ?, phoneNumber = ?, streetAddress = ?, cityID = ?, zipCode = ? "+
+                        "WHERE staffID = ?");
+                
+                pscreate.setInt(1, hotelID);
+                pscreate.setInt(2, staffTypeID);
+                pscreate.setInt(3, departmentID);
+                pscreate.setString(4, staffFirstName);
+                pscreate.setString(5, staffLastName);
+                pscreate.setDate(6, sqlBirthDate);
+                pscreate.setString(7, phoneNumber);
+                pscreate.setString(8, streetAddress);
+                pscreate.setInt(9, cityID);
+                pscreate.setInt(10, zipCode);
+                pscreate.setInt(11, staffID);
+         
+
+                pscreate.executeUpdate();
+                return true;
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null,ex);
+                return false;
+            }
+
+        
+    }
+        
         public static ArrayList<Staff> getAllStaffsList(int hotelID){
         ArrayList<Staff> StaffsList = new ArrayList<Staff>();
         int tempStaffID, tempHotelID, tempStaffTypeID, tempDepartmentID, tempCityID, tempZipCode;

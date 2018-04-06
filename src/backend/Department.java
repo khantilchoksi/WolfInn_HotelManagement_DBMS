@@ -5,6 +5,7 @@
  */
 package backend;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -43,12 +44,15 @@ public class Department {
         String tempDepartmentName;
         try
         {
+            
             Statement statement = Connect.connection.createStatement();
-            resultSet = statement.executeQuery("select * from Department order by departmentName");
+            resultSet = statement.executeQuery("select * from Departments order by departmentName");
             
             while(resultSet.next()){
                 tempDepartmentID = resultSet.getInt("departmentID");
+                
                 tempDepartmentName = resultSet.getString("departmentName");
+                
                 departmentList.add(new Department(tempDepartmentID, tempDepartmentName));
             }
             
@@ -59,5 +63,29 @@ public class Department {
         
         return departmentList;
         
+    }
+    
+    public static Department getDepartment(int departmentID){
+        int tempDepartmentID;
+        String tempDepartmentName;
+        ResultSet resultSet = null;
+        try
+        {
+            PreparedStatement preparedStatement = Connect.connection.prepareStatement("select * from Departments where departmentID = ? ");
+            preparedStatement.setInt(1, departmentID);
+            resultSet = preparedStatement.executeQuery();
+            
+            while(resultSet.next()){
+                
+                tempDepartmentID = resultSet.getInt("departmentID");
+                tempDepartmentName = resultSet.getString("departmentName");
+                return (new Department(tempDepartmentID, tempDepartmentName));
+            }
+            
+        }catch(Exception ex){
+            ex.printStackTrace();
+            //JOptionPane.showMessageDialog(null,ex);
+        }
+        return null;
     }
 }

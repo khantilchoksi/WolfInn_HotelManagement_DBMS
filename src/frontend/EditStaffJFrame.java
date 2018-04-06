@@ -5,6 +5,18 @@
  */
 package frontend;
 
+import backend.City;
+import backend.Department;
+import backend.Hotel;
+import backend.Staff;
+import backend.StaffType;
+import backend.State;
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Dax Amin
@@ -14,9 +26,91 @@ public class EditStaffJFrame extends javax.swing.JFrame {
     /**
      * Creates new form EditStaffJFrame
      */
-    public EditStaffJFrame() {
+    
+    Hotel selectedHotel;
+    public EditStaffJFrame(Hotel selectedHotel) {
+        this.selectedHotel = selectedHotel;
         initComponents();
+        populateStaff();
+        populateStates();
+        populateStaffTypes();
+        populateDepartments();
     }
+    
+    private void populateStaff() {
+        selectStaffComboBox.removeAllItems();
+        //statesJComboBox.addItem("");
+        //statesJComboBox.addItem("All States");
+
+        try {
+            ArrayList<Staff> staffsList = Staff.getAllStaffsList(selectedHotel.getHotelID());
+            for (Staff staff : staffsList) {
+                selectStaffComboBox.addItem(staff);
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    private void populateStates() {
+        stateComboBox.removeAllItems();
+        //statesJComboBox.addItem("");
+        //statesJComboBox.addItem("All States");
+
+        try {
+            ArrayList<State> statesList = State.getAllStatesList();
+            for (State state : statesList) {
+                stateComboBox.addItem(state);
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    private void populateCities() {
+        cityComboBox.removeAllItems();
+        //statesJComboBox.addItem("");
+        //statesJComboBox.addItem("All States");
+
+        try {
+            State selectedState = (State) stateComboBox.getSelectedItem();
+            ArrayList<City> citiesList = City.getAllCitiesInStateList(selectedState.getStateID());
+            for (City city : citiesList) {
+                cityComboBox.addItem(city);
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    private void populateStaffTypes() {
+            staffTypeComboBox.removeAllItems();
+            
+            try{
+                ArrayList<StaffType> staffTypesList = StaffType.getAllStaffTypeList();
+                for (StaffType staffType : staffTypesList) {
+                    staffTypeComboBox.addItem(staffType);
+                }
+            } catch (Exception ex) {
+            ex.printStackTrace();
+            }
+        }
+    
+    private void populateDepartments() {
+            departmentComboBox.removeAllItems();
+            
+            try{
+                ArrayList<Department> departmentList = Department.getAllDepartmentList();
+                for (Department department : departmentList) {
+                    departmentComboBox.addItem(department);
+                }
+            } catch (Exception ex) {
+            ex.printStackTrace();
+            }
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,39 +123,191 @@ public class EditStaffJFrame extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        selectStaffComboBox = new javax.swing.JComboBox();
+        staffType = new javax.swing.JLabel();
+        staffTypeComboBox = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
+        departmentComboBox = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
+        firstNameTextField = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        lastNameTextField = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        birthDateChooser = new com.toedter.calendar.JDateChooser();
+        jLabel7 = new javax.swing.JLabel();
+        phoneNumberTextField = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        streetAddressTextField = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        stateComboBox = new javax.swing.JComboBox();
+        jLabel10 = new javax.swing.JLabel();
+        cityComboBox = new javax.swing.JComboBox();
+        jLabel11 = new javax.swing.JLabel();
+        zipCodeTextField = new javax.swing.JTextField();
+        editButton = new javax.swing.JButton();
+        closeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Edit / Update Staff");
+
+        jLabel2.setText("Select Staff:");
+
+        selectStaffComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectStaffComboBoxActionPerformed(evt);
+            }
+        });
+
+        staffType.setText("Edit Type");
+
+        jLabel3.setText("Edit Department");
+
+        jLabel4.setText("First Name");
+
+        jLabel5.setText("Last Name:");
+
+        jLabel6.setText("Birth Date:");
+
+        jLabel7.setText("Phone Number:");
+
+        jLabel8.setText("Street Address");
+
+        jLabel9.setText("State:");
+
+        stateComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stateComboBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("City:");
+
+        jLabel11.setText("Zip Code");
+
+        editButton.setText("Edit");
+        editButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editButtonMouseClicked(evt);
+            }
+        });
+
+        closeButton.setText("Close");
+        closeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                closeButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(244, 244, 244)
-                .addComponent(jLabel1)
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(244, 244, 244)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(staffType)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11))
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(phoneNumberTextField)
+                            .addComponent(selectStaffComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, 211, Short.MAX_VALUE)
+                            .addComponent(staffTypeComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(departmentComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(firstNameTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lastNameTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(birthDateChooser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(streetAddressTextField)
+                            .addComponent(stateComboBox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cityComboBox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(zipCodeTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(328, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(editButton)
+                .addGap(69, 69, 69)
+                .addComponent(closeButton)
+                .addGap(123, 123, 123))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addGap(0, 423, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(selectStaffComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(staffType)
+                    .addComponent(staffTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(departmentComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(firstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(lastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(birthDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(phoneNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(streetAddressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(stateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(cityComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(zipCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editButton)
+                    .addComponent(closeButton))
+                .addGap(0, 18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -69,6 +315,71 @@ public class EditStaffJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void stateComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stateComboBoxActionPerformed
+        // TODO add your handling code here:
+        populateCities();
+    }//GEN-LAST:event_stateComboBoxActionPerformed
+
+    private void selectStaffComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectStaffComboBoxActionPerformed
+        // TODO add your handling code here:
+        Staff selectedStaff = (Staff) selectStaffComboBox.getSelectedItem();
+        
+        StaffType selectedType = StaffType.getStaffType(selectedStaff.getStaffTypeID());
+        staffTypeComboBox.setSelectedItem(selectedType);
+        Department selectedDepartment = Department.getDepartment(selectedStaff.getDepartmentID());
+        departmentComboBox.setSelectedItem(selectedDepartment);
+        firstNameTextField.setText(selectedStaff.getFirstName());
+        lastNameTextField.setText(selectedStaff.getLastName());
+        streetAddressTextField.setText(selectedStaff.getAddress());
+        City selectedCity = City.getCity(selectedStaff.getCityID());
+        State selectedState = State.getState(selectedCity.getStateID());
+        stateComboBox.setSelectedItem(selectedState);
+        cityComboBox.setSelectedItem(selectedCity);
+        zipCodeTextField.setText(Integer.toString(selectedStaff.getZipCode()));
+        phoneNumberTextField.setText(selectedStaff.getPhoneNumber());
+        birthDateChooser.setDate(selectedStaff.getBirthDate());
+    }//GEN-LAST:event_selectStaffComboBoxActionPerformed
+
+    private void editButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editButtonMouseClicked
+        // TODO add your handling code here:
+        Staff selectedStaff = (Staff) selectStaffComboBox.getSelectedItem();
+        int staffID = selectedStaff.getStaffID();
+        int hotelID = selectedHotel.getHotelID();
+        StaffType selectedStaffType = (StaffType)staffTypeComboBox.getSelectedItem();
+        Department selectedDepartment = (Department) departmentComboBox.getSelectedItem();
+        int staffTypeID = (int) selectedStaffType.getStaffTypeID();
+        int departmentID = (int) selectedDepartment.getDepartmentID();
+        String staffFirstName = firstNameTextField.getText();
+        String staffLastName = lastNameTextField.getText();
+        Date birthDate = birthDateChooser.getDateEditor().getDate();
+        String phoneNumber = phoneNumberTextField.getText();
+        String streetAddress = streetAddressTextField.getText();
+        City selectedCity = (City)cityComboBox.getSelectedItem();
+        int cityID = (int) selectedCity.getCityID();
+        int zipCode = Integer.parseInt(zipCodeTextField.getText());
+        
+        
+        boolean staffUpdated = Staff.updateStaffDetails(staffID, hotelID, staffTypeID, departmentID, staffFirstName, staffLastName, 
+                birthDate, phoneNumber, streetAddress, cityID, zipCode);
+        String showMessage = "";
+        if(staffUpdated){
+            showMessage = "Staff details have been successfully updated!";
+        }else{
+            showMessage = "Oops! Some error occured while updating staff details!";
+        }
+        
+        JOptionPane.showMessageDialog(null,showMessage);
+        
+        WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+    }//GEN-LAST:event_editButtonMouseClicked
+
+    private void closeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeButtonMouseClicked
+        // TODO add your handling code here:
+        WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+    }//GEN-LAST:event_closeButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -98,15 +409,40 @@ public class EditStaffJFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        /*
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new EditStaffJFrame().setVisible(true);
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDateChooser birthDateChooser;
+    private javax.swing.JComboBox cityComboBox;
+    private javax.swing.JButton closeButton;
+    private javax.swing.JComboBox departmentComboBox;
+    private javax.swing.JButton editButton;
+    private javax.swing.JTextField firstNameTextField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField lastNameTextField;
+    private javax.swing.JTextField phoneNumberTextField;
+    private javax.swing.JComboBox selectStaffComboBox;
+    private javax.swing.JLabel staffType;
+    private javax.swing.JComboBox staffTypeComboBox;
+    private javax.swing.JComboBox stateComboBox;
+    private javax.swing.JTextField streetAddressTextField;
+    private javax.swing.JTextField zipCodeTextField;
     // End of variables declaration//GEN-END:variables
 }

@@ -271,7 +271,7 @@ public class WolfInn {
                 );
 				
 				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/Staffs.csv\'"+
-                                        " INTO TABLE Staffs FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (hotelID, staffTypeID, staffFirstName, staffLastName, birthDate, phoneNumber, streetAddress, cityID, zipCode);"
+                                        " INTO TABLE Staffs FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (hotelID, staffTypeID, departmentID, staffFirstName, staffLastName, birthDate, phoneNumber, streetAddress, cityID, zipCode);"
                 );
 				
 				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/Customers.csv\'"+
