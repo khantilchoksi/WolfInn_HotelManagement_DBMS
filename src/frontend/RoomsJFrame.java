@@ -19,6 +19,7 @@ public class RoomsJFrame extends javax.swing.JFrame {
      */
     public RoomsJFrame() {
         initComponents();
+        populateHotels();
     }
 
     private void populateHotels() {
@@ -29,7 +30,7 @@ public class RoomsJFrame extends javax.swing.JFrame {
         try {
             ArrayList<Hotel> hotelsList = Hotel.getAllHotelsList();
             for (Hotel hotel : hotelsList) {
-                jComboBox1.addItem(hotel.getHotelName());
+                jComboBox1.addItem(hotel);
             }
 
         } catch (Exception ex) {
@@ -64,7 +65,6 @@ public class RoomsJFrame extends javax.swing.JFrame {
 
         jLabel2.setText("Select Hotel:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -160,7 +160,7 @@ public class RoomsJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<Hotel> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

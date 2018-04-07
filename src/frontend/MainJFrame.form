@@ -61,7 +61,11 @@
                           <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="staffs" pref="114" max="32767" attributes="0"/>
+<<<<<<< HEAD
+                              <Component id="rooms" max="32767" attributes="0"/>
+=======
                               <Component id="reportJButton" max="32767" attributes="0"/>
+>>>>>>> 5ff9128ffbf66265bb2ed0811a5c3e5c3866efec
                           </Group>
                       </Group>
                   </Group>
@@ -80,9 +84,15 @@
                       <Component id="hotels" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+<<<<<<< HEAD
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jButton3" pref="44" max="32767" attributes="0"/>
+                      <Component id="rooms" max="32767" attributes="0"/>
+=======
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButton3" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
                       <Component id="reportJButton" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
+>>>>>>> 5ff9128ffbf66265bb2ed0811a5c3e5c3866efec
                   </Group>
                   <EmptySpace pref="107" max="32767" attributes="0"/>
               </Group>
@@ -127,6 +137,14 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="reportJButtonMouseClicked"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="rooms">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Rooms"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="roomsMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>

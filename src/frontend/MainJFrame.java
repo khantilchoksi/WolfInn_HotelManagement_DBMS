@@ -36,6 +36,7 @@ public class MainJFrame extends javax.swing.JFrame {
         hotels = new javax.swing.JButton();
         staffs = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        rooms = new javax.swing.JButton();
         reportJButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -72,6 +73,13 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        rooms.setText("Rooms");
+        rooms.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                roomsMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -89,6 +97,7 @@ public class MainJFrame extends javax.swing.JFrame {
                         .addGap(83, 83, 83)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(staffs, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                            .addComponent(rooms, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addComponent(reportJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(87, Short.MAX_VALUE))
         );
@@ -102,6 +111,9 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(staffs, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(hotels, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(47, 47, 47)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                    .addComponent(rooms, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(reportJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -152,6 +164,18 @@ public class MainJFrame extends javax.swing.JFrame {
         int screenWidth = screenSize.width;
         StaffsJFrame.setLocation(screenWidth/4,screenHeight/4);
     }//GEN-LAST:event_staffsMouseClicked
+
+	private void roomsMouseClicked(java.awt.event.MouseEvent evt) {                                   
+        // TODO add your handling code here:
+        RoomsJFrame RoomsJFrame = new RoomsJFrame();
+        RoomsJFrame.setVisible(true);
+        RoomsJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        RoomsJFrame.setLocation(screenWidth/4,screenHeight/4);
+    }
 
     private void customersMouseClicked(java.awt.event.MouseEvent evt) {                                       
         // TODO add your handling code here:
@@ -218,6 +242,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton rooms;
     private javax.swing.JButton reportJButton;
     private javax.swing.JButton staffs;
     // End of variables declaration//GEN-END:variables
