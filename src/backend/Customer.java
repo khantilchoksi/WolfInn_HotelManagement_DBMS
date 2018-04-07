@@ -5,7 +5,7 @@
  */
 package backend;
 
-import java.sql.Date;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -64,11 +64,14 @@ public class Customer {
     }
     
     public static boolean createCustomer(String customerFirstName, String customerLastName, Date birthDate, String phoneNumber, String emailAddress){
+        
+        java.sql.Date sqlBirthDate = new java.sql.Date(birthDate.getTime());
+        
         try {
             PreparedStatement pscreate = Connect.connection.prepareStatement("insert into Customers(customerFirstName, customerLastName, birthDate, phoneNumber, emailAddress) values(?,?,?,?,?)");
             pscreate.setString(1, customerFirstName);
             pscreate.setString(2, customerLastName);
-            pscreate.setDate(3, birthDate);
+            pscreate.setDate(3, sqlBirthDate);
             pscreate.setString(4, phoneNumber);
             pscreate.setString(5, emailAddress);
 			
@@ -95,13 +98,16 @@ public class Customer {
     }
     
     public static boolean updateCustomerDetails(int customerID, String customerFirstName, String customerLastName, Date birthDate, String phoneNumber, String emailAddress){
+        
+        java.sql.Date sqlBirthDate = new java.sql.Date(birthDate.getTime());
+        
         try {
             PreparedStatement psupdate = Connect.connection.prepareStatement("UPDATE Customers "+
                     "SET customerFirstName = ?, customerLastName = ?, birthDate = ?, phoneNumber = ?, emailAddress = ?"+
                     "WHERE customerID = ?");
             psupdate.setString(1, customerFirstName);
             psupdate.setString(2, customerLastName);
-            psupdate.setDate(3, birthDate);
+            psupdate.setDate(3, sqlBirthDate);
             psupdate.setString(4, phoneNumber);
             psupdate.setString(5, emailAddress);
             psupdate.setInt(6, customerID);
