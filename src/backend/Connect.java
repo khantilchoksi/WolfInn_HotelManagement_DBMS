@@ -16,12 +16,13 @@ import javax.swing.JOptionPane;
 public class Connect {
     static Connection connection = null;
     
-    private static final String user = "khchoksi";
-    private static final String password = "choksi";
+    private static final String user = "root";
+    private static final String password = "";
     private static final String driver ="org.mariadb.jdbc.Driver";
     private static final boolean localdb = true; // Determine whether to use a local database or NCSU's DB.
 //    jdbc:mariadb://localhost:3306/DB?user=root&password=myPassword"
     private static final String jdbcURL = localdb
+
 			? "jdbc:mariadb://localhost/wolfinn?user=root&password=&createDatabaseIfNotExist=true" // If using a local database
 			: "jdbc:mariadb://classdb2.csc.ncsu.edu:3306/$USER$"; // If using NCSU's DB
     
@@ -32,7 +33,7 @@ public class Connect {
             Class.forName(driver);
             // URL 
             connection = DriverManager.getConnection(jdbcURL);
-            
+            System.out.println(jdbcURL);
             System.out.println("\n Connected from Connect.java!");
             //JOptionPane.showMessageDialog(null,"CONNECTED");
 

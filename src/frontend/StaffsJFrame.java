@@ -5,8 +5,10 @@
  */
 package frontend;
 
+import backend.Hotel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 
 /**
@@ -20,6 +22,23 @@ public class StaffsJFrame extends javax.swing.JFrame {
      */
     public StaffsJFrame() {
         initComponents();
+        populateHotels();
+    }
+    
+    private void populateHotels() {
+        selectHotelJBox.removeAllItems();
+        //statesJComboBox.addItem("");
+        //statesJComboBox.addItem("All States");
+
+        try {
+            ArrayList<Hotel> hotelsList = Hotel.getAllHotelsList();
+            for (Hotel hotel : hotelsList) {
+                selectHotelJBox.addItem(hotel);
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     /**
@@ -36,6 +55,8 @@ public class StaffsJFrame extends javax.swing.JFrame {
         editStaffButton = new javax.swing.JButton();
         viewStaffButton = new javax.swing.JButton();
         deleteStaffButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        selectHotelJBox = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,9 +72,13 @@ public class StaffsJFrame extends javax.swing.JFrame {
 
         editStaffButton.setActionCommand("Edit Staff");
         editStaffButton.setLabel("Edit Staffs");
+        editStaffButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editStaffButtonMouseClicked(evt);
+            }
+        });
 
         viewStaffButton.setText("View Staffs");
-        viewStaffButton.setActionCommand("View Staffs");
         viewStaffButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 viewStaffButtonMouseClicked(evt);
@@ -62,6 +87,20 @@ public class StaffsJFrame extends javax.swing.JFrame {
 
         deleteStaffButton.setActionCommand("Delete Staff");
         deleteStaffButton.setLabel("Delete Staff");
+        deleteStaffButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deleteStaffButtonMouseClicked(evt);
+            }
+        });
+
+        jLabel2.setText("Select Hotel:");
+
+        selectHotelJBox.setToolTipText("");
+        selectHotelJBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectHotelJBoxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,13 +124,23 @@ public class StaffsJFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteStaffButton, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(58, 58, 58))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(146, 146, 146)
+                .addComponent(jLabel2)
+                .addGap(30, 30, 30)
+                .addComponent(selectHotelJBox, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(62, 62, 62)
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(selectHotelJBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(editStaffButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(addStaffButton, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE))
@@ -102,15 +151,14 @@ public class StaffsJFrame extends javax.swing.JFrame {
                 .addGap(78, 78, 78))
         );
 
-        jLabel1.getAccessibleContext().setAccessibleName("Manage Staffs");
-        editStaffButton.getAccessibleContext().setAccessibleName("Edit Staffs");
+        jLabel2.getAccessibleContext().setAccessibleName("Select Hotel");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void addStaffButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStaffButtonMouseClicked
         // TODO add your handling code here:
-        AddStaffJFrame addStaffJFrame = new AddStaffJFrame();
+        AddStaffJFrame addStaffJFrame = new AddStaffJFrame((Hotel) selectHotelJBox.getSelectedItem());
         addStaffJFrame.setVisible(true);
         addStaffJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -122,16 +170,47 @@ public class StaffsJFrame extends javax.swing.JFrame {
 
     private void viewStaffButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewStaffButtonMouseClicked
         // TODO add your handling code here:
-        ViewHotelsJFrame viewHotelsJFrame = new ViewHotelsJFrame();
-        viewHotelsJFrame.setVisible(true);
-        viewHotelsJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        ViewStaffsJFrame viewStaffsJFrame = new ViewStaffsJFrame((Hotel) selectHotelJBox.getSelectedItem());
+        viewStaffsJFrame.setVisible(true);
+        viewStaffsJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension screenSize = tk.getScreenSize();
         int screenHeight = screenSize.height;
         int screenWidth = screenSize.width;
-        viewHotelsJFrame.setLocation(screenWidth/4,screenHeight/4);
+        viewStaffsJFrame.setLocation(screenWidth/4,screenHeight/4);
     }//GEN-LAST:event_viewStaffButtonMouseClicked
+    
+    private void selectHotelJBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectHotelJBoxActionPerformed
+        // TODO add your handling code here:
+        //System.out.println("\n SELECTED HOTEL: " + (Hotel) selectHotelJBox.getSelectedItem());
+        Hotel selectedHotel = (Hotel) selectHotelJBox.getSelectedItem();
+        
+    }//GEN-LAST:event_selectHotelJBoxActionPerformed
 
+    private void deleteStaffButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteStaffButtonMouseClicked
+        // TODO add your handling code here:
+        DeleteStaffJFrame deleteStaffJFrame = new DeleteStaffJFrame((Hotel) selectHotelJBox.getSelectedItem());
+        deleteStaffJFrame.setVisible(true);
+        deleteStaffJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        deleteStaffJFrame.setLocation(screenWidth/4,screenHeight/4);
+    }//GEN-LAST:event_deleteStaffButtonMouseClicked
+
+    private void editStaffButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editStaffButtonMouseClicked
+        // TODO add your handling code here:
+        EditStaffJFrame editStaffJFrame = new EditStaffJFrame((Hotel) selectHotelJBox.getSelectedItem());
+        editStaffJFrame.setVisible(true);
+        editStaffJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        editStaffJFrame.setLocation(screenWidth/4,screenHeight/4);
+    }//GEN-LAST:event_editStaffButtonMouseClicked
+    
     /**
      * @param args the command line arguments
      */
@@ -172,6 +251,8 @@ public class StaffsJFrame extends javax.swing.JFrame {
     private javax.swing.JButton deleteStaffButton;
     private javax.swing.JButton editStaffButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JComboBox selectHotelJBox;
     private javax.swing.JButton viewStaffButton;
     // End of variables declaration//GEN-END:variables
 }

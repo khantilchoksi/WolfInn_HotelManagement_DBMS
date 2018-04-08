@@ -5,6 +5,20 @@
  */
 package frontend;
 
+import backend.City;
+import backend.Hotel;
+import backend.Staff;
+import backend.StaffType;
+import backend.State;
+import backend.Department;
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
+import java.util.Date;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
+
+
 /**
  *
  * @author Dax Amin
@@ -14,9 +28,77 @@ public class AddStaffJFrame extends javax.swing.JFrame {
     /**
      * Creates new form AddStaffJFrame
      */
-    public AddStaffJFrame() {
+    
+    Hotel selectedHotel;
+    public AddStaffJFrame(Hotel selectedHotel) {
+        this.selectedHotel = selectedHotel;
         initComponents();
+        populateStates();
+        populateStaffTypes();
+        populateDepartments();
     }
+    
+        private void populateStates() {
+        stateJComboBox.removeAllItems();
+        //statesJComboBox.addItem("");
+        //statesJComboBox.addItem("All States");
+
+        try {
+            ArrayList<State> statesList = State.getAllStatesList();
+            for (State state : statesList) {
+                stateJComboBox.addItem(state);
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+        
+        private void populateCities() {
+        cityJComboBox.removeAllItems();
+        //statesJComboBox.addItem("");
+        //statesJComboBox.addItem("All States");
+
+        try {
+            State selectedState = (State) stateJComboBox.getSelectedItem();
+            ArrayList<City> citiesList = City.getAllCitiesInStateList(selectedState.getStateID());
+            for (City city : citiesList) {
+                cityJComboBox.addItem(city);
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+        
+        private void populateStaffTypes() {
+            staffTypeJComboBox.removeAllItems();
+            
+            try{
+                ArrayList<StaffType> staffTypesList = StaffType.getAllStaffTypeList();
+                for (StaffType staffType : staffTypesList) {
+                    staffTypeJComboBox.addItem(staffType);
+                }
+            } catch (Exception ex) {
+            ex.printStackTrace();
+            }
+        }
+        
+        private void populateDepartments() {
+            departmentJComboBox.removeAllItems();
+            
+            try{
+                ArrayList<Department> departmentList = Department.getAllDepartmentList();
+                for (Department department : departmentList) {
+                    departmentJComboBox.addItem(department);
+                }
+            } catch (Exception ex) {
+            ex.printStackTrace();
+            }
+        }
+        
+        
+        
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,25 +109,252 @@ public class AddStaffJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        staffTypeJComboBox = new javax.swing.JComboBox();
+        firstNameJTextField = new javax.swing.JTextField();
+        lastNameJTextField = new javax.swing.JTextField();
+        phoneNumberJTextField = new javax.swing.JTextField();
+        streetAddressJTextField = new javax.swing.JTextField();
+        cityJComboBox = new javax.swing.JComboBox();
+        zipCodeJTextField = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        stateJLabel = new javax.swing.JLabel();
+        stateJComboBox = new javax.swing.JComboBox();
+        addStaffJButton = new javax.swing.JButton();
+        closeJButton = new javax.swing.JButton();
+        birthDateChooser = new com.toedter.calendar.JDateChooser();
+        departmentJComboBox = new javax.swing.JComboBox();
+        jLabel10 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Staff Type:");
+
+        jLabel2.setText("First Name:");
+
+        jLabel3.setText("Last Name:");
+
+        jLabel4.setText("Birth Date:");
+
+        jLabel5.setText("Phone Number:");
+
+        jLabel6.setText("Street Address:");
+
+        jLabel7.setText("City:");
+
+        jLabel8.setText("Zip Code:");
+
+        staffTypeJComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                staffTypeJComboBoxActionPerformed(evt);
+            }
+        });
+
+        cityJComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cityJComboBoxActionPerformed(evt);
+            }
+        });
+
+        zipCodeJTextField.setToolTipText("");
+
+        jLabel9.setText("Add Staff to selected hotel");
+
+        stateJLabel.setText("State");
+
+        stateJComboBox.setToolTipText("");
+        stateJComboBox.setLightWeightPopupEnabled(false);
+        stateJComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stateJComboBoxActionPerformed(evt);
+            }
+        });
+
+        addStaffJButton.setText("Add Staff");
+        addStaffJButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addStaffJButtonMouseClicked(evt);
+            }
+        });
+
+        closeJButton.setText("Close");
+        closeJButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                closeJButtonMouseClicked(evt);
+            }
+        });
+
+        departmentJComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                departmentJComboBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Department:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 582, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(233, 233, 233)
+                .addComponent(jLabel9)
+                .addContainerGap(293, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(addStaffJButton)
+                .addGap(55, 55, 55)
+                .addComponent(closeJButton)
+                .addGap(146, 146, 146))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addComponent(stateJLabel))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(staffTypeJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(firstNameJTextField)
+                    .addComponent(lastNameJTextField)
+                    .addComponent(phoneNumberJTextField)
+                    .addComponent(streetAddressJTextField)
+                    .addComponent(cityJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(zipCodeJTextField)
+                    .addComponent(stateJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(birthDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
+                .addGap(98, 98, 98)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(departmentJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 451, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addComponent(jLabel9)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(staffTypeJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(departmentJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(firstNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(lastNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(birthDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(phoneNumberJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(streetAddressJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stateJLabel)
+                    .addComponent(stateJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(cityJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(zipCodeJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addStaffJButton)
+                    .addComponent(closeJButton))
+                .addGap(31, 31, 31))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void stateJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stateJComboBoxActionPerformed
+        // TODO add your handling code here:
+        //System.out.println("\n SELECTED STATE: " + (State) stateJComboBox.getSelectedItem());
+        populateCities();
+    }//GEN-LAST:event_stateJComboBoxActionPerformed
+
+    private void cityJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cityJComboBoxActionPerformed
+        // TODO add your handling code here:
+        //System.out.println("\n SELECTED CITY: " + (City) cityJComboBox.getSelectedItem());
+    }//GEN-LAST:event_cityJComboBoxActionPerformed
+
+    private void staffTypeJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffTypeJComboBoxActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_staffTypeJComboBoxActionPerformed
+
+    private void addStaffJButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStaffJButtonMouseClicked
+        // TODO add your handling code here:
+        StaffType selectedStaffType = (StaffType)staffTypeJComboBox.getSelectedItem();
+        Department selectedDepartment = (Department) departmentJComboBox.getSelectedItem();
+        int staffTypeID = (int) selectedStaffType.getStaffTypeID();
+        int departmentID = (int) selectedDepartment.getDepartmentID();
+        int hotelID = selectedHotel.getHotelID();
+        String staffFirstName = firstNameJTextField.getText();
+        String staffLastName = lastNameJTextField.getText();
+        Date birthDate = birthDateChooser.getDateEditor().getDate();
+        String streetAddress = streetAddressJTextField.getText();
+        City selectedCity = (City)cityJComboBox.getSelectedItem();
+        int cityID = (int) selectedCity.getCityID();
+        int zipCode = Integer.parseInt(zipCodeJTextField.getText());
+        String phoneNumber = phoneNumberJTextField.getText();
+        boolean warning = false;
+        
+        boolean newStaffCreated = Staff.createStaff(hotelID, staffTypeID, departmentID, staffFirstName, staffLastName, birthDate, phoneNumber, streetAddress, cityID, zipCode);
+        String showMessage = "";
+        if(newStaffCreated){
+            showMessage = "Your new staff has been successfully created!";
+        }else{
+            showMessage = "Oops! Some error occured while inserting new staff!";
+        }
+        
+        JOptionPane.showMessageDialog(null,showMessage);
+        WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+    }//GEN-LAST:event_addStaffJButtonMouseClicked
+
+    private void closeJButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeJButtonMouseClicked
+        // TODO add your handling code here:
+        WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+    }//GEN-LAST:event_closeJButtonMouseClicked
+
+    private void departmentJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departmentJComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_departmentJComboBoxActionPerformed
+
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -71,13 +380,37 @@ public class AddStaffJFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+    /*    java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddStaffJFrame().setVisible(true);
+                new AddStaffJFrame(selectedHotel).setVisible(true);
             }
-        });
+        });*/
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addStaffJButton;
+    private com.toedter.calendar.JDateChooser birthDateChooser;
+    private javax.swing.JComboBox cityJComboBox;
+    private javax.swing.JButton closeJButton;
+    private javax.swing.JComboBox departmentJComboBox;
+    private javax.swing.JTextField firstNameJTextField;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField lastNameJTextField;
+    private javax.swing.JTextField phoneNumberJTextField;
+    private javax.swing.JComboBox staffTypeJComboBox;
+    private javax.swing.JComboBox stateJComboBox;
+    private javax.swing.JLabel stateJLabel;
+    private javax.swing.JTextField streetAddressJTextField;
+    private javax.swing.JTextField zipCodeJTextField;
     // End of variables declaration//GEN-END:variables
 }
