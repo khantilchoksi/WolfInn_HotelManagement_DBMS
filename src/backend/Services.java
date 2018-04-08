@@ -21,7 +21,9 @@ public class Services {
         this.serviceName = serviceName;
     }
     
-    
+    public String toString(){
+        return "" + serviceName ;
+    }
     
     private int serviceID;
     
@@ -70,10 +72,10 @@ public class Services {
     public static boolean createService(String serviceName) {
 
         try {
-            PreparedStatement pscreate = Connect.connection.prepareStatement("insert into Services(serviceName) values(?)");
-            pscreate.setString(1, serviceName);
+            PreparedStatement pscreate1 = Connect.connection.prepareStatement("INSERT into Services(serviceName) values(?)");
+            pscreate1.setString(1, serviceName);
 
-            pscreate.executeUpdate();
+            pscreate1.executeUpdate();
             return true;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -87,13 +89,13 @@ public class Services {
     public static boolean updateServiceDetails(int serviceID, String serviceName) {
 
         try {
-            PreparedStatement pscreate = Connect.connection.prepareStatement("UPDATE Services"+
+            PreparedStatement pscreate1 = Connect.connection.prepareStatement("UPDATE Services"+
                     "SET serviceName = ?"+
                     "WHERE serviceID = ?");
-            pscreate.setString(1, serviceName);
-            pscreate.setInt(2, serviceID);
+            pscreate1.setString(1, serviceName);
+            pscreate1.setInt(2, serviceID);
 
-            pscreate.executeUpdate();
+            pscreate1.executeUpdate();
             return true;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -107,10 +109,10 @@ public class Services {
     public static boolean deleteService(int serviceID) {
 
         try {
-            PreparedStatement pscreate = Connect.connection.prepareStatement("DELETE from Services WHERE serviceID = ?");
-            pscreate.setInt(1, serviceID);
+            PreparedStatement pscreate1 = Connect.connection.prepareStatement("DELETE from Services WHERE serviceID = ?");
+            pscreate1.setInt(1, serviceID);
 
-            pscreate.executeUpdate();
+            pscreate1.executeUpdate();
             return true;
         } catch (Exception ex) {
             ex.printStackTrace();

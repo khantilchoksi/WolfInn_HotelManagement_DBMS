@@ -5,6 +5,14 @@
  */
 package frontend;
 
+import backend.Services;
+import backend.State;
+import backend.*;
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author patel
@@ -16,6 +24,23 @@ public class EditServiceJFrame extends javax.swing.JFrame {
      */
     public EditServiceJFrame() {
         initComponents();
+        populateServices();
+    }
+    
+    public void populateServices(){
+        serviceListEdit.removeAllItems();
+        //statesJComboBox.addItem("");
+        //statesJComboBox.addItem("All States");
+
+        try {
+            ArrayList<Services> servicesList = Services.getAllServiceList();
+            for (Services services : servicesList) {
+                serviceListEdit.addItem(services);
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     /**
@@ -27,21 +52,88 @@ public class EditServiceJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        serviceListEdit = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        serviceName = new javax.swing.JTextField();
+        updateService = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Edit Service");
+
+        jLabel2.setText("Select Service:");
+
+        jLabel3.setText("Service Name");
+
+        updateService.setText("Update");
+        updateService.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                updateServiceMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(83, 83, 83)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(serviceListEdit, 0, 83, Short.MAX_VALUE)
+                            .addComponent(serviceName)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(157, 157, 157)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(updateService))))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(serviceListEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(serviceName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
+                .addComponent(updateService)
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void updateServiceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateServiceMouseClicked
+        // TODO add your handling code here:
+        System.out.println(serviceName.getText());
+        Services s = (Services)serviceListEdit.getSelectedItem();
+        boolean serviceUpdated = Services.updateServiceDetails(s.getServiceID(),serviceName.getText());
+        String showMessage = "";
+        if(serviceUpdated){
+            showMessage = "Service has been successfully updates!";
+        }else{
+            showMessage = "Oops! Some error occured while updating a service!";
+        }
+
+        JOptionPane.showMessageDialog(null,showMessage);
+
+        WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+    }//GEN-LAST:event_updateServiceMouseClicked
 
     /**
      * @param args the command line arguments
@@ -79,5 +171,11 @@ public class EditServiceJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JComboBox<Services> serviceListEdit;
+    private javax.swing.JTextField serviceName;
+    private javax.swing.JButton updateService;
     // End of variables declaration//GEN-END:variables
 }
