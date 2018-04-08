@@ -23,7 +23,7 @@ public class RoomType {
     
     
     public String toString(){
-        return " " + roomTypeID + " " + roomTypeName; 
+        return " " + roomTypeID + " - " + roomTypeName; 
     }
     
     private String roomTypeName;
@@ -147,7 +147,7 @@ public class RoomType {
         ResultSet resultSet = null;
         try
         {
-            PreparedStatement preparedStatement = Connect.connection.prepareStatement("select * from RoomTypes");
+            PreparedStatement preparedStatement = Connect.connection.prepareStatement("select * from RoomTypes order by roomTypeName");
             resultSet = preparedStatement.executeQuery();
             
             while(resultSet.next()){

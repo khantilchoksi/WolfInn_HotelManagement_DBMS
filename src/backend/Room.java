@@ -241,4 +241,53 @@ public class Room
         return roomsList;
         
     }
+    
+    public static ResultSet getAvailableRoomsInHotel(int hotelID){
+        ResultSet resultSet = null;
+        try
+        {
+            PreparedStatement preparedStatement = 
+                    Connect.connection.prepareStatement(
+                        "SELECT roomNo, roomTypeName, roomRates, maxAllowedOccupancy " +
+                        "From Rooms, RoomTypes " +
+                        "WHERE (roomNo, hotelID) NOT IN (SELECT Rooms.roomNo, Rooms.hotelID " +
+                                              "FROM Rooms, CheckIns " +
+                                              "WHERE Rooms.roomNo=CheckIns.roomNo AND Rooms.hotelID = CheckIns.hotelID AND CheckIns.checkOutDateTime=\"0000-00-00 00:00:00\" ) "+
+                        "AND Rooms.roomTypeID = RoomTypes.roomTypeID AND hotelID=?;"
+                    );
+            preparedStatement.setInt(1, hotelID);
+            resultSet = preparedStatement.executeQuery();
+            
+        }catch(Exception ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null,ex);
+        }
+        
+        return resultSet;
+    }
+    
+    public static ResultSet getAvailableRoomsInHotelByRoomTypes(int hotelID, int roomTypeID){
+        ResultSet resultSet = null;
+        try
+        {
+            PreparedStatement preparedStatement = 
+                    Connect.connection.prepareStatement(
+                        "SELECT roomNo, roomTypeName, roomRates, maxAllowedOccupancy " +
+                        "From Rooms, RoomTypes " +
+                        "WHERE roomNo NOT IN (SELECT Rooms.roomNo " +
+                                              "FROM Rooms, CheckIns " +
+                                              "WHERE Rooms.roomNo=CheckIns.roomNo AND Rooms.hotelID = CheckIns.hotelID AND CheckIns.checkOutDateTime=\"0000-00-00 00:00:00\" ) "+
+                        "AND Rooms.roomTypeID = RoomTypes.roomTypeID AND hotelID=? AND Rooms.roomTypeID = ?;"
+                    );
+            preparedStatement.setInt(1, hotelID);
+            preparedStatement.setInt(2, roomTypeID);
+            resultSet = preparedStatement.executeQuery();
+            
+        }catch(Exception ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null,ex);
+        }
+        
+        return resultSet;
+    }
 }
