@@ -5,8 +5,12 @@
  */
 package frontend;
 
+import backend.Connect;
 import backend.Hotel;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 
 /**
  *
@@ -47,9 +51,9 @@ public class RoomsJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        addRoom = new javax.swing.JButton();
+        editRoom = new javax.swing.JButton();
+        removeRoom = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
 
@@ -57,11 +61,26 @@ public class RoomsJFrame extends javax.swing.JFrame {
 
         jLabel1.setText("Manage  Rooms");
 
-        jButton2.setText("Add Room");
+        addRoom.setText("Add Room");
+        addRoom.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addRoomMouseClicked(evt);
+            }
+        });
 
-        jButton3.setText("Edit Room Details");
+        editRoom.setText("Edit Room Details");
+        editRoom.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editRoomMouseClicked(evt);
+            }
+        });
 
-        jButton4.setText("Remove Room");
+        removeRoom.setText("Remove Room");
+        removeRoom.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                removeRoomMouseClicked(evt);
+            }
+        });
 
         jLabel2.setText("Select Hotel:");
 
@@ -77,9 +96,9 @@ public class RoomsJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(43, 43, 43)
-                .addComponent(jButton3)
+                .addComponent(editRoom)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addComponent(jButton4)
+                .addComponent(removeRoom)
                 .addGap(70, 70, 70))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,7 +107,7 @@ public class RoomsJFrame extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(137, 137, 137)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(addRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(101, 101, 101)
                         .addComponent(jLabel2)
@@ -106,11 +125,11 @@ public class RoomsJFrame extends javax.swing.JFrame {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(42, 42, 42)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(addRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(editRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(removeRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -119,7 +138,44 @@ public class RoomsJFrame extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
+        Hotel hotel =(Hotel)jComboBox1.getSelectedItem();
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void addRoomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addRoomMouseClicked
+        // TODO add your handling code here:
+        AddRoomJFrame addRoomJFrame = new AddRoomJFrame((Hotel) jComboBox1.getSelectedItem());
+        addRoomJFrame.setVisible(true);
+        addRoomJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        addRoomJFrame.setLocation(screenWidth/4,screenHeight/4);
+    }//GEN-LAST:event_addRoomMouseClicked
+
+    private void editRoomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editRoomMouseClicked
+        // TODO add your handling code here:
+        EditRoomJFrame editRoomJFrame = new EditRoomJFrame((Hotel) jComboBox1.getSelectedItem());
+        editRoomJFrame.setVisible(true);
+        editRoomJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        editRoomJFrame.setLocation(screenWidth/4,screenHeight/4);
+    }//GEN-LAST:event_editRoomMouseClicked
+
+    private void removeRoomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeRoomMouseClicked
+        // TODO add your handling code here:
+        RemoveRoomJFrame removeRoomJFrame = new RemoveRoomJFrame((Hotel) jComboBox1.getSelectedItem());
+        removeRoomJFrame.setVisible(true);
+        removeRoomJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        removeRoomJFrame.setLocation(screenWidth/4,screenHeight/4);
+    }//GEN-LAST:event_removeRoomMouseClicked
 
     /**
      * @param args the command line arguments
@@ -130,6 +186,7 @@ public class RoomsJFrame extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -147,7 +204,7 @@ public class RoomsJFrame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(RoomsJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -157,11 +214,11 @@ public class RoomsJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton addRoom;
+    private javax.swing.JButton editRoom;
     private javax.swing.JComboBox<Hotel> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton removeRoom;
     // End of variables declaration//GEN-END:variables
 }

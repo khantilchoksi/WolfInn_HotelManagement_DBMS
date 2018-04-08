@@ -18,6 +18,10 @@ import javax.swing.JOptionPane;
 public class Room
 {
 
+    public String toString(){
+        return " " + roomNo + " " + roomTypeID; 
+    }
+    
     public Room(int maxAllowedOccupancy, double roomRates, int hotelID, int roomTypeID, int roomNo) {
         this.maxAllowedOccupancy = maxAllowedOccupancy;
         this.roomRates = roomRates;
@@ -151,14 +155,14 @@ public class Room
         
     }
     
-    public static boolean updateRoomDetails(int roomNo, int roomTypeID, int hotelID, double roomRates, int maxAllowedOccupancy) {
+    public static boolean updateRoomDetails(int roomNo, int roomTypeID, int hotelID, double roomRates, short maxAllowedOccupancy) {
 
         try {
             PreparedStatement pscreate = Connect.connection.prepareStatement("UPDATE Rooms "+
-                    "SET roomRates = ?, maxAllowedOccupancy = ?, roomTypeID = ?"+
-                    "WHERE hotelID = ? and roomNo = ?");
+                    "SET roomRates = ?, maxAllowedOccupancy = ?, roomTypeID = ? "+
+                    "WHERE (hotelID = ? and roomNo = ?)");
             pscreate.setDouble(1, roomRates);
-            pscreate.setInt(2, maxAllowedOccupancy);
+            pscreate.setShort(2, maxAllowedOccupancy);
             pscreate.setInt(3, roomTypeID);
             pscreate.setInt(4, hotelID);
             pscreate.setInt(5, roomNo);

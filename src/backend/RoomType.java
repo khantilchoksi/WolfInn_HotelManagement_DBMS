@@ -22,6 +22,10 @@ public class RoomType {
     }
     
     
+    public String toString(){
+        return " " + roomTypeID + " " + roomTypeName; 
+    }
+    
     private String roomTypeName;
 
     /**
@@ -136,7 +140,7 @@ public class RoomType {
         
     }
     
-    public static ArrayList<RoomType> getAllRoomsList(){
+    public static ArrayList<RoomType> getAllRoomTypesList(){
         ArrayList<RoomType> roomTypesList = new ArrayList<RoomType>();
         int tempRoomTypeID;
         String tempRoomTypeName;
