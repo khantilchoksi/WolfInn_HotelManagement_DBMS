@@ -67,13 +67,15 @@
                           </Group>
                       </Group>
                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="searchRoomsButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="searchRoomsButton" min="-2" pref="175" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="searchRoomByTypesButton" min="-2" pref="194" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="closeButton" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                               <Component id="jScrollPane1" min="-2" pref="619" max="-2" attributes="0"/>
                           </Group>
@@ -104,6 +106,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="searchRoomsButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="closeButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="searchRoomByTypesButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -133,7 +136,7 @@
         </Component>
         <Component class="javax.swing.JComboBox" name="roomTypesJComboBox">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;RoomTypeK&gt;"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;RoomType&gt;"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="searchRoomsButton">
@@ -171,6 +174,14 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="closeButtonMouseClicked"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="searchRoomByTypesButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Search Rooms By Types"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="searchRoomByTypesButtonMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>

@@ -6,11 +6,13 @@
 package frontend;
 
 import backend.Hotel;
-import backend.RoomK;
-import backend.RoomTypeK;
+import backend.Room;
+import backend.RoomType;
+import static frontend.ViewHotelsJFrame.buildTableModel;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -49,8 +51,8 @@ public class CreateReservationJFrame extends javax.swing.JFrame {
         //statesJComboBox.addItem("All States");
 
         try {
-            ArrayList<RoomTypeK> roomTypesList = RoomTypeK.getRoomTypesList();
-            for (RoomTypeK roomType : roomTypesList) {
+            ArrayList<RoomType> roomTypesList = RoomType.getAllRoomTypesList();
+            for (RoomType roomType : roomTypesList) {
                 roomTypesJComboBox.addItem(roomType);
             }
 
@@ -77,6 +79,7 @@ public class CreateReservationJFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         closeButton = new javax.swing.JButton();
+        searchRoomByTypesButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,6 +117,13 @@ public class CreateReservationJFrame extends javax.swing.JFrame {
             }
         });
 
+        searchRoomByTypesButton.setText("Search Rooms By Types");
+        searchRoomByTypesButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchRoomByTypesButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -134,12 +144,14 @@ public class CreateReservationJFrame extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addGap(145, 145, 145))))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createSequentialGroup()
                             .addContainerGap()
-                            .addComponent(searchRoomsButton)
+                            .addComponent(searchRoomsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(searchRoomByTypesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(closeButton))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(23, 23, 23)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(18, Short.MAX_VALUE))
@@ -162,7 +174,8 @@ public class CreateReservationJFrame extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchRoomsButton)
-                    .addComponent(closeButton)))
+                    .addComponent(closeButton)
+                    .addComponent(searchRoomByTypesButton)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -192,8 +205,31 @@ public class CreateReservationJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_closeButtonMouseClicked
 
     private void searchRoomsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchRoomsButtonMouseClicked
-        // TODO add your handling code here:
+        Hotel selectedHotel  = (Hotel) hotelsJComboBox.getSelectedItem();
+        try{
+            
+            jTable1.setModel(buildTableModel(Room.getAvailableRoomsInHotel(selectedHotel.getHotelID())));
+            jScrollPane1.setViewportView(jTable1);
+            pack();
+        }catch(Exception ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null,ex);
+        }
     }//GEN-LAST:event_searchRoomsButtonMouseClicked
+
+    private void searchRoomByTypesButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchRoomByTypesButtonMouseClicked
+        Hotel selectedHotel  = (Hotel) hotelsJComboBox.getSelectedItem();
+        RoomType selectedRoomType = (RoomType) roomTypesJComboBox.getSelectedItem();
+        try{
+            
+            jTable1.setModel(buildTableModel(Room.getAvailableRoomsInHotelByRoomTypes(selectedHotel.getHotelID(), selectedRoomType.getRoomTypeID())));
+            jScrollPane1.setViewportView(jTable1);
+            pack();
+        }catch(Exception ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null,ex);
+        }
+    }//GEN-LAST:event_searchRoomByTypesButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -239,7 +275,8 @@ public class CreateReservationJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JComboBox<RoomTypeK> roomTypesJComboBox;
+    private javax.swing.JComboBox<RoomType> roomTypesJComboBox;
+    private javax.swing.JButton searchRoomByTypesButton;
     private javax.swing.JButton searchRoomsButton;
     // End of variables declaration//GEN-END:variables
 }
