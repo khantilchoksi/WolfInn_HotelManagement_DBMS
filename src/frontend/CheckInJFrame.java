@@ -9,10 +9,12 @@ import backend.CheckIn;
 import backend.Customer;
 import backend.Hotel;
 import backend.Staff;
+import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Calendar;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -252,11 +254,20 @@ public class CheckInJFrame extends javax.swing.JFrame {
         
         JOptionPane.showMessageDialog(null,showMessage);
         
-        WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+        
         
         //Open Bill Window
+        CreateBillingInfoJFrame billinInfoJFrame = new CreateBillingInfoJFrame(newCheckInCreated);
+        billinInfoJFrame.setVisible(true);
+        billinInfoJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        billinInfoJFrame.setLocation(screenWidth/4,screenHeight/4);
         
+        WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
     }//GEN-LAST:event_checkInJButtonMouseClicked
 
     /**
