@@ -19,7 +19,7 @@ public class Room
 {
 
     public String toString(){
-        return " " + roomNo + " " + roomTypeID; 
+        return " " + roomNo + " "; 
     }
     
     public Room(int maxAllowedOccupancy, double roomRates, int hotelID, int roomTypeID, int roomNo) {

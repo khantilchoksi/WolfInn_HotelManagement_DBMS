@@ -37,7 +37,7 @@ public class MainJFrame extends javax.swing.JFrame {
         customers = new javax.swing.JButton();
         rooms = new javax.swing.JButton();
         reportJButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        service = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -82,7 +82,12 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("jButton1");
+        service.setText("Service");
+        service.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                serviceMouseClicked(evt);
+            }
+        });
 
         jButton2.setText("jButton2");
 
@@ -112,7 +117,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(reportJButton)
                     .addComponent(jButton3)
                     .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(service))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton4)
@@ -132,7 +137,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(staffs)
-                    .addComponent(jButton1)
+                    .addComponent(service)
                     .addComponent(jButton5))
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -227,6 +232,18 @@ public class MainJFrame extends javax.swing.JFrame {
         reportsJFrame.setLocation(screenWidth/4,screenHeight/4);
     }//GEN-LAST:event_reportJButtonMouseClicked
 
+    private void serviceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_serviceMouseClicked
+        // TODO add your handling code here:
+        ServiceJFrame serviceJFrame = new ServiceJFrame();
+        serviceJFrame.setVisible(true);
+        serviceJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        serviceJFrame.setLocation(screenWidth/4,screenHeight/4);
+    }//GEN-LAST:event_serviceMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -265,7 +282,6 @@ public class MainJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton customers;
     private javax.swing.JButton hotels;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -275,6 +291,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton reportJButton;
     private javax.swing.JButton rooms;
+    private javax.swing.JButton service;
     private javax.swing.JButton staffs;
     // End of variables declaration//GEN-END:variables
 }
