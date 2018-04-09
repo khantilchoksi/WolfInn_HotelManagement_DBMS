@@ -274,10 +274,10 @@ public class Room
                     Connect.connection.prepareStatement(
                         "SELECT roomNo, roomTypeName, roomRates, maxAllowedOccupancy " +
                         "From Rooms, RoomTypes " +
-                        "WHERE roomNo NOT IN (SELECT Rooms.roomNo " +
+                        "WHERE (roomNo, hotelID) NOT IN (SELECT Rooms.roomNo, Rooms.hotelID " +
                                               "FROM Rooms, CheckIns " +
-                                              "WHERE Rooms.roomNo=CheckIns.roomNo AND Rooms.hotelID = CheckIns.hotelID AND CheckIns.checkOutDateTime=\"0000-00-00 00:00:00\" ) "+
-                        "AND Rooms.roomTypeID = RoomTypes.roomTypeID AND hotelID=? AND Rooms.roomTypeID = ?;"
+                                              "WHERE Rooms.roomNo=CheckIns.roomNo AND Rooms.hotelID = CheckIns.hotelID AND (CheckIns.checkOutDateTime IS NULL OR CheckIns.checkOutDateTime=\"0000-00-00 00:00:00\") ) "+
+                        "AND Rooms.roomTypeID = RoomTypes.roomTypeID AND hotelID=? AND Rooms.roomTypeID=?;"
                     );
             preparedStatement.setInt(1, hotelID);
             preparedStatement.setInt(2, roomTypeID);
