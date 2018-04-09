@@ -17,14 +17,14 @@ import javax.swing.JOptionPane;
 public class Bill {
     public static boolean enterBillInfo(int checkInID, int paymentMethodID, 
             String payerFirstName, String payerLastName, String cardNumber, String SSN,  
-            String payerBillAddress, int cityID, int payerZipCode) {
+            String payerBillingAddress, int cityID, int payerZipCode) {
 
         
         try {
             PreparedStatement pscreate = Connect.connection.prepareStatement(
                     "INSERT into Bills(checkInID, paymentMethodID, " +
                     "payerFirstName, payerLastName, cardNumber, SSN, " +
-                    "payerBillAddress, cityID, payerZipCode) values(?,?,?,?,?,?,?,?,?);"
+                    "payerBillingAddress, cityID, payerZipCode) values(?,?,?,?,?,?,?,?,?);"
             );
             pscreate.setInt(1, checkInID);
             pscreate.setInt(2, paymentMethodID);
@@ -32,7 +32,7 @@ public class Bill {
             pscreate.setString(4, payerLastName);
             pscreate.setString(5, cardNumber);
             pscreate.setString(6, SSN);
-            pscreate.setString(7, payerBillAddress);
+            pscreate.setString(7, payerBillingAddress);
             pscreate.setInt(8, cityID);
             pscreate.setInt(9, payerZipCode);
             pscreate.executeUpdate();
