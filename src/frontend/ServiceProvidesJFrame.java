@@ -80,10 +80,25 @@ public class ServiceProvidesJFrame extends javax.swing.JFrame {
         });
 
         updateServiceProvideButton.setText("Update Service");
+        updateServiceProvideButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                updateServiceProvideButtonMouseClicked(evt);
+            }
+        });
 
         viewServiceProvideButton.setText("View Service");
+        viewServiceProvideButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                viewServiceProvideButtonMouseClicked(evt);
+            }
+        });
 
         removeServiceProvideButton.setText("Remove Service");
+        removeServiceProvideButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                removeServiceProvideButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -155,6 +170,42 @@ public class ServiceProvidesJFrame extends javax.swing.JFrame {
         int screenWidth = screenSize.width;
         addServiceProvidesJFrame.setLocation(screenWidth/4,screenHeight/4);
     }//GEN-LAST:event_addServiceProvideButtonMouseClicked
+
+    private void updateServiceProvideButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateServiceProvideButtonMouseClicked
+        // TODO add your handling code here:
+        UpdateServiceProvidesJFrame updateServiceProvidesJFrame = new UpdateServiceProvidesJFrame((Hotel) selectHotelJBox.getSelectedItem());
+        updateServiceProvidesJFrame.setVisible(true);
+        updateServiceProvidesJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        updateServiceProvidesJFrame.setLocation(screenWidth/4,screenHeight/4);
+    }//GEN-LAST:event_updateServiceProvideButtonMouseClicked
+
+    private void viewServiceProvideButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewServiceProvideButtonMouseClicked
+        // TODO add your handling code here:
+        ViewServiceProvidesJFrame viewServiceProvidesJFrame = new ViewServiceProvidesJFrame((Hotel) selectHotelJBox.getSelectedItem());
+        viewServiceProvidesJFrame.setVisible(true);
+        viewServiceProvidesJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        viewServiceProvidesJFrame.setLocation(screenWidth/4,screenHeight/4);
+    }//GEN-LAST:event_viewServiceProvideButtonMouseClicked
+
+    private void removeServiceProvideButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeServiceProvideButtonMouseClicked
+        // TODO add your handling code here:
+        DeleteServiceProvideJFrame deleteServiceProvideJFrame = new DeleteServiceProvideJFrame((Hotel) selectHotelJBox.getSelectedItem());
+        deleteServiceProvideJFrame.setVisible(true);
+        deleteServiceProvideJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        deleteServiceProvideJFrame.setLocation(screenWidth/4,screenHeight/4);
+    }//GEN-LAST:event_removeServiceProvideButtonMouseClicked
 
     /**
      * @param args the command line arguments

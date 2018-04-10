@@ -25,11 +25,11 @@ public class UpdateServiceProvidesJFrame extends javax.swing.JFrame {
      * Creates new form UpdateServiceProvidesJFrame
      */
     Hotel selectedHotel;
-    public UpdateServiceProvidesJFrame() {
+    public UpdateServiceProvidesJFrame(Hotel selectedHotel) {
         this.selectedHotel = selectedHotel;
         initComponents();
         populateRoomTypes();
-        populateServiceTypes();
+        //populateServiceTypes();
     }
     
     private void populateRoomTypes() {
@@ -38,7 +38,7 @@ public class UpdateServiceProvidesJFrame extends javax.swing.JFrame {
         //statesJComboBox.addItem("All States");
 
         try {
-            ArrayList<RoomType> roomTypesList = RoomType.getAllRoomTypesList();
+            ArrayList<RoomType> roomTypesList = ServiceProvides.getHotelRoomTypes(selectedHotel.getHotelID());
             for (RoomType roomType : roomTypesList) {
                 roomTypeComboBox.addItem(roomType);
             }
@@ -55,8 +55,10 @@ public class UpdateServiceProvidesJFrame extends javax.swing.JFrame {
         //statesJComboBox.addItem("All States");
 
         try {
-            ArrayList<Services> servicesList = Services.getAllServiceList();
+            RoomType selectedRoomType = (RoomType) roomTypeComboBox.getSelectedItem();
+            ArrayList<Services> servicesList = ServiceProvides.getAllHotelRoomServicesList(selectedHotel.getHotelID(), selectedRoomType.getRoomTypeID());
             for (Services service : servicesList) {
+                System.out.println(service);
                 serviceTypeComboBox.addItem(service);
             }
 
@@ -180,10 +182,11 @@ public class UpdateServiceProvidesJFrame extends javax.swing.JFrame {
 
     private void roomTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roomTypeComboBoxActionPerformed
         // TODO add your handling code here:
-        Services selectedService = (Services) serviceTypeComboBox.getSelectedItem();
         RoomType selectedRoomType = (RoomType) roomTypeComboBox.getSelectedItem();
-        ratePerServiceTextField.setText(Double.toString(ServiceProvides.getRatePerService(selectedHotel.getHotelID(), 
-                selectedRoomType.getRoomTypeID(), selectedService.getServiceID())));
+        populateServiceTypes();
+        Services selectedService = (Services) serviceTypeComboBox.getSelectedItem();
+        System.out.println(ServiceProvides.getRatePerService(selectedHotel.getHotelID(), selectedRoomType.getRoomTypeID(), selectedService.getServiceID()));
+        ratePerServiceTextField.setText(Double.toString(ServiceProvides.getRatePerService(selectedHotel.getHotelID(), selectedRoomType.getRoomTypeID(), selectedService.getServiceID())));
         
     }//GEN-LAST:event_roomTypeComboBoxActionPerformed
 
@@ -244,12 +247,12 @@ public class UpdateServiceProvidesJFrame extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the form *//*
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new UpdateServiceProvidesJFrame().setVisible(true);
             }
-        });
+        }); */
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

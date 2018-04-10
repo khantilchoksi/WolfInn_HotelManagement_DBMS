@@ -148,6 +148,7 @@ public class ServiceProvides {
             psget.setInt(2, roomTypeID);
             psget.setInt(3, serviceID);
             rs = psget.executeQuery();
+            rs.next();
             tempRatePerService = rs.getDouble("ratePerService");
         }catch(Exception e){
             e.printStackTrace();
@@ -160,7 +161,7 @@ public class ServiceProvides {
         try {
             PreparedStatement pscreate = Connect.connection.prepareStatement("UPDATE ServiceProvides "+
                     "SET ratePerService = ?"+
-                    "WHERE hotelID = ? and roomTyepID = ? and serviceID = ?");
+                    "WHERE hotelID = ? and roomTypeID = ? and serviceID = ?");
             pscreate.setDouble(1, ratePerService);
             pscreate.setInt(4, serviceID);
             pscreate.setInt(3, roomTypeID);
@@ -214,8 +215,9 @@ public class ServiceProvides {
         
     }
     
-    public static ArrayList<ServiceProvides> getAllHotelRoomServicesList(int hotelID, int roomTypeID){
-        ArrayList<ServiceProvides> hotelRoomServicesList = new ArrayList<ServiceProvides>();
+    public static ArrayList<Services> getAllHotelRoomServicesList(int hotelID, int roomTypeID){
+        ArrayList<Services> hotelRoomServicesList = new ArrayList<Services>();
+        int serviceID;
         int tempHotelID, tempRoomTypeID; 
         String tempServiceName;
         double tempRatePerService;
@@ -232,7 +234,8 @@ public class ServiceProvides {
                 tempRoomTypeID = resultSet.getInt("roomTypeID");
                 tempRatePerService = resultSet.getDouble("ratePerService");
                 tempServiceName= resultSet.getString("serviceName");
-                hotelRoomServicesList.add(new ServiceProvides( tempServiceName, tempHotelID, tempRoomTypeID, tempRatePerService));
+                serviceID = resultSet.getInt("serviceID");
+                hotelRoomServicesList.add(new Services(serviceID, tempServiceName));
             }
             
         }catch(Exception ex){
@@ -262,8 +265,8 @@ public class ServiceProvides {
         int roomTypeID;
         String roomTypeName;
         try{
-            PreparedStatement ps = Connect.connection.prepareStatement("Select DISTINCT RoomTypes.roomTypeID,RoomTypes.roomTypeName"+
-                    "FROM Rooms,RoomTypes"+
+            PreparedStatement ps = Connect.connection.prepareStatement("Select DISTINCT RoomTypes.roomTypeID,RoomTypes.roomTypeName "+
+                    "FROM Rooms, RoomTypes "+
                     "WHERE (Rooms.hotelID = ? and Rooms.roomTypeID = RoomTypes.roomTypeID)");
             ps.setInt(1, hotelID);
             rs = ps.executeQuery();

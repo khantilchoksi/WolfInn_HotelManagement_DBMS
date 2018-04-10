@@ -25,7 +25,7 @@ public class DeleteServiceProvideJFrame extends javax.swing.JFrame {
      * Creates new form DeleteServiceProvideJFrame
      */
     Hotel selectedHotel;
-    public DeleteServiceProvideJFrame() {
+    public DeleteServiceProvideJFrame(Hotel selectedHotel) {
         this.selectedHotel = selectedHotel;
         initComponents();
         populateRoomTypes();
@@ -56,8 +56,9 @@ public class DeleteServiceProvideJFrame extends javax.swing.JFrame {
 
         try {
             RoomType selectedRoomType = (RoomType) roomTypeComboBox.getSelectedItem();
-            ArrayList<ServiceProvides> servicesList = ServiceProvides.getAllHotelRoomServicesList(selectedHotel.getHotelID(), selectedRoomType.getRoomTypeID());
-            for (ServiceProvides service : servicesList) {
+            ArrayList<Services> servicesList = ServiceProvides.getAllHotelRoomServicesList(selectedHotel.getHotelID(), selectedRoomType.getRoomTypeID());
+            for (Services service : servicesList) {
+                System.out.println(service);
                 serviceComboBox.addItem(service);
             }
 
@@ -230,12 +231,12 @@ public class DeleteServiceProvideJFrame extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the form *//*
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new DeleteServiceProvideJFrame().setVisible(true);
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
