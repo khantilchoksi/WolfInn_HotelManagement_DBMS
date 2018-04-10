@@ -7,6 +7,10 @@ package frontend;
 
 
 import backend.*;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.util.ArrayList;
+import javax.swing.JFrame;
 /**
  *
  * @author patel
@@ -18,7 +22,26 @@ public class ServiceProvidesJFrame extends javax.swing.JFrame {
      */
     public ServiceProvidesJFrame() {
         initComponents();
+        populateHotels();
     }
+    
+    private void populateHotels() {
+        selectHotelJBox.removeAllItems();
+        //statesJComboBox.addItem("");
+        //statesJComboBox.addItem("All States");
+
+        try {
+            ArrayList<Hotel> hotelsList = Hotel.getAllHotelsList();
+            for (Hotel hotel : hotelsList) {
+                selectHotelJBox.addItem(hotel);
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,11 +54,11 @@ public class ServiceProvidesJFrame extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        selectHotel = new javax.swing.JComboBox<>();
-        addServiceProvide = new javax.swing.JButton();
-        updateServiceProvide = new javax.swing.JButton();
-        viewServiceProvide = new javax.swing.JButton();
-        removeServiceProvide = new javax.swing.JButton();
+        selectHotelJBox = new javax.swing.JComboBox<Hotel>();
+        addServiceProvideButton = new javax.swing.JButton();
+        updateServiceProvideButton = new javax.swing.JButton();
+        viewServiceProvideButton = new javax.swing.JButton();
+        removeServiceProvideButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,13 +66,24 @@ public class ServiceProvidesJFrame extends javax.swing.JFrame {
 
         jLabel2.setText("Select Hotel");
 
-        addServiceProvide.setText("Add");
+        selectHotelJBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectHotelJBoxActionPerformed(evt);
+            }
+        });
 
-        updateServiceProvide.setText("Update");
+        addServiceProvideButton.setText("Add Service");
+        addServiceProvideButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addServiceProvideButtonMouseClicked(evt);
+            }
+        });
 
-        viewServiceProvide.setText("View");
+        updateServiceProvideButton.setText("Update Service");
 
-        removeServiceProvide.setText("Remove");
+        viewServiceProvideButton.setText("View Service");
+
+        removeServiceProvideButton.setText("Remove Service");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -61,20 +95,25 @@ public class ServiceProvidesJFrame extends javax.swing.JFrame {
                         .addGap(150, 150, 150)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel2)
-                            .addComponent(viewServiceProvide, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(addServiceProvide, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(96, 96, 96)
+                                .addComponent(jLabel2))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGap(67, 67, 67)
-                                .addComponent(selectHotel, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(addServiceProvideButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(viewServiceProvideButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addComponent(selectHotelJBox, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(removeServiceProvide, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(updateServiceProvide, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(removeServiceProvideButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(updateServiceProvideButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)))))
                 .addContainerGap(66, Short.MAX_VALUE))
         );
@@ -86,20 +125,36 @@ public class ServiceProvidesJFrame extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
-                    .addComponent(selectHotel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(selectHotelJBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addServiceProvide, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(updateServiceProvide, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addServiceProvideButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(updateServiceProvideButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(viewServiceProvide, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(removeServiceProvide, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(viewServiceProvideButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(removeServiceProvideButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(57, 57, 57))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void selectHotelJBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectHotelJBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_selectHotelJBoxActionPerformed
+
+    private void addServiceProvideButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addServiceProvideButtonMouseClicked
+        // TODO add your handling code here:
+        AddServiceProvidesJFrame addServiceProvidesJFrame = new AddServiceProvidesJFrame((Hotel) selectHotelJBox.getSelectedItem());
+        addServiceProvidesJFrame.setVisible(true);
+        addServiceProvidesJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        addServiceProvidesJFrame.setLocation(screenWidth/4,screenHeight/4);
+    }//GEN-LAST:event_addServiceProvideButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -137,12 +192,12 @@ public class ServiceProvidesJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addServiceProvide;
+    private javax.swing.JButton addServiceProvideButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JButton removeServiceProvide;
-    private javax.swing.JComboBox<Hotel> selectHotel;
-    private javax.swing.JButton updateServiceProvide;
-    private javax.swing.JButton viewServiceProvide;
+    private javax.swing.JButton removeServiceProvideButton;
+    private javax.swing.JComboBox<Hotel> selectHotelJBox;
+    private javax.swing.JButton updateServiceProvideButton;
+    private javax.swing.JButton viewServiceProvideButton;
     // End of variables declaration//GEN-END:variables
 }
