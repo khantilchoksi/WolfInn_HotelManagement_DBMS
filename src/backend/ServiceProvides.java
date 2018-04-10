@@ -270,7 +270,7 @@ public class ServiceProvides {
             while(rs.next()){
                 roomTypeID = rs.getInt("roomTypeID");
                 roomTypeName = rs.getString("roomTypeName");
-                typesForHotels.add(new  RoomType(roomTypeName, roomTypeID));
+                typesForHotels.add(new RoomType(roomTypeName, roomTypeID));
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -278,4 +278,6 @@ public class ServiceProvides {
         return(typesForHotels);
             
     }
+    
+    
 }
