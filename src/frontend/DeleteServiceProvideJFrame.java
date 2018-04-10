@@ -56,8 +56,8 @@ public class DeleteServiceProvideJFrame extends javax.swing.JFrame {
 
         try {
             RoomType selectedRoomType = (RoomType) roomTypeComboBox.getSelectedItem();
-            ArrayList<ServiceProvides> servicesList = ServiceProvides.getAllHotelRoomServicesList(selectedHotel.getHotelID(), selectedRoomType.getRoomTypeID());
-            for (ServiceProvides service : servicesList) {
+            ArrayList<Services> servicesList = ServiceProvides.getAllHotelRoomServicesList(selectedHotel.getHotelID(), selectedRoomType.getRoomTypeID());
+            for (Services service : servicesList) {
                 System.out.println(service);
                 serviceComboBox.addItem(service);
             }

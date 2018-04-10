@@ -38,7 +38,7 @@ public class UpdateServiceProvidesJFrame extends javax.swing.JFrame {
         //statesJComboBox.addItem("All States");
 
         try {
-            ArrayList<RoomType> roomTypesList = RoomType.getAllRoomTypesList();
+            ArrayList<RoomType> roomTypesList = ServiceProvides.getHotelRoomTypes(selectedHotel.getHotelID());
             for (RoomType roomType : roomTypesList) {
                 roomTypeComboBox.addItem(roomType);
             }
@@ -56,8 +56,8 @@ public class UpdateServiceProvidesJFrame extends javax.swing.JFrame {
 
         try {
             RoomType selectedRoomType = (RoomType) roomTypeComboBox.getSelectedItem();
-            ArrayList<ServiceProvides> servicesList = ServiceProvides.getAllHotelRoomServicesList(selectedHotel.getHotelID(), selectedRoomType.getRoomTypeID());
-            for (ServiceProvides service : servicesList) {
+            ArrayList<Services> servicesList = ServiceProvides.getAllHotelRoomServicesList(selectedHotel.getHotelID(), selectedRoomType.getRoomTypeID());
+            for (Services service : servicesList) {
                 System.out.println(service);
                 serviceTypeComboBox.addItem(service);
             }
@@ -185,7 +185,6 @@ public class UpdateServiceProvidesJFrame extends javax.swing.JFrame {
         RoomType selectedRoomType = (RoomType) roomTypeComboBox.getSelectedItem();
         populateServiceTypes();
         Services selectedService = (Services) serviceTypeComboBox.getSelectedItem();
-        System.out.println("****************");
         System.out.println(ServiceProvides.getRatePerService(selectedHotel.getHotelID(), selectedRoomType.getRoomTypeID(), selectedService.getServiceID()));
         ratePerServiceTextField.setText(Double.toString(ServiceProvides.getRatePerService(selectedHotel.getHotelID(), selectedRoomType.getRoomTypeID(), selectedService.getServiceID())));
         
