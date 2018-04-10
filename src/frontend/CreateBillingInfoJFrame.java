@@ -39,7 +39,7 @@ public class CreateBillingInfoJFrame extends javax.swing.JFrame {
 
 
         try {
-            ArrayList<PaymentMethod> paymentMethodsList = PaymentMethod.getAllPaymentMethodsList();
+            ArrayList<PaymentMethod> paymentMethodsList = PaymentMethod.getAllPaymentMethods();
             for (PaymentMethod paymentMethod : paymentMethodsList) {
                 paymentMethodJComboBox.addItem(paymentMethod);
             }

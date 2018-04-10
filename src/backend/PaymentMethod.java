@@ -11,63 +11,98 @@ import java.util.ArrayList;
 
 /**
  *
- * @author khantil
+ * @author adity
  */
 public class PaymentMethod {
-
+    
     @Override
     public String toString() {
-        return  "" + paymentMethodID + " - " + paymentMethodName ;
+        return ""+ paymentMethodID + " - "+paymentMethodName; //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public String getPaymentMethodName() {
+        return paymentMethodName;
+    }
+
+    public double getDiscountPercent() {
+        return discountPercent;
     }
 
     public int getPaymentMethodID() {
         return paymentMethodID;
     }
-
-    public String getPaymentMethodName() {
-        return paymentMethodName;
-    }
-
-    public double getDiscountPercentage() {
-        return discountPercentage;
-    }
-
-    public PaymentMethod(int paymentMethodID, String paymentMethodName, double discountPercentage) {
-        this.paymentMethodID = paymentMethodID;
-        this.paymentMethodName = paymentMethodName;
-        this.discountPercentage = discountPercentage;
-    }
+    
     int paymentMethodID;
     String paymentMethodName;
-    double discountPercentage;
+    double discountPercent;
     
-    
-    
-    public static ArrayList<PaymentMethod> getAllPaymentMethodsList(){
-        ArrayList<PaymentMethod> paymentMethodsList = new ArrayList<PaymentMethod>();
-        int tempPaymentMethodID;
-        String tempPaymentMethodName;
-        double tempDiscount;
-        ResultSet resultSet = null;
-        try{
-            PreparedStatement preparedStatement = Connect.connection.prepareStatement("select * from PaymentMethods order by paymentMethodID");
-            
-            resultSet = preparedStatement.executeQuery();
-            
-            while(resultSet.next()){
-                tempPaymentMethodID = resultSet.getInt("paymentMethodID");
-                tempPaymentMethodName = resultSet.getString("paymentMethodName");
-                tempDiscount = resultSet.getDouble("discountPercent");
-                paymentMethodsList.add(new PaymentMethod(tempPaymentMethodID, tempPaymentMethodName, tempDiscount));
-            }
-            
-        }catch(Exception ex){
-            ex.printStackTrace();
-            //JOptionPane.showMessageDialog(null,ex);
-        }
-        
-        return paymentMethodsList;
-        
+    public PaymentMethod(int paymentMethodID, String paymentMethodName, double discountPercent){
+        this.paymentMethodName = paymentMethodName;
+        this.paymentMethodID = paymentMethodID;
+        this.discountPercent = discountPercent;
     }
     
+    public static boolean createPaymentMethod(String paymentMethodName, double discountPercent){
+        
+        try {
+            PreparedStatement pscreate = Connect.connection.prepareStatement("insert into PaymentMethods(paymentMethodName, discountPercent) values(?,?)");
+            pscreate.setString(1, paymentMethodName);
+            pscreate.setDouble(2, discountPercent);
+            
+            pscreate.executeUpdate();
+            return true;
+        }catch(Exception ex){
+            ex.printStackTrace();
+            return false;
+        }
+    }
+    
+    public static ArrayList<PaymentMethod> getAllPaymentMethods(){
+        ArrayList <PaymentMethod> paymentMethodList = new ArrayList<PaymentMethod>();
+        int tempPaymentMethodID;
+        String tempPaymentMethodName;
+        double tempDiscountPercent;
+        ResultSet resultset = null;
+        
+        try{
+            PreparedStatement preparedStatement = Connect.connection.prepareStatement("select * from PaymentMethods order by paymentMethodName");
+            resultset = preparedStatement.executeQuery();
+            
+            while(resultset.next()){
+                tempPaymentMethodID = resultset.getInt("paymentMethodID");
+                tempPaymentMethodName = resultset.getString("paymentMethodName");
+                tempDiscountPercent = resultset.getDouble("discountPercent");
+                paymentMethodList.add(new PaymentMethod(tempPaymentMethodID, tempPaymentMethodName, tempDiscountPercent));
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return paymentMethodList;
+    }
+    
+    public static boolean updatePaymentMethod(int paymentMethodID, String paymentMethodName, double discountPercent){
+        try {
+            PreparedStatement psupdate = Connect.connection.prepareStatement("UPDATE PaymentMethods SET paymentMethodName = ?, discountPercent = ? WHERE paymentMethodID = ?");
+            psupdate.setString(1, paymentMethodName);
+            psupdate.setDouble(2, discountPercent);
+            psupdate.setInt(3, paymentMethodID);
+            
+            psupdate.executeUpdate();
+            return true;
+        }catch(Exception ex){
+            ex.printStackTrace();
+            return false;
+        }
+    }
+    
+    public static ResultSet viewAllPaymentMethods(){
+        ResultSet resultSet = null;
+        try{
+            PreparedStatement preparedStatement = Connect.connection.prepareStatement("select * from PaymentMethods order by paymentMethodName");
+            resultSet = preparedStatement.executeQuery();
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return resultSet;
+    }
 }

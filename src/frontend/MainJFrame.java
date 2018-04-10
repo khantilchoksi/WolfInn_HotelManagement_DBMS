@@ -43,7 +43,7 @@ public class MainJFrame extends javax.swing.JFrame {
         serviceProvides = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         checkOutButton = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        paymentMethodButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,7 +119,12 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton7.setText("jButton7");
+        paymentMethodButton.setText("Payment Methods");
+        paymentMethodButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                paymentMethodButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -142,7 +147,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(serviceProvides, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton5)
-                    .addComponent(jButton7)
+                    .addComponent(paymentMethodButton)
                     .addComponent(checkOutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(27, 27, 27))
         );
@@ -168,7 +173,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rooms)
                     .addComponent(roomTypes)
-                    .addComponent(jButton7))
+                    .addComponent(paymentMethodButton))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
 
@@ -305,6 +310,18 @@ public class MainJFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_checkOutButtonMouseClicked
 
+    private void paymentMethodButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paymentMethodButtonMouseClicked
+        // TODO add your handling code here:
+        paymentMethodsJFrame paymentMethodsJFrame = new paymentMethodsJFrame();
+        paymentMethodsJFrame.setVisible(true);
+        paymentMethodsJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        paymentMethodsJFrame.setLocation(screenWidth/4,screenHeight/4);
+    }//GEN-LAST:event_paymentMethodButtonMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -345,9 +362,9 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton customers;
     private javax.swing.JButton hotels;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton makeReservationButton;
+    private javax.swing.JButton paymentMethodButton;
     private javax.swing.JButton reportJButton;
     private javax.swing.JButton roomTypes;
     private javax.swing.JButton rooms;

@@ -65,7 +65,7 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="serviceProvides" max="32767" attributes="0"/>
                       <Component id="jButton5" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton7" min="-2" max="-2" attributes="0"/>
+                      <Component id="paymentMethodButton" min="-2" max="-2" attributes="0"/>
                       <Component id="checkOutButton" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
@@ -97,7 +97,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="rooms" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="roomTypes" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton7" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="paymentMethodButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="48" max="32767" attributes="0"/>
               </Group>
@@ -190,10 +190,13 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="checkOutButtonMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton7">
+        <Component class="javax.swing.JButton" name="paymentMethodButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jButton7"/>
+            <Property name="text" type="java.lang.String" value="Payment Methods"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="paymentMethodButtonMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
