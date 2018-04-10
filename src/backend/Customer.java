@@ -152,7 +152,7 @@ public class Customer {
                tempcustomerLastName = resultSet.getString("customerLastName");
                tempphoneNumber = resultSet.getString("phoneNumber");
                tempemailAddress = resultSet.getString("emailAddress");
-               tempbirthDate = resultSet.getDate("birthDatte");
+               tempbirthDate = resultSet.getDate("birthDate");
                customersList.add(new Customer(tempcustomerID, tempcustomerFirstName, tempcustomerLastName, tempbirthDate, tempphoneNumber, tempemailAddress));
             }
         }catch(Exception ex){

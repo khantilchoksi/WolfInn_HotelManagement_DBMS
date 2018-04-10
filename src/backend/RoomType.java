@@ -22,6 +22,10 @@ public class RoomType {
     }
     
     
+    public String toString(){
+        return " " + roomTypeID + " - " + roomTypeName; 
+    }
+    
     private String roomTypeName;
 
     /**
@@ -136,14 +140,14 @@ public class RoomType {
         
     }
     
-    public static ArrayList<RoomType> getAllRoomsList(){
+    public static ArrayList<RoomType> getAllRoomTypesList(){
         ArrayList<RoomType> roomTypesList = new ArrayList<RoomType>();
         int tempRoomTypeID;
         String tempRoomTypeName;
         ResultSet resultSet = null;
         try
         {
-            PreparedStatement preparedStatement = Connect.connection.prepareStatement("select * from RoomTypes");
+            PreparedStatement preparedStatement = Connect.connection.prepareStatement("select * from RoomTypes order by roomTypeName");
             resultSet = preparedStatement.executeQuery();
             
             while(resultSet.next()){

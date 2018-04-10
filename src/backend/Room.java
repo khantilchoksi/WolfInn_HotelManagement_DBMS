@@ -18,6 +18,10 @@ import javax.swing.JOptionPane;
 public class Room
 {
 
+    public String toString(){
+        return " " + roomNo + " "; 
+    }
+    
     public Room(int maxAllowedOccupancy, double roomRates, int hotelID, int roomTypeID, int roomNo) {
         this.maxAllowedOccupancy = maxAllowedOccupancy;
         this.roomRates = roomRates;
@@ -151,14 +155,14 @@ public class Room
         
     }
     
-    public static boolean updateRoomDetails(int roomNo, int roomTypeID, int hotelID, double roomRates, int maxAllowedOccupancy) {
+    public static boolean updateRoomDetails(int roomNo, int roomTypeID, int hotelID, double roomRates, short maxAllowedOccupancy) {
 
         try {
             PreparedStatement pscreate = Connect.connection.prepareStatement("UPDATE Rooms "+
-                    "SET roomRates = ?, maxAllowedOccupancy = ?, roomTypeID = ?"+
-                    "WHERE hotelID = ? and roomNo = ?");
+                    "SET roomRates = ?, maxAllowedOccupancy = ?, roomTypeID = ? "+
+                    "WHERE (hotelID = ? and roomNo = ?)");
             pscreate.setDouble(1, roomRates);
-            pscreate.setInt(2, maxAllowedOccupancy);
+            pscreate.setShort(2, maxAllowedOccupancy);
             pscreate.setInt(3, roomTypeID);
             pscreate.setInt(4, hotelID);
             pscreate.setInt(5, roomNo);
@@ -236,5 +240,54 @@ public class Room
         
         return roomsList;
         
+    }
+    
+    public static ResultSet getAvailableRoomsInHotel(int hotelID){
+        ResultSet resultSet = null;
+        try
+        {
+            PreparedStatement preparedStatement = 
+                    Connect.connection.prepareStatement(
+                        "SELECT roomNo, roomTypeName, roomRates, maxAllowedOccupancy " +
+                        "From Rooms, RoomTypes " +
+                        "WHERE (roomNo, hotelID) NOT IN (SELECT Rooms.roomNo, Rooms.hotelID " +
+                                              "FROM Rooms, CheckIns " +
+                                              "WHERE Rooms.roomNo=CheckIns.roomNo AND Rooms.hotelID = CheckIns.hotelID AND CheckIns.checkOutDateTime=\"0000-00-00 00:00:00\" ) "+
+                        "AND Rooms.roomTypeID = RoomTypes.roomTypeID AND hotelID=?;"
+                    );
+            preparedStatement.setInt(1, hotelID);
+            resultSet = preparedStatement.executeQuery();
+            
+        }catch(Exception ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null,ex);
+        }
+        
+        return resultSet;
+    }
+    
+    public static ResultSet getAvailableRoomsInHotelByRoomTypes(int hotelID, int roomTypeID){
+        ResultSet resultSet = null;
+        try
+        {
+            PreparedStatement preparedStatement = 
+                    Connect.connection.prepareStatement(
+                        "SELECT roomNo, roomTypeName, roomRates, maxAllowedOccupancy " +
+                        "From Rooms, RoomTypes " +
+                        "WHERE (roomNo, hotelID) NOT IN (SELECT Rooms.roomNo, Rooms.hotelID " +
+                                              "FROM Rooms, CheckIns " +
+                                              "WHERE Rooms.roomNo=CheckIns.roomNo AND Rooms.hotelID = CheckIns.hotelID AND (CheckIns.checkOutDateTime IS NULL OR CheckIns.checkOutDateTime=\"0000-00-00 00:00:00\") ) "+
+                        "AND Rooms.roomTypeID = RoomTypes.roomTypeID AND hotelID=? AND Rooms.roomTypeID=?;"
+                    );
+            preparedStatement.setInt(1, hotelID);
+            preparedStatement.setInt(2, roomTypeID);
+            resultSet = preparedStatement.executeQuery();
+            
+        }catch(Exception ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null,ex);
+        }
+        
+        return resultSet;
     }
 }
