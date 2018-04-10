@@ -8,6 +8,7 @@ package backend;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,6 +16,194 @@ import javax.swing.JOptionPane;
  * @author khantil
  */
 public class CheckIn {
+
+    public CheckIn(int checkInID, int roomNo, String customerName) {
+        this.checkInID = checkInID;
+        this.roomNo = roomNo;
+        this.customerName = customerName;
+    }
+    
+        private int checkInID;
+
+    /**
+     * Get the value of checkInID
+     *
+     * @return the value of checkInID
+     */
+    public int getCheckInID() {
+        return checkInID;
+    }
+
+    /**
+     * Set the value of checkInID
+     *
+     * @param checkInID new value of checkInID
+     */
+    public void setCheckInID(int checkInID) {
+        this.checkInID = checkInID;
+    }
+
+        private int customerID;
+
+    /**
+     * Get the value of customerID
+     *
+     * @return the value of customerID
+     */
+    public int getCustomerID() {
+        return customerID;
+    }
+
+    /**
+     * Set the value of customerID
+     *
+     * @param customerID new value of customerID
+     */
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
+    }
+
+        private int roomNo;
+
+    /**
+     * Get the value of roomNo
+     *
+     * @return the value of roomNo
+     */
+    public int getRoomNo() {
+        return roomNo;
+    }
+
+    /**
+     * Set the value of roomNo
+     *
+     * @param roomNo new value of roomNo
+     */
+    public void setRoomNo(int roomNo) {
+        this.roomNo = roomNo;
+    }
+
+        private int hotelID;
+
+    /**
+     * Get the value of hotelID
+     *
+     * @return the value of hotelID
+     */
+    public int getHotelID() {
+        return hotelID;
+    }
+
+    /**
+     * Set the value of hotelID
+     *
+     * @param hotelID new value of hotelID
+     */
+    public void setHotelID(int hotelID) {
+        this.hotelID = hotelID;
+    }
+
+    
+        private int staffID;
+
+    /**
+     * Get the value of staffID
+     *
+     * @return the value of staffID
+     */
+    public int getStaffID() {
+        return staffID;
+    }
+
+    /**
+     * Set the value of staffID
+     *
+     * @param staffID new value of staffID
+     */
+    public void setStaffID(int staffID) {
+        this.staffID = staffID;
+    }
+
+        private int numberOfGuests;
+
+    /**
+     * Get the value of numberOfGuests
+     *
+     * @return the value of numberOfGuests
+     */
+    public int getNumberOfGuests() {
+        return numberOfGuests;
+    }
+
+    /**
+     * Set the value of numberOfGuests
+     *
+     * @param numberOfGuests new value of numberOfGuests
+     */
+    public void setNumberOfGuests(int numberOfGuests) {
+        this.numberOfGuests = numberOfGuests;
+    }
+
+        private Date checkInDateTime;
+
+    /**
+     * Get the value of checkInDateTime
+     *
+     * @return the value of checkInDateTime
+     */
+    public Date getCheckInDateTime() {
+        return checkInDateTime;
+    }
+
+    /**
+     * Set the value of checkInDateTime
+     *
+     * @param checkInDateTime new value of checkInDateTime
+     */
+    public void setCheckInDateTime(Date checkInDateTime) {
+        this.checkInDateTime = checkInDateTime;
+    }
+
+        private Date checkOutDateTime;
+
+    /**
+     * Get the value of checkOutDateTime
+     *
+     * @return the value of checkOutDateTime
+     */
+    public Date getCheckOutDateTime() {
+        return checkOutDateTime;
+    }
+
+    /**
+     * Set the value of checkOutDateTime
+     *
+     * @param checkOutDateTime new value of checkOutDateTime
+     */
+    public void setCheckOutDateTime(Date checkOutDateTime) {
+        this.checkOutDateTime = checkOutDateTime;
+    }
+
+        private String customerName;
+
+    /**
+     * Get the value of customerName
+     *
+     * @return the value of customerName
+     */
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    /**
+     * Set the value of customerName
+     *
+     * @param customerName new value of customerName
+     */
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
     
     public static int createCheckIn(int customerID, int roomNo, int hotelID, int staffID, int numberOfGuests) {
 

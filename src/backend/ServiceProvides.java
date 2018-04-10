@@ -135,6 +135,22 @@ public class ServiceProvides {
         
     }
     
+    public static Double getRatePerService(int hotelID,int roomTypeID,int serviceID){
+        ResultSet rs = null;
+        double tempRatePerService = 0;
+        try{
+            PreparedStatement psget = Connect.connection.prepareStatement("SELECT ratePerService FROM ServiceProvides WHERE (hotelID = ? and roomTypeID = ? and serviceID = ?)");
+            psget.setInt(1, hotelID);
+            psget.setInt(2, roomTypeID);
+            psget.setInt(3, serviceID);
+            rs = psget.executeQuery();
+            tempRatePerService = rs.getDouble("ratePerService");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return(tempRatePerService);
+    }
+    
     public static boolean updateServiceProvideDetails(int roomTypeID, int hotelID,int serviceID, double ratePerService) {
 
         try {
@@ -222,6 +238,18 @@ public class ServiceProvides {
         
         return hotelRoomServicesList;
         
+    }
+    
+    public static ResultSet getHotelServicesNamesAndDetails(int hotelID){
+        ResultSet rs = null;
+        try{
+            PreparedStatement psselect = Connect.connection.prepareStatement("SELECT RoomTypes.roomTypeName,Services.serviceName,ServiceProvides.ratePerService FROM ServiceProvides, Services, RoomTypes WHERE (ServiceProvides.hotelID = ? and ServiceProvides.serviceID = Services.serviceID and ServiceProvides.roomTypeID = RoomTypes.roomTypeID) ORDER BY ServiceProvides.roomTypeID");
+            psselect.setInt(1, hotelID);
+            rs = psselect.executeQuery();
+        }catch(Exception es){
+            es.printStackTrace();
+        }
+        return(rs);
     }
     
     
