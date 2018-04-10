@@ -16,6 +16,10 @@ import javax.swing.JOptionPane;
  */
 public class ServiceProvides {
     private String serviceName;
+    
+    public String toString(){
+        return " " + serviceName;
+    }
 
     public ServiceProvides(String serviceName, int hotelID, int roomTypeID, double ratePerService) {
         this.serviceName = serviceName;
