@@ -213,4 +213,21 @@ public class ServiceRecord {
         return activeCheckIns;
     }
     
+    public static boolean updateServiceProvides(int hotelID, int roomTypeID, int serviceID, double ratePerService){
+        try{
+            PreparedStatement ps = Connect.connection.prepareStatement("Update ServiceProvides"+
+                    "SET ratePerService = ?"+ 
+                    "WHERE (hotelID = ? and roomTypeID = ? and serviceID = ?)");
+            ps.setDouble(1, ratePerService);
+            ps.setInt(2, hotelID);
+            ps.setInt(3, roomTypeID);
+            ps.setInt(4, serviceID);
+            ps.executeQuery();
+            return(true);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
 }

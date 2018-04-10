@@ -256,5 +256,26 @@ public class ServiceProvides {
         return(rs);
     }
     
-    
+    public static ArrayList<RoomType> getHotelRoomTypes(int hotelID){
+        ResultSet rs = null;
+        ArrayList<RoomType> typesForHotels = new ArrayList<RoomType>();
+        int roomTypeID;
+        String roomTypeName;
+        try{
+            PreparedStatement ps = Connect.connection.prepareStatement("Select DISTINCT RoomTypes.roomTypeID,RoomTypes.roomTypeName"+
+                    "FROM Rooms,RoomTypes"+
+                    "WHERE (Rooms.hotelID = ? and Rooms.roomTypeID = RoomTypes.roomTypeID)");
+            ps.setInt(1, hotelID);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                roomTypeID = rs.getInt("roomTypeID");
+                roomTypeName = rs.getString("roomTypeName");
+                typesForHotels.add(new  RoomType(roomTypeName, roomTypeID));
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return(typesForHotels);
+            
+    }
 }
