@@ -125,16 +125,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Update Service"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="updateServiceProvideButtonMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="viewServiceProvideButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="View Service"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="viewServiceProvideButtonMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="removeServiceProvideButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Remove Service"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="removeServiceProvideButtonMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
