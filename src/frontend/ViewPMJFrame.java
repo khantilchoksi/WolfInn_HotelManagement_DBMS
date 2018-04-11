@@ -5,7 +5,7 @@
  */
 package frontend;
 
-import backend.Customer;
+import backend.PaymentMethod;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -17,16 +17,16 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author adity
  */
-public class ViewCustomerJFrame extends javax.swing.JFrame {
+public class ViewPMJFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form ViewCustomerJFrame
+     * Creates new form ViewPMJFrame
      */
-    public ViewCustomerJFrame() {
+    public ViewPMJFrame() {
         initComponents();
         try{
-            customerTable.setModel(buildTableModel(Customer.viewAllCustomers()));
-            jScrollPane1.setViewportView(customerTable);
+            paymentMethodTable.setModel(buildTableModel(PaymentMethod.viewAllPaymentMethods()));
+            paymentMethodScrollPane.setViewportView(paymentMethodTable);
             pack();
         }catch(Exception ex){
             ex.printStackTrace();
@@ -69,12 +69,12 @@ public class ViewCustomerJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        customerTable = new javax.swing.JTable();
+        paymentMethodScrollPane = new javax.swing.JScrollPane();
+        paymentMethodTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        customerTable.setModel(new javax.swing.table.DefaultTableModel(
+        paymentMethodTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -85,23 +85,23 @@ public class ViewCustomerJFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(customerTable);
+        paymentMethodScrollPane.setViewportView(paymentMethodTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGap(46, 46, 46)
+                .addComponent(paymentMethodScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGap(43, 43, 43)
+                .addComponent(paymentMethodScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         pack();
@@ -124,26 +124,26 @@ public class ViewCustomerJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewCustomerJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewPMJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewCustomerJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewPMJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewCustomerJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewPMJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewCustomerJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewPMJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewCustomerJFrame().setVisible(true);
+                new ViewPMJFrame().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable customerTable;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane paymentMethodScrollPane;
+    private javax.swing.JTable paymentMethodTable;
     // End of variables declaration//GEN-END:variables
 }
