@@ -281,4 +281,6 @@ public class ServiceProvides {
         return(typesForHotels);
             
     }
+    
+    
 }

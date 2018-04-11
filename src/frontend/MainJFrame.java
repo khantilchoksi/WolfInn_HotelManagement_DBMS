@@ -41,7 +41,7 @@ public class MainJFrame extends javax.swing.JFrame {
         makeReservationButton = new javax.swing.JButton();
         roomTypes = new javax.swing.JButton();
         serviceProvides = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        requestServiceButton = new javax.swing.JButton();
         checkOutButton = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
 
@@ -110,7 +110,12 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("jButton5");
+        requestServiceButton.setText("Request Service");
+        requestServiceButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                requestServiceButtonMouseClicked(evt);
+            }
+        });
 
         checkOutButton.setText("Check-Out");
         checkOutButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -141,7 +146,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(serviceProvides, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5)
+                    .addComponent(requestServiceButton)
                     .addComponent(jButton7)
                     .addComponent(checkOutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(27, 27, 27))
@@ -158,7 +163,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(staffs)
                     .addComponent(service)
-                    .addComponent(jButton5))
+                    .addComponent(requestServiceButton))
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(customers)
@@ -305,6 +310,18 @@ public class MainJFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_checkOutButtonMouseClicked
 
+    private void requestServiceButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_requestServiceButtonMouseClicked
+        // TODO add your handling code here:
+        RequestServiceJFrame requestServiceJFrame = new RequestServiceJFrame();
+        requestServiceJFrame.setVisible(true);
+        requestServiceJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        requestServiceJFrame.setLocation(screenWidth/4,screenHeight/4);
+    }//GEN-LAST:event_requestServiceButtonMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -344,11 +361,11 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton checkOutButton;
     private javax.swing.JButton customers;
     private javax.swing.JButton hotels;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton makeReservationButton;
     private javax.swing.JButton reportJButton;
+    private javax.swing.JButton requestServiceButton;
     private javax.swing.JButton roomTypes;
     private javax.swing.JButton rooms;
     private javax.swing.JButton service;

@@ -204,6 +204,10 @@ public class CheckIn {
         this.customerName = customerName;
     }
 
+    @Override
+    public String toString(){
+        return " " + customerName + "-" + roomNo;
+    }
     
     public static int createCheckIn(int customerID, int roomNo, int hotelID, int staffID, int numberOfGuests) {
 

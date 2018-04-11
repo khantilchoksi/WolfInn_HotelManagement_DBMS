@@ -146,10 +146,12 @@ public class ServiceRecord {
     public void setDatetime(Date datetime) {
         this.datetime = datetime;
     }
+    
+
 
     public static boolean createServiceRecords(int checkInID, int serviceID, int quantity) {
         try {
-            PreparedStatement pscreate = Connect.connection.prepareStatement("insert into ServiceProvides(checkInID, serviceID, quantity, dateTime) values(?,?,?,NOW())");
+            PreparedStatement pscreate = Connect.connection.prepareStatement("insert into ServiceRecords(checkInID, serviceID, quantity, dateTime) values(?,?,?,NOW())");
             pscreate.setInt(3, quantity);
             pscreate.setInt(1, checkInID);
             pscreate.setInt(2, serviceID);
@@ -171,7 +173,7 @@ public class ServiceRecord {
         try
         {
             PreparedStatement psshow = Connect.connection.prepareStatement("SELECT Services.serviceID, Services.serviceName "+
-                    "FROM ServiceProvides,CheckIns,Rooms,Services"+
+                    "FROM ServiceProvides, CheckIns, Rooms, Services "+
                     "WHERE (CheckIns.checkInID = ? and CheckIns.roomNo = Rooms.roomNo and CheckIns.hotelID = Rooms.hotelID and Rooms.roomTypeID = ServiceProvides.roomTypeID and Rooms.hotelID = ServiceProvides.hotelID and ServiceProvides.serviceID = Services.serviceID)");
             psshow.setInt(1, checkInID);
             resultSet = psshow.executeQuery();
@@ -195,9 +197,9 @@ public class ServiceRecord {
         String customerName;
         
         try{
-            PreparedStatement ps = Connect.connection.prepareStatement("SELECT CheckIns.checkInID, Customers.customerFirstName, CheckIns.roomNo"+
-                    "FROM CheckIns, Customers"+
-                    "WHERE (CheckIns.hotelID = ? and CheckIns.customerID = Customers.customerID and CheckIns.checkOutDateTime =\"0000-00-00 00:00:00\")");
+            PreparedStatement ps = Connect.connection.prepareStatement("SELECT CheckIns.checkInID, Customers.customerFirstName, CheckIns.roomNo "+
+                    "FROM CheckIns, Customers "+
+                    "WHERE (CheckIns.hotelID = ? and CheckIns.customerID = Customers.customerID and (CheckIns.checkOutDateTime =\"0000-00-00 00:00:00\" OR NULL))");
             ps.setInt(1, hotelID);
             rs = ps.executeQuery();
             while(rs.next()){
@@ -228,6 +230,25 @@ public class ServiceRecord {
             e.printStackTrace();
         }
         return false;
+    }
+    
+    public static ResultSet viewServices(int hotelID, int checkInID){
+        ResultSet resultSet = null;
+        try
+        {
+            PreparedStatement psshow = Connect.connection.prepareStatement("SELECT ServiceRecords.checkInID, Services.serviceName, "
+                    + "ServiceRecords.quantity, ServiceRecords.dateTime "+
+                    "FROM Services, ServiceRecords "+
+                    "WHERE checkInID = ? AND Services.serviceID = ServiceRecords.serviceID "
+                    + "ORDER BY dateTime;");
+            psshow.setInt(1, checkInID);
+            resultSet = psshow.executeQuery();
+            
+        }catch(Exception ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null,ex);
+        }        
+        return resultSet;   
     }
     
 }
