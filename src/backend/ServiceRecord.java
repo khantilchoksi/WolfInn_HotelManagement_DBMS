@@ -17,7 +17,7 @@ import java.util.*;
  * @author patel
  */
 public class ServiceRecord {
-
+    
     public ServiceRecord(int recordID, int checkInID, int serviceID, int staffID, int quantity, Date datetime) {
         this.recordID = recordID;
         this.checkInID = checkInID;
@@ -26,6 +26,55 @@ public class ServiceRecord {
         this.quantity = quantity;
         this.datetime = datetime;
     }
+
+    public ServiceRecord(String serviceName, double totalCost, int quantity, Date datetime) {
+        this.serviceName = serviceName;
+        this.totalCost = totalCost;
+        this.quantity = quantity;
+        this.datetime = datetime;
+    }
+    
+    private String serviceName;
+
+    /**
+     * Get the value of serviceName
+     *
+     * @return the value of serviceName
+     */
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    /**
+     * Set the value of serviceName
+     *
+     * @param serviceName new value of serviceName
+     */
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
+
+    
+    private double totalCost;
+
+    /**
+     * Get the value of totalCost
+     *
+     * @return the value of totalCost
+     */
+    public double getTotalCost() {
+        return totalCost;
+    }
+
+    /**
+     * Set the value of totalCost
+     *
+     * @param totalCost new value of totalCost
+     */
+    public void setTotalCost(double totalCost) {
+        this.totalCost = totalCost;
+    }
+
     
     private int recordID;
 
@@ -199,7 +248,7 @@ public class ServiceRecord {
         try{
             PreparedStatement ps = Connect.connection.prepareStatement("SELECT CheckIns.checkInID, Customers.customerFirstName, CheckIns.roomNo "+
                     "FROM CheckIns, Customers "+
-                    "WHERE (CheckIns.hotelID = ? and CheckIns.customerID = Customers.customerID and (CheckIns.checkOutDateTime =\"0000-00-00 00:00:00\" OR NULL))");
+                    "WHERE (CheckIns.hotelID = ? and CheckIns.customerID = Customers.customerID and (CheckIns.checkOutDateTime =\"0000-00-00 00:00:00\" OR CheckIns.checkOutDateTime IS NULL))");
             ps.setInt(1, hotelID);
             rs = ps.executeQuery();
             while(rs.next()){
@@ -251,4 +300,47 @@ public class ServiceRecord {
         return resultSet;   
     }
     
+    public static ResultSet getServiceRecordsForCheckIns(int checkInID){
+        ResultSet rs = null;
+        try{
+            PreparedStatement psDisplay = Connect.connection.prepareStatement("SELECT Services.serviceName, ServiceRecords.quantity, ServiceProvides.ratePerService AS CostOfEachItem, (ServiceProvides.ratePerService*ServiceRecords.quantity) AS TotalServiceCost, ServiceRecords.dateTime " +
+                "FROM ServiceRecords, ServiceProvides, CheckIns, Rooms, Services " +
+                "WHERE (ServiceRecords.checkInID = ? " +
+                    "AND ServiceRecords.checkInID = CheckIns.checkInID " +
+                    "AND ServiceRecords.serviceID = ServiceProvides.serviceID " +
+                    "AND CheckIns.roomNo = Rooms.roomNo " +
+                    "AND CheckIns.hotelID = ServiceProvides.hotelID " +
+                    "AND Rooms.roomTypeID = ServiceProvides.roomTypeID " +
+                    "AND ServiceRecords.serviceID = Services.serviceID " +
+                    "AND Rooms.hotelID = CheckIns.hotelID)");
+            psDisplay.setInt(1, checkInID);
+            rs = psDisplay.executeQuery();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return rs;
+    }
+    
+    public static double getTotalServiceCost(int checkInID){
+        double totalCost = 0;
+        ResultSet rs = null;
+        try{
+            PreparedStatement psDisplay = Connect.connection.prepareStatement("SELECT SUM(ServiceProvides.ratePerService*ServiceRecords.quantity) AS TotalServiceCost " +
+                "FROM ServiceRecords, ServiceProvides, CheckIns, Rooms " +
+                "WHERE (ServiceRecords.checkInID = ? " +
+                    "AND ServiceRecords.checkInID = CheckIns.checkInID " +
+                    "AND ServiceRecords.serviceID = ServiceProvides.serviceID " +
+                    "AND CheckIns.roomNo = Rooms.roomNo " +
+                    "AND CheckIns.hotelID = ServiceProvides.hotelID " +
+                    "AND Rooms.roomTypeID = ServiceProvides.roomTypeID " +
+                    "AND Rooms.hotelID = CheckIns.hotelID)");
+            psDisplay.setInt(1, checkInID);
+            rs = psDisplay.executeQuery();
+            rs.next();
+            totalCost = rs.getDouble("TotalServiceCost");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return totalCost;
+    }
 }

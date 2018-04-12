@@ -311,7 +311,14 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void checkOutButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkOutButtonMouseClicked
         // TODO add your handling code here:
-        
+        CheckOutJFrame checkOutJFrame = new CheckOutJFrame();
+        checkOutJFrame.setVisible(true);
+        checkOutJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        checkOutJFrame.setLocation(screenWidth/4,screenHeight/4);
         
     }//GEN-LAST:event_checkOutButtonMouseClicked
 

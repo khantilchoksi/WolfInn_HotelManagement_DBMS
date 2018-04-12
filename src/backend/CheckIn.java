@@ -23,6 +23,67 @@ public class CheckIn {
         this.customerName = customerName;
     }
     
+    private double totalCost;
+
+    /**
+     * Get the value of totalCost
+     *
+     * @return the value of totalCost
+     */
+    public double getTotalCost() {
+        return totalCost;
+    }
+
+    /**
+     * Set the value of totalCost
+     *
+     * @param totalCost new value of totalCost
+     */
+    public void setTotalCost(double totalCost) {
+        this.totalCost = totalCost;
+    }
+
+        private double totalRoomCost;
+
+    /**
+     * Get the value of totalRoomCost
+     *
+     * @return the value of totalRoomCost
+     */
+    public double getTotalRoomCost() {
+        return totalRoomCost;
+    }
+
+    /**
+     * Set the value of totalRoomCost
+     *
+     * @param totalRoomCost new value of totalRoomCost
+     */
+    public void setTotalRoomCost(double totalRoomCost) {
+        this.totalRoomCost = totalRoomCost;
+    }
+
+    
+    private double totalServiceCost;
+
+    /**
+     * Get the value of totalServiceCost
+     *
+     * @return the value of totalServiceCost
+     */
+    public double getTotalServiceCost() {
+        return totalServiceCost;
+    }
+
+    /**
+     * Set the value of totalServiceCost
+     *
+     * @param totalServiceCost new value of totalServiceCost
+     */
+    public void setTotalServiceCost(double totalServiceCost) {
+        this.totalServiceCost = totalServiceCost;
+    }
+
         private int checkInID;
 
     /**
@@ -232,8 +293,55 @@ public class CheckIn {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null,ex);
             return -1;
+        }   
+    }
+    
+    public static double getRoomCost(int checkInID){
+        ResultSet rs = null;
+        double roomCost = 0;
+        try{
+            PreparedStatement pstotal = Connect.connection.prepareStatement("SELECT DATEDIFF( NOW(), CheckIns.checkInDateTime)*Rooms.roomRates AS totalStayCost " +
+                "FROM CheckIns,Rooms " +
+                "WHERE CheckIns.checkInID = ? " +
+                    "AND CheckIns.roomNo = Rooms.roomNo " +
+                    "AND CheckIns.hotelID = Rooms.hotelID");
+            pstotal.setInt(1, checkInID);
+            rs = pstotal.executeQuery();
+            while(rs.next()){
+                roomCost = rs.getDouble("totalStayCost");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
         }
-
-        
+        return roomCost;
+    }
+    
+    public double getTotalDiscount(){
+        double discount = 0.0;
+        double discountAmount = 0.0;
+        discount = Bill.getDiscountPercent(this.checkInID);
+        discountAmount = (this.totalRoomCost + this.totalServiceCost)*(discount/100);
+        return discount;
+    }
+    
+    public double getTotalBillAmount(){
+        double discount = this.getTotalDiscount();
+        double total = this.totalRoomCost + this.totalServiceCost - discount;
+        this.totalCost = total;
+        return total;
+    }
+    
+    public static boolean doCheckOut(int checkInID){
+        boolean status = false;
+        try{
+                PreparedStatement psupdate = Connect.connection.prepareStatement("UPDATE CheckIns " +
+                        "SET checkOutDateTime = NOW() " +
+                        "WHERE checkInID = ?");
+                psupdate.setInt(1, checkInID);
+                status = psupdate.execute();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return status;
     }
 }
