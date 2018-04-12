@@ -64,7 +64,7 @@
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="serviceProvides" max="32767" attributes="0"/>
-                      <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                      <Component id="requestServiceButton" min="-2" max="-2" attributes="0"/>
                       <Component id="paymentMethodButton" min="-2" max="-2" attributes="0"/>
                       <Component id="checkOutButton" alignment="0" max="32767" attributes="0"/>
                   </Group>
@@ -85,7 +85,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="staffs" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="service" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="requestServiceButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -177,10 +177,13 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="serviceProvidesMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton5">
+        <Component class="javax.swing.JButton" name="requestServiceButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jButton5"/>
+            <Property name="text" type="java.lang.String" value="Request Service"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="requestServiceButtonMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="checkOutButton">
           <Properties>
