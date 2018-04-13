@@ -16,6 +16,10 @@ import javax.swing.JOptionPane;
  */
 public class ServiceProvides {
     private String serviceName;
+    
+    public String toString(){
+        return " " + serviceName;
+    }
 
     public ServiceProvides(String serviceName, int hotelID, int roomTypeID, double ratePerService) {
         this.serviceName = serviceName;
@@ -135,12 +139,29 @@ public class ServiceProvides {
         
     }
     
+    public static Double getRatePerService(int hotelID,int roomTypeID,int serviceID){
+        ResultSet rs = null;
+        double tempRatePerService = 0;
+        try{
+            PreparedStatement psget = Connect.connection.prepareStatement("SELECT ratePerService FROM ServiceProvides WHERE (hotelID = ? and roomTypeID = ? and serviceID = ?)");
+            psget.setInt(1, hotelID);
+            psget.setInt(2, roomTypeID);
+            psget.setInt(3, serviceID);
+            rs = psget.executeQuery();
+            rs.next();
+            tempRatePerService = rs.getDouble("ratePerService");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return(tempRatePerService);
+    }
+    
     public static boolean updateServiceProvideDetails(int roomTypeID, int hotelID,int serviceID, double ratePerService) {
 
         try {
             PreparedStatement pscreate = Connect.connection.prepareStatement("UPDATE ServiceProvides "+
                     "SET ratePerService = ?"+
-                    "WHERE hotelID = ? and roomTyepID = ? and serviceID = ?");
+                    "WHERE hotelID = ? and roomTypeID = ? and serviceID = ?");
             pscreate.setDouble(1, ratePerService);
             pscreate.setInt(4, serviceID);
             pscreate.setInt(3, roomTypeID);
@@ -194,8 +215,9 @@ public class ServiceProvides {
         
     }
     
-    public static ArrayList<ServiceProvides> getAllHotelRoomServicesList(int hotelID, int roomTypeID){
-        ArrayList<ServiceProvides> hotelRoomServicesList = new ArrayList<ServiceProvides>();
+    public static ArrayList<Services> getAllHotelRoomServicesList(int hotelID, int roomTypeID){
+        ArrayList<Services> hotelRoomServicesList = new ArrayList<Services>();
+        int serviceID;
         int tempHotelID, tempRoomTypeID; 
         String tempServiceName;
         double tempRatePerService;
@@ -212,7 +234,8 @@ public class ServiceProvides {
                 tempRoomTypeID = resultSet.getInt("roomTypeID");
                 tempRatePerService = resultSet.getDouble("ratePerService");
                 tempServiceName= resultSet.getString("serviceName");
-                hotelRoomServicesList.add(new ServiceProvides( tempServiceName, tempHotelID, tempRoomTypeID, tempRatePerService));
+                serviceID = resultSet.getInt("serviceID");
+                hotelRoomServicesList.add(new Services(serviceID, tempServiceName));
             }
             
         }catch(Exception ex){
@@ -222,6 +245,41 @@ public class ServiceProvides {
         
         return hotelRoomServicesList;
         
+    }
+    
+    public static ResultSet getHotelServicesNamesAndDetails(int hotelID){
+        ResultSet rs = null;
+        try{
+            PreparedStatement psselect = Connect.connection.prepareStatement("SELECT RoomTypes.roomTypeName,Services.serviceName,ServiceProvides.ratePerService FROM ServiceProvides, Services, RoomTypes WHERE (ServiceProvides.hotelID = ? and ServiceProvides.serviceID = Services.serviceID and ServiceProvides.roomTypeID = RoomTypes.roomTypeID) ORDER BY ServiceProvides.roomTypeID");
+            psselect.setInt(1, hotelID);
+            rs = psselect.executeQuery();
+        }catch(Exception es){
+            es.printStackTrace();
+        }
+        return(rs);
+    }
+    
+    public static ArrayList<RoomType> getHotelRoomTypes(int hotelID){
+        ResultSet rs = null;
+        ArrayList<RoomType> typesForHotels = new ArrayList<RoomType>();
+        int roomTypeID;
+        String roomTypeName;
+        try{
+            PreparedStatement ps = Connect.connection.prepareStatement("Select DISTINCT RoomTypes.roomTypeID,RoomTypes.roomTypeName "+
+                    "FROM Rooms, RoomTypes "+
+                    "WHERE (Rooms.hotelID = ? and Rooms.roomTypeID = RoomTypes.roomTypeID)");
+            ps.setInt(1, hotelID);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                roomTypeID = rs.getInt("roomTypeID");
+                roomTypeName = rs.getString("roomTypeName");
+                typesForHotels.add(new RoomType(roomTypeName, roomTypeID));
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return(typesForHotels);
+            
     }
     
     

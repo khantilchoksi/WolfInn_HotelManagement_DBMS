@@ -46,4 +46,41 @@ public class Bill {
 
         
     }
+    
+    public static double getDiscountPercent(int checkInID){
+        ResultSet rs = null;
+        double discount = 0;
+        String error;
+        try{
+            PreparedStatement psGetDiscount = Connect.connection.prepareStatement("SELECT PaymentMethods.discountPercent " +
+                    "FROM Bills, PaymentMethods "+
+                    "WHERE Bills.checkInID = ? and Bills.paymentMethodID = PaymentMethods.paymentMethodID");
+            psGetDiscount.setInt(1, checkInID);
+            rs = psGetDiscount.executeQuery();
+            while(rs.next()){
+                discount = rs.getDouble("discountPercent");
+            }
+            //rs.next();
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return discount;
+                
+    }
+    
+    public static boolean updateBill(int checkInID, double totalAmount){
+        boolean status = false;
+        try{
+            PreparedStatement ps = Connect.connection.prepareStatement("UPDATE Bills " +
+                    "SET totalAmount = ? " +
+                    "WHERE checkInID = ?");
+            ps.setInt(2, checkInID);
+            ps.setDouble(1, totalAmount);
+            status = ps.execute();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return status;
+    }
 }

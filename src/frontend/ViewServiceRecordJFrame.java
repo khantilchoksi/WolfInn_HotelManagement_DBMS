@@ -5,36 +5,29 @@
  */
 package frontend;
 
-import backend.Customer;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.util.Vector;
+import backend.Hotel;
+import backend.ServiceProvides;
+import static frontend.ViewHotelsJFrame.buildTableModel;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author adity
+ * @author Dax Amin
  */
-public class ViewCustomerJFrame extends javax.swing.JFrame {
+public class ViewServiceRecordJFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form ViewCustomerJFrame
+     * Creates new form ViewServiceRecordJFrame
      */
-    public ViewCustomerJFrame() {
+    Hotel selectedHotel;
+    public ViewServiceRecordJFrame(Hotel selectedHotel) {
+        this.selectedHotel = selectedHotel;
         initComponents();
-        try{
-            customerTable.setModel(buildTableModel(Customer.viewAllCustomers()));
-            jScrollPane1.setViewportView(customerTable);
-            pack();
-        }catch(Exception ex){
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null,ex);
-        }
+        
+        
     }
     
-    public static DefaultTableModel buildTableModel(ResultSet rs)
+    /*public static DefaultTableModel buildTableModel(ResultSet rs)
             throws SQLException {
 
         ResultSetMetaData metaData = rs.getMetaData();
@@ -58,7 +51,7 @@ public class ViewCustomerJFrame extends javax.swing.JFrame {
 
         return new DefaultTableModel(data, columnNames);
 
-    }
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,39 +62,17 @@ public class ViewCustomerJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        customerTable = new javax.swing.JTable();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        customerTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(customerTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+            .addGap(0, 648, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+            .addGap(0, 555, Short.MAX_VALUE)
         );
 
         pack();
@@ -124,26 +95,24 @@ public class ViewCustomerJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewCustomerJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewServiceRecordJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewCustomerJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewServiceRecordJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewCustomerJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewServiceRecordJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewCustomerJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewServiceRecordJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the form *//*
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewCustomerJFrame().setVisible(true);
+                new ViewServiceRecordJFrame().setVisible(true);
             }
-        });
+        }); */
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable customerTable;
-    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

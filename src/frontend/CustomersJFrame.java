@@ -121,6 +121,14 @@ public class CustomersJFrame extends javax.swing.JFrame {
 
     private void editCustomerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editCustomerButtonMouseClicked
         // TODO add your handling code here:
+        EditCustomerJFrame editCustomerJFrame = new EditCustomerJFrame();
+        editCustomerJFrame.setVisible(true);
+        editCustomerJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        editCustomerJFrame.setLocation(screenWidth/4,screenHeight/4);
     }//GEN-LAST:event_editCustomerButtonMouseClicked
 
     private void viewCustomersButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewCustomersButtonMouseClicked
