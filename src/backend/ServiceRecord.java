@@ -238,31 +238,7 @@ public class ServiceRecord {
         }        
         return checkInServiceList; 
     }
-    
-    public static ArrayList<CheckIn> getActiveCheckIns(int hotelID){
-        ArrayList<CheckIn> activeCheckIns = new ArrayList<CheckIn>();
-        ResultSet rs = null;
-        int tempcheckInID,tempRoomNo;
-        String customerName;
-        
-        try{
-            PreparedStatement ps = Connect.connection.prepareStatement("SELECT CheckIns.checkInID, Customers.customerFirstName, CheckIns.roomNo "+
-                    "FROM CheckIns, Customers "+
-                    "WHERE (CheckIns.hotelID = ? and CheckIns.customerID = Customers.customerID and (CheckIns.checkOutDateTime =\"0000-00-00 00:00:00\" OR CheckIns.checkOutDateTime IS NULL))");
-            ps.setInt(1, hotelID);
-            rs = ps.executeQuery();
-            while(rs.next()){
-                tempcheckInID = rs.getInt("checkInID");
-                tempRoomNo = rs.getInt("roomNo");
-                customerName = rs.getString("customerFirstName");
-                activeCheckIns.add(new CheckIn(tempcheckInID, tempRoomNo, customerName));
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        
-        return activeCheckIns;
-    }
+   
     
     public static boolean updateServiceProvides(int hotelID, int roomTypeID, int serviceID, double ratePerService){
         try{
@@ -336,8 +312,11 @@ public class ServiceRecord {
                     "AND Rooms.hotelID = CheckIns.hotelID)");
             psDisplay.setInt(1, checkInID);
             rs = psDisplay.executeQuery();
-            rs.next();
-            totalCost = rs.getDouble("TotalServiceCost");
+            
+            if(rs.next()){
+                totalCost = rs.getDouble("TotalServiceCost");
+            }
+            
         }catch(Exception e){
             e.printStackTrace();
         }

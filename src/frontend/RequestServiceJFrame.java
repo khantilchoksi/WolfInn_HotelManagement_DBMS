@@ -52,7 +52,7 @@ public class RequestServiceJFrame extends javax.swing.JFrame {
         try {
             
             System.out.print(selectedHotel.getHotelID());
-            ArrayList<CheckIn> checkList = ServiceRecord.getActiveCheckIns(selectedHotel.getHotelID());
+            ArrayList<CheckIn> checkList = CheckIn.getActiveCheckIns(selectedHotel.getHotelID());
             for (CheckIn checkIn: checkList) {
                 checkInComboBox.addItem(checkIn);
             }

@@ -8,6 +8,7 @@ package backend;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -43,7 +44,7 @@ public class CheckIn {
         this.totalCost = totalCost;
     }
 
-        private double totalRoomCost;
+    private double totalRoomCost;
 
     /**
      * Get the value of totalRoomCost
@@ -267,7 +268,7 @@ public class CheckIn {
 
     @Override
     public String toString(){
-        return " " + customerName + "-" + roomNo;
+        return " Room:" + this.roomNo + "- Name:" + this.customerName;
     }
     
     public static int createCheckIn(int customerID, int roomNo, int hotelID, int staffID, int numberOfGuests) {
@@ -307,7 +308,7 @@ public class CheckIn {
                     "AND CheckIns.hotelID = Rooms.hotelID");
             pstotal.setInt(1, checkInID);
             rs = pstotal.executeQuery();
-            while(rs.next()){
+            if(rs.next()){
                 roomCost = rs.getDouble("totalStayCost");
             }
         }catch(Exception e){
@@ -343,5 +344,31 @@ public class CheckIn {
             e.printStackTrace();
         }
         return status;
+    }
+    
+    public static ArrayList<CheckIn> getActiveCheckIns(int hotelID){
+        ArrayList<CheckIn> activeCheckIns = new ArrayList<CheckIn>();
+        ResultSet rs = null;
+        int tempcheckInID,tempRoomNo;
+        String tempCustomerName;
+        
+        try{
+            PreparedStatement ps = Connect.connection.prepareStatement("SELECT CheckIns.checkInID, Customers.customerFirstName, CheckIns.roomNo "+
+                    "FROM CheckIns, Customers "+
+                    "WHERE CheckIns.hotelID = ? AND CheckIns.customerID = Customers.customerID AND (CheckIns.checkOutDateTime =\"0000-00-00 00:00:00\" OR CheckIns.checkOutDateTime IS NULL)");
+            ps.setInt(1, hotelID);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                tempcheckInID = rs.getInt("checkInID");
+                tempRoomNo = rs.getInt("roomNo");
+                tempCustomerName = rs.getString("customerFirstName");
+                activeCheckIns.add(new CheckIn(tempcheckInID, tempRoomNo, tempCustomerName));
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return activeCheckIns;
     }
 }

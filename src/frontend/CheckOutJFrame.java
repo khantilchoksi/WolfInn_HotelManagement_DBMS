@@ -36,14 +36,14 @@ public class CheckOutJFrame extends javax.swing.JFrame {
     }
 
     private void populateHotels() {
-        selectHotel.removeAllItems();
+        selectHotelJComboBox.removeAllItems();
         //statesJComboBox.addItem("");
         //statesJComboBox.addItem("All States");
 
         try {
             ArrayList<Hotel> hotelsList = Hotel.getAllHotelsList();
             for (Hotel hotel : hotelsList) {
-                selectHotel.addItem(hotel);
+                selectHotelJComboBox.addItem(hotel);
             }
 
         } catch (Exception ex) {
@@ -55,8 +55,8 @@ public class CheckOutJFrame extends javax.swing.JFrame {
         roomsJComboBox.removeAllItems();
         //Hotel hotel = (Hotel)selectHotel.getSelectedItem();
         try{
-            ArrayList<CheckIn> CheckedInRooms = ServiceRecord.getActiveCheckIns(hotelID);
-            for(CheckIn checkin : CheckedInRooms){
+            ArrayList<CheckIn> checkedInRooms = CheckIn.getActiveCheckIns(hotelID);
+            for(CheckIn checkin : checkedInRooms){
                 roomsJComboBox.addItem(checkin);
             }
         }catch(Exception e){
@@ -78,7 +78,7 @@ public class CheckOutJFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         closeJButton = new javax.swing.JButton();
         checkOutJButton = new javax.swing.JButton();
-        selectHotel = new javax.swing.JComboBox<>();
+        selectHotelJComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         roomsJComboBox = new javax.swing.JComboBox<>();
@@ -114,9 +114,9 @@ public class CheckOutJFrame extends javax.swing.JFrame {
             }
         });
 
-        selectHotel.addActionListener(new java.awt.event.ActionListener() {
+        selectHotelJComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectHotelActionPerformed(evt);
+                selectHotelJComboBoxActionPerformed(evt);
             }
         });
 
@@ -175,7 +175,7 @@ public class CheckOutJFrame extends javax.swing.JFrame {
                                 .addGap(39, 39, 39)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(selectHotel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(selectHotelJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(roomsJComboBox, 0, 255, Short.MAX_VALUE))
                                     .addComponent(roomRateLabel)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -211,7 +211,7 @@ public class CheckOutJFrame extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(selectHotel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(selectHotelJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -265,32 +265,48 @@ public class CheckOutJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_none
 
-    private void selectHotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectHotelActionPerformed
+    private void selectHotelJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectHotelJComboBoxActionPerformed
         // TODO add your handling code here:
         roomsJComboBox.removeAllItems();
-        jTable1.removeAll();
-        Hotel hotel = (Hotel)selectHotel.getSelectedItem();
+        //jTable1.removeAll();
+        Hotel hotel = (Hotel)selectHotelJComboBox.getSelectedItem();
         populateCheckedInRooms(hotel.getHotelID());
-    }//GEN-LAST:event_selectHotelActionPerformed
+    }//GEN-LAST:event_selectHotelJComboBoxActionPerformed
 
     private void roomsJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roomsJComboBoxActionPerformed
         // TODO add your handling code here:
-        jTable1.removeAll();
-        currentCheckIn = (CheckIn)roomsJComboBox.getSelectedItem();
-        try{
-            jTable1.setModel(buildTableModel(ServiceRecord.getServiceRecordsForCheckIns(currentCheckIn.getCheckInID())));
-            jScrollPane1.setViewportView(jTable1);
-            pack();
-        }catch(Exception ex){
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null,ex);
+//        jTable1.removeAll();
+        System.out.println("\n ITEM COUNT: "+roomsJComboBox.getItemCount()+ "Hotel : "+(Hotel)selectHotelJComboBox.getSelectedItem());
+        if(roomsJComboBox.getItemCount() > 0){
+            currentCheckIn = (CheckIn) roomsJComboBox.getSelectedItem();
+            
+            try{
+                jTable1.setModel(buildTableModel(ServiceRecord.getServiceRecordsForCheckIns(currentCheckIn.getCheckInID())));
+                jScrollPane1.setViewportView(jTable1);
+                pack();
+                
+                currentCheckIn.setTotalServiceCost(ServiceRecord.getTotalServiceCost(currentCheckIn.getCheckInID()));
+                currentCheckIn.setTotalRoomCost(CheckIn.getRoomCost(currentCheckIn.getCheckInID()));
+                roomRateLabel.setText(Double.toString(currentCheckIn.getTotalRoomCost()));
+                totalAmountJLabel.setText(Double.toString(currentCheckIn.getTotalRoomCost()+currentCheckIn.getTotalServiceCost()));
+                discountAmountLabel.setText(Double.toString(currentCheckIn.getTotalDiscount()));
+                totalAmoutToBePaidLabel.setText(Double.toString(currentCheckIn.getTotalBillAmount()));
+            
+            }catch(Exception ex){
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null,ex);
+            }
+            
+            
+            
         }
-        currentCheckIn.setTotalServiceCost(ServiceRecord.getTotalServiceCost(currentCheckIn.getCheckInID()));
-        currentCheckIn.setTotalRoomCost(CheckIn.getRoomCost(currentCheckIn.getCheckInID()));
-        roomRateLabel.setText(Double.toString(currentCheckIn.getTotalRoomCost()));
-        totalAmountJLabel.setText(Double.toString(currentCheckIn.getTotalRoomCost()+currentCheckIn.getTotalServiceCost()));
-        discountAmountLabel.setText(Double.toString(currentCheckIn.getTotalDiscount()));
-        totalAmoutToBePaidLabel.setText(Double.toString(currentCheckIn.getTotalBillAmount()));
+//        else{
+//            
+//            JOptionPane.showMessageDialog(null,"NO CHECKED IN ROOMS FOUND IN THIS HOTEL!");
+//        }
+        
+
+
     }//GEN-LAST:event_roomsJComboBoxActionPerformed
 
     private void checkOutJButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkOutJButtonMouseClicked
@@ -374,7 +390,7 @@ public class CheckOutJFrame extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel roomRateLabel;
     private javax.swing.JComboBox<CheckIn> roomsJComboBox;
-    private javax.swing.JComboBox<Hotel> selectHotel;
+    private javax.swing.JComboBox<Hotel> selectHotelJComboBox;
     private javax.swing.JLabel totalAmountJLabel;
     private javax.swing.JLabel totalAmoutToBePaidLabel;
     // End of variables declaration//GEN-END:variables
