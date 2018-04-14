@@ -371,4 +371,30 @@ public class CheckIn {
         
         return activeCheckIns;
     }
+    
+    public static ArrayList<CheckIn> getActivePresidentialCheckIns(int hotelID){
+        ArrayList<CheckIn> activeCheckIns = new ArrayList<CheckIn>();
+        ResultSet rs = null;
+        int tempcheckInID,tempRoomNo;
+        String tempCustomerName;
+        
+        try{
+            PreparedStatement ps = Connect.connection.prepareStatement("SELECT CheckIns.checkInID, Customers.customerFirstName, CheckIns.roomNo "+
+                    "FROM CheckIns, Customers, Rooms, RoomTypes "+
+                    "WHERE CheckIns.hotelID = ? AND CheckIns.hotelID = Rooms.hotelID AND CheckIns.roomNo = Rooms.roomNo AND Rooms.roomTypeID = 4 AND CheckIns.customerID = Customers.customerID AND (CheckIns.checkOutDateTime =\"0000-00-00 00:00:00\" OR CheckIns.checkOutDateTime IS NULL)");
+            ps.setInt(1, hotelID);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                tempcheckInID = rs.getInt("checkInID");
+                tempRoomNo = rs.getInt("roomNo");
+                tempCustomerName = rs.getString("customerFirstName");
+                activeCheckIns.add(new CheckIn(tempcheckInID, tempRoomNo, tempCustomerName));
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return activeCheckIns;
+    }
 }

@@ -16,6 +16,13 @@ import javax.swing.JOptionPane;
  * @author Dax Amin
  */
 public class Staff {
+
+    public Staff(int staffID, String staffFirstName, String staffLastName, String phoneNumber) {
+        this.staffID = staffID;
+        this.staffFirstName = staffFirstName;
+        this.staffLastName = staffLastName;
+        this.phoneNumber = phoneNumber;
+    }
     
     public int getStaffID(){
         return staffID;
@@ -232,6 +239,58 @@ public class Staff {
         
         return StaffsList;
         
+    }
+    
+    public static ArrayList<Staff> getAllCateringStaffsList(int hotelID){
+        ArrayList<Staff> staffList = new ArrayList<Staff>();
+        int tempStaffID;
+        String tempStaffFirstName;
+        String tempStaffLastName;
+        String phoneNumber;
+        ResultSet rs = null;
+        try{
+            PreparedStatement ps = Connect.connection.prepareStatement("SELECT *"
+                    + "FROM Staffs "
+                    + "WHERE Staffs.hotelID = ? AND Staffs.staffTypeID = 4");
+            ps.setInt(1, hotelID);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                tempStaffID = rs.getInt("staffID");
+                tempStaffFirstName = rs.getString("staffLastName");
+                tempStaffLastName = rs.getString("staffLastName");
+                phoneNumber = rs.getString("phoneNumber");
+                staffList.add(new Staff(tempStaffID, tempStaffFirstName, tempStaffLastName, phoneNumber));
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return staffList;
+    }
+    
+    public static ArrayList<Staff> getAllServingStaffsList(int hotelID){
+        ArrayList<Staff> staffList = new ArrayList<Staff>();
+        int tempStaffID;
+        String tempStaffFirstName;
+        String tempStaffLastName;
+        String phoneNumber;
+        ResultSet rs = null;
+        try{
+            PreparedStatement ps = Connect.connection.prepareStatement("SELECT *"
+                    + "FROM Staffs "
+                    + "WHERE Staffs.hotelID = ? AND Staffs.staffTypeID = 3");
+            ps.setInt(1, hotelID);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                tempStaffID = rs.getInt("staffID");
+                tempStaffFirstName = rs.getString("staffLastName");
+                tempStaffLastName = rs.getString("staffLastName");
+                phoneNumber = rs.getString("phoneNumber");
+                staffList.add(new Staff(tempStaffID, tempStaffFirstName, tempStaffLastName, phoneNumber));
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return staffList;
     }
     
     

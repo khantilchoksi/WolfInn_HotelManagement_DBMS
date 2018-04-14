@@ -44,6 +44,8 @@ public class MainJFrame extends javax.swing.JFrame {
         requestServiceButton = new javax.swing.JButton();
         checkOutButton = new javax.swing.JButton();
         paymentMethodButton = new javax.swing.JButton();
+        presidentialCatering = new javax.swing.JButton();
+        presidentialServing = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -131,6 +133,20 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        presidentialCatering.setText("Presidential Room Catering");
+        presidentialCatering.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                presidentialCateringMouseClicked(evt);
+            }
+        });
+
+        presidentialServing.setText("Presidential Room Serving");
+        presidentialServing.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                presidentialServingMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -155,6 +171,12 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(paymentMethodButton)
                     .addComponent(checkOutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(27, 27, 27))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(presidentialCatering, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(presidentialServing, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(167, 167, 167))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,7 +201,11 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(rooms)
                     .addComponent(roomTypes)
                     .addComponent(paymentMethodButton))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(presidentialCatering)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(presidentialServing)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -346,6 +372,31 @@ public class MainJFrame extends javax.swing.JFrame {
         requestServiceJFrame.setLocation(screenWidth/4,screenHeight/4);
     }//GEN-LAST:event_requestServiceButtonMouseClicked
 
+    private void presidentialCateringMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_presidentialCateringMouseClicked
+        // TODO add your handling code here:
+        PresidentialRoomCateringJFrame presidentialRoomCatering = new PresidentialRoomCateringJFrame();
+        presidentialRoomCatering.setVisible(true);
+        presidentialRoomCatering.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        presidentialRoomCatering.setLocation(screenWidth/4,screenHeight/4);
+        
+    }//GEN-LAST:event_presidentialCateringMouseClicked
+
+    private void presidentialServingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_presidentialServingMouseClicked
+        // TODO add your handling code here:
+        PresidentialRoomServingJFrame presidentialRoomServingJFrame = new PresidentialRoomServingJFrame();
+        presidentialRoomServingJFrame.setVisible(true);
+        presidentialRoomServingJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        presidentialRoomServingJFrame.setLocation(screenWidth/4,screenHeight/4);
+    }//GEN-LAST:event_presidentialServingMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -388,6 +439,8 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton makeReservationButton;
     private javax.swing.JButton paymentMethodButton;
+    private javax.swing.JButton presidentialCatering;
+    private javax.swing.JButton presidentialServing;
     private javax.swing.JButton reportJButton;
     private javax.swing.JButton requestServiceButton;
     private javax.swing.JButton roomTypes;

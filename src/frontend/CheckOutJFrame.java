@@ -8,6 +8,8 @@ package frontend;
 import backend.Hotel;
 import backend.*;
 import static frontend.ViewRoomTypesJFrame.buildTableModel;
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -101,9 +103,9 @@ public class CheckOutJFrame extends javax.swing.JFrame {
         jLabel3.setText("Select Check-In Room:");
 
         closeJButton.setText("Close");
-        closeJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                none(evt);
+        closeJButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                closeJButtonMouseClicked(evt);
             }
         });
 
@@ -261,10 +263,6 @@ public class CheckOutJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void none(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_none
-        // TODO add your handling code here:
-    }//GEN-LAST:event_none
-
     private void selectHotelJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectHotelJComboBoxActionPerformed
         // TODO add your handling code here:
         roomsJComboBox.removeAllItems();
@@ -311,8 +309,16 @@ public class CheckOutJFrame extends javax.swing.JFrame {
 
     private void checkOutJButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkOutJButtonMouseClicked
         // TODO add your handling code here:
-       
+       CheckIn.doCheckOut(currentCheckIn.getCheckInID());
+       Bill.updateBill(currentCheckIn.getCheckInID(), currentCheckIn.getTotalCost());
+       JOptionPane.showConfirmDialog(null, "Successfully checked out");
     }//GEN-LAST:event_checkOutJButtonMouseClicked
+
+    private void closeJButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeJButtonMouseClicked
+        // TODO add your handling code here:
+        WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+    }//GEN-LAST:event_closeJButtonMouseClicked
 
     public static DefaultTableModel buildTableModel(ResultSet rs)
             throws SQLException {
