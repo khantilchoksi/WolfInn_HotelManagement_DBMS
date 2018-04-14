@@ -69,7 +69,7 @@ public class WolfInn {
                                         "cityID INTEGER NOT NULL,"+
                                         "zipCode INTEGER NOT NULL,"+
                                         "phoneNumber VARCHAR(20),"+
-                                        "CONSTRAINT hotel_city_fk FOREIGN KEY(cityID) REFERENCES Cities(cityID)"+
+                                        "CONSTRAINT hotel_city_fk FOREIGN KEY(cityID) REFERENCES Cities(cityID) ON DELETE CASCADE"+
                                         ");"
                 );
 
@@ -90,7 +90,7 @@ public class WolfInn {
                                                             "availability BOOLEAN NOT NULL, "+
                                                             "CONSTRAINT rooms_pk PRIMARY KEY(roomNo, hotelID),"+
                                                             "CONSTRAINT room_hotel_fk FOREIGN KEY(hotelID) REFERENCES Hotels(hotelID) ON DELETE CASCADE,"+
-                                                            "CONSTRAINT room_roomtype_fk FOREIGN KEY(roomTypeID) REFERENCES RoomTypes(roomTypeID)"+
+                                                            "CONSTRAINT room_roomtype_fk FOREIGN KEY(roomTypeID) REFERENCES RoomTypes(roomTypeID) ON DELETE CASCADE"+
                                                             ");"
 				);
 				
@@ -120,10 +120,10 @@ public class WolfInn {
 										"streetAddress TEXT NOT NULL,"+
 										"cityID INTEGER NOT NULL,"+
 										"zipCode INTEGER NOT NULL,"+
-										"CONSTRAINT staffs_hotel_fk FOREIGN KEY(hotelID) REFERENCES Hotels(hotelID),"+
-										"CONSTRAINT staffs_stafftype_fk FOREIGN KEY(staffTypeID) REFERENCES StaffTypes(staffTypeID),"+
-                                                                                "CONSTRAINT staffs_department_fk FOREIGN KEY(departmentID) REFERENCES Departments(departmentID),"+
-										"CONSTRAINT staffs_city_fk FOREIGN KEY(cityID) REFERENCES Cities(cityID)"+
+										"CONSTRAINT staffs_hotel_fk FOREIGN KEY(hotelID) REFERENCES Hotels(hotelID) ON DELETE CASCADE,"+
+										"CONSTRAINT staffs_stafftype_fk FOREIGN KEY(staffTypeID) REFERENCES StaffTypes(staffTypeID) ON DELETE CASCADE,"+
+                                                                                "CONSTRAINT staffs_department_fk FOREIGN KEY(departmentID) REFERENCES Departments(departmentID) ON DELETE CASCADE,"+
+										"CONSTRAINT staffs_city_fk FOREIGN KEY(cityID) REFERENCES Cities(cityID) ON DELETE CASCADE"+
 										");"
 				);
 				
@@ -148,9 +148,9 @@ public class WolfInn {
 										"checkInDateTime DATETIME NOT NULL,"+
 										"checkOutDateTime DATETIME,"+
 										"numberOfGuests INTEGER NOT NULL,"+
-										"CONSTRAINT checkin_customer_fk FOREIGN KEY(customerID) REFERENCES Customers(customerID),"+
-										"CONSTRAINT checkin_room_fk FOREIGN KEY(roomNo, hotelID) REFERENCES Rooms(roomNo, hotelID),"+
-										"CONSTRAINT checkin_staff_fk FOREIGN KEY(staffID) REFERENCES Staffs(staffID)"+
+										"CONSTRAINT checkin_customer_fk FOREIGN KEY(customerID) REFERENCES Customers(customerID) ON DELETE CASCADE,"+
+										"CONSTRAINT checkin_room_fk FOREIGN KEY(roomNo, hotelID) REFERENCES Rooms(roomNo, hotelID) ON DELETE CASCADE,"+
+										"CONSTRAINT checkin_staff_fk FOREIGN KEY(staffID) REFERENCES Staffs(staffID) ON DELETE CASCADE"+
 										");"
 				);
 				
@@ -167,10 +167,10 @@ public class WolfInn {
 										"roomTypeID INTEGER NOT NULL,"+
 										"serviceID INTEGER NOT NULL,"+
 										"ratePerService DOUBLE NOT NULL,"+
-										"CONSTRAINT service_provides_pk PRIMARY KEY(hotelID, roomTypeID, serviceID),"+
-										"CONSTRAINT service_provides_hotel_fk FOREIGN KEY(hotelID) REFERENCES Hotels(hotelID),"+
-										"CONSTRAINT service_provides_roomtype_fk FOREIGN KEY(roomTypeID) REFERENCES RoomTypes(roomTypeID),"+
-										"CONSTRAINT service_provides_services_fk FOREIGN KEY(serviceID) REFERENCES Services(serviceID)"+
+										"CONSTRAINT service_provides_pk PRIMARY KEY(hotelID, roomTypeID, serviceID) ,"+
+										"CONSTRAINT service_provides_hotel_fk FOREIGN KEY(hotelID) REFERENCES Hotels(hotelID) ON DELETE CASCADE,"+
+										"CONSTRAINT service_provides_roomtype_fk FOREIGN KEY(roomTypeID) REFERENCES RoomTypes(roomTypeID) ON DELETE CASCADE,"+
+										"CONSTRAINT service_provides_services_fk FOREIGN KEY(serviceID) REFERENCES Services(serviceID) ON DELETE CASCADE"+
 										");"
 				);
 				
@@ -195,9 +195,9 @@ public class WolfInn {
 										"payerBillingAddress TEXT,"+
 										"cityID INTEGER,"+
 										"payerZipcode INTEGER,"+
-										"CONSTRAINT bill_checkin_fk FOREIGN KEY(checkInID) REFERENCES CheckIns(checkInID),"+
-										"CONSTRAINT bill_paymentmethod_fk FOREIGN KEY(paymentMethodID) REFERENCES PaymentMethods(paymentMethodID),"+
-										"CONSTRAINT bill_payer_city_fk FOREIGN KEY(cityID) REFERENCES Cities(cityID)"+
+										"CONSTRAINT bill_checkin_fk FOREIGN KEY(checkInID) REFERENCES CheckIns(checkInID) ON DELETE CASCADE,"+
+										"CONSTRAINT bill_paymentmethod_fk FOREIGN KEY(paymentMethodID) REFERENCES PaymentMethods(paymentMethodID) ON DELETE CASCADE,"+
+										"CONSTRAINT bill_payer_city_fk FOREIGN KEY(cityID) REFERENCES Cities(cityID) ON DELETE CASCADE"+
 										");"
 				);
 				
@@ -209,9 +209,9 @@ public class WolfInn {
                                         "staffID INTEGER,"+
 										"quantity INTEGER NOT NULL,"+
 										"dateTime DATETIME NOT NULL,"+
-										"CONSTRAINT service_record_checkin_fk FOREIGN KEY(checkInID) REFERENCES CheckIns(checkInID),"+
-                                        "CONSTRAINT service_record_services_fk FOREIGN KEY(serviceID) REFERENCES Services(serviceID),"+
-                                        "CONSTRAINT service_record_staffs_fk FOREIGN KEY(staffID) REFERENCES Staffs(staffID)"+
+										"CONSTRAINT service_record_checkin_fk FOREIGN KEY(checkInID) REFERENCES CheckIns(checkInID) ON DELETE CASCADE,"+
+                                        "CONSTRAINT service_record_services_fk FOREIGN KEY(serviceID) REFERENCES Services(serviceID) ON DELETE CASCADE,"+
+                                        "CONSTRAINT service_record_staffs_fk FOREIGN KEY(staffID) REFERENCES Staffs(staffID) ON DELETE CASCADE"+
 										");"
 				);
 				
@@ -219,9 +219,9 @@ public class WolfInn {
 				statement.executeUpdate("CREATE TABLE PresidentialRoomServing ("+
 										"checkInID INTEGER NOT NULL,"+
 										"staffID INTEGER NOT NULL,"+
-										"CONSTRAINT pres_room_serv_checkin_fk FOREIGN KEY(checkInID) REFERENCES CheckIns(checkInID),"+
-										"CONSTRAINT pres_room_serv_staff_fk FOREIGN KEY(staffID) REFERENCES Staffs(staffID),"+
-										"CONSTRAINT pres_room_serv_pk PRIMARY KEY(checkInID, staffID)"+
+										"CONSTRAINT pres_room_serv_checkin_fk FOREIGN KEY(checkInID) REFERENCES CheckIns(checkInID) ON DELETE CASCADE,"+
+										"CONSTRAINT pres_room_serv_staff_fk FOREIGN KEY(staffID) REFERENCES Staffs(staffID) ON DELETE CASCADE,"+
+										"CONSTRAINT pres_room_serv_pk PRIMARY KEY(checkInID, staffID) "+
 										");"
 				);
 				
@@ -229,8 +229,8 @@ public class WolfInn {
 				statement.executeUpdate("CREATE TABLE PresidentialCatering ("+
 										"checkInID INTEGER NOT NULL,"+
 										"staffID INTEGER NOT NULL,"+
-										"CONSTRAINT pres_cater_checkin_fk FOREIGN KEY(checkInID) REFERENCES CheckIns(checkInID),"+
-										"CONSTRAINT pres_cater_staff_fk FOREIGN KEY(staffID) REFERENCES Staffs(staffID),"+
+										"CONSTRAINT pres_cater_checkin_fk FOREIGN KEY(checkInID) REFERENCES CheckIns(checkInID) ON DELETE CASCADE,"+
+										"CONSTRAINT pres_cater_staff_fk FOREIGN KEY(staffID) REFERENCES Staffs(staffID) ON DELETE CASCADE,"+
 										"CONSTRAINT pres_cater_pk PRIMARY KEY(checkInID, staffID)"+
 										");"
 				);
