@@ -332,7 +332,7 @@ public class CheckOutJFrame extends javax.swing.JFrame {
             }
         }else{
             try{
-                conn.rollback();
+                conn.rollback(s);
                 JOptionPane.showMessageDialog(null, "One of the transactions did not execute");
             }catch(Exception e){
                 e.printStackTrace();
