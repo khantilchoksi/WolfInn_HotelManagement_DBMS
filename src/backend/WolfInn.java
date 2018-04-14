@@ -246,71 +246,71 @@ public class WolfInn {
 				// );
 				
                 // Populate the CATS table
-                statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/States.csv\'"+
+                statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/States.csv\'"+
                                         " INTO TABLE States FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (stateName);"
                 );
 
-                statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/Cities.csv\' "+
+                statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/Cities.csv\' "+
                                         " INTO TABLE Cities FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (cityName, stateID);"
                 );
 				
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/Hotels.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/Hotels.csv\'"+
                                         " INTO TABLE Hotels FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (hotelName, hotelStreetAddress, cityID, zipCode, phoneNumber);"
                 );
 				
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/RoomTypes.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/RoomTypes.csv\'"+
                                         " INTO TABLE RoomTypes FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (roomTypeName);"
                 );
 				
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/Rooms.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/Rooms.csv\'"+
                                         " INTO TABLE Rooms FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (roomNo, hotelID, roomTypeID, roomRates, maxAllowedOccupancy, availability);"
                 );
 				
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/StaffTypes.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/StaffTypes.csv\'"+
                                         " INTO TABLE StaffTypes FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (staffTypeName);"
                 );
                                         
-                                statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/Departments.csv\'"+
+                                statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/Departments.csv\'"+
                                         " INTO TABLE Departments FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (departmentName);"
                 );
 				
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/Staffs.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/Staffs.csv\'"+
                                         " INTO TABLE Staffs FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (hotelID, staffTypeID, departmentID, staffFirstName, staffLastName, birthDate, phoneNumber, streetAddress, cityID, zipCode);"
                 );
 				
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/Customers.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/Customers.csv\'"+
                                         " INTO TABLE Customers FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (customerFirstName, customerLastName, birthDate, phoneNumber, emailAddress);"
                 );
 				
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/CheckIns.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/CheckIns.csv\'"+
                                         " INTO TABLE CheckIns FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (customerID, roomNo, hotelID, staffID, checkInDateTime, checkOutDateTime, numberOfGuests);"
                 );
 				
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/Services.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/Services.csv\'"+
                                         " INTO TABLE Services FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (serviceName);"
                 );
 				
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/ServicesProvides.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/ServiceProvides.csv\'"+
                                         " INTO TABLE ServiceProvides FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (hotelID, roomTypeID, serviceID, ratePerService);"
                 );
 				
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/PaymentMethods.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/PaymentMethods.csv\'"+
                                         " INTO TABLE PaymentMethods FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (paymentMethodName, discountPercent);"
                 );
 				
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/Bills.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/Bills.csv\'"+
                                         " INTO TABLE Bills FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (checkInID, paymentMethodID, totalAmount, payerFirstName, payerLastName, cardNumber, SSN, payerBillingAddress, cityID, payerZipcode);"
                 );
 			
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/ServicesRecords.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/ServiceRecords.csv\'"+
                                         " INTO TABLE ServiceRecords FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (checkInID, serviceID, staffID, quantity, dateTime);"
                 );
 				
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/PresidentialRoomServing.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/PresidentialRoomServing.csv\'"+
                                         " INTO TABLE PresidentialRoomServing FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (checkInID, staffID);"
                 );
 				
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/PresidentialCatering.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/PresidentialCatering.csv\'"+
                                         " INTO TABLE PresidentialCatering FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (checkInID, staffID);"
                 );
 				
