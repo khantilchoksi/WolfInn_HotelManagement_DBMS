@@ -17,17 +17,38 @@ import javax.swing.JOptionPane;
  */
 public class Room
 {
+    
+    private boolean availability;
+
+    /**
+     * Get the value of availability
+     *
+     * @return the value of availability
+     */
+    public boolean isAvailability() {
+        return availability;
+    }
+
+    /**
+     * Set the value of availability
+     *
+     * @param availability new value of availability
+     */
+    public void setAvailability(boolean availability) {
+        this.availability = availability;
+    }
 
     public String toString(){
         return " " + roomNo + " "; 
     }
     
-    public Room(int maxAllowedOccupancy, double roomRates, int hotelID, int roomTypeID, int roomNo) {
+    public Room(int maxAllowedOccupancy, double roomRates, int hotelID, int roomTypeID, int roomNo, boolean availability) {
         this.maxAllowedOccupancy = maxAllowedOccupancy;
         this.roomRates = roomRates;
         this.hotelID = hotelID;
         this.roomTypeID = roomTypeID;
         this.roomNo = roomNo;
+        this.availability = availability;
     }
 
     private int maxAllowedOccupancy;
@@ -134,15 +155,16 @@ public class Room
     }
     
     //Return Newly created room id or return -1 if error  
-    public static boolean createRoom(int roomNo, int roomTypeID, int hotelID, double roomRates, int maxAllowedOccupancy) {
+    public static boolean createRoom(int roomNo, int roomTypeID, int hotelID, double roomRates, int maxAllowedOccupancy, boolean availability) {
 
         try {
-            PreparedStatement pscreate = Connect.connection.prepareStatement("insert into Rooms(roomNo, roomTypeID, hotelID, roomRates, maxAllowedOccupancy) values(?,?,?,?,?)");
+            PreparedStatement pscreate = Connect.connection.prepareStatement("insert into Rooms(roomNo, roomTypeID, hotelID, roomRates, maxAllowedOccupancy, availability) values(?,?,?,?,?,?)");
             pscreate.setInt(1, roomNo);
             pscreate.setInt(2, roomTypeID);
             pscreate.setInt(3, hotelID);
             pscreate.setDouble(4, roomRates);
             pscreate.setInt(5, maxAllowedOccupancy);
+            pscreate.setBoolean(5, availability);
 
             pscreate.executeUpdate();
             return true;
@@ -155,7 +177,7 @@ public class Room
         
     }
     
-    public static boolean updateRoomDetails(int roomNo, int roomTypeID, int hotelID, double roomRates, short maxAllowedOccupancy) {
+    public static boolean updateRoomDetails(int roomNo, int roomTypeID, int hotelID, double roomRates, short maxAllowedOccupancy, boolean availability) {
 
         try {
             PreparedStatement pscreate = Connect.connection.prepareStatement("UPDATE Rooms "+
@@ -164,8 +186,9 @@ public class Room
             pscreate.setDouble(1, roomRates);
             pscreate.setShort(2, maxAllowedOccupancy);
             pscreate.setInt(3, roomTypeID);
-            pscreate.setInt(4, hotelID);
-            pscreate.setInt(5, roomNo);
+            pscreate.setBoolean(4, availability);
+            pscreate.setInt(5, hotelID);
+            pscreate.setInt(6, roomNo);
 
             pscreate.executeUpdate();
             return true;
@@ -176,6 +199,26 @@ public class Room
         }
 
         
+    }
+
+    public static boolean updateRoomAvailability(int roomNo,  int hotelID, boolean availability) {
+
+        try {
+            PreparedStatement pscreate = Connect.connection.prepareStatement("UPDATE Rooms "+
+                    "SET availability = ? "+
+                    "WHERE (hotelID = ? and roomNo = ?)");
+            pscreate.setBoolean(1, availability);
+            pscreate.setInt(2, hotelID);
+            pscreate.setInt(3, roomNo);
+
+            pscreate.executeUpdate();
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null,ex);
+            return false;
+        }
+
     }
     
     public static boolean deleteRoom(int hotelID, int roomNo) {
@@ -217,6 +260,7 @@ public class Room
         ArrayList<Room> roomsList = new ArrayList<Room>();
         int tempHotelID, tempRoomTypeID, tempRoomNo, tempMaxAllowedOccupancy;
         double tempRoomRates;
+        boolean tempAvailability;
         ResultSet resultSet = null;
         try
         {
@@ -230,7 +274,8 @@ public class Room
                 tempRoomNo = resultSet.getInt("roomNo");
                 tempRoomRates = resultSet.getDouble("roomRates");
                 tempMaxAllowedOccupancy = resultSet.getInt("maxAllowedOccupancy");
-                roomsList.add(new Room( tempMaxAllowedOccupancy, tempRoomRates, tempHotelID, tempRoomTypeID, tempRoomNo));
+                tempAvailability = resultSet.getBoolean("availability");
+                roomsList.add(new Room( tempMaxAllowedOccupancy, tempRoomRates, tempHotelID, tempRoomTypeID, tempRoomNo, tempAvailability));
             }
             
         }catch(Exception ex){
@@ -253,7 +298,7 @@ public class Room
                         "WHERE (roomNo, hotelID) NOT IN (SELECT Rooms.roomNo, Rooms.hotelID " +
                                               "FROM Rooms, CheckIns " +
                                               "WHERE Rooms.roomNo=CheckIns.roomNo AND Rooms.hotelID = CheckIns.hotelID AND CheckIns.checkOutDateTime=\"0000-00-00 00:00:00\" ) "+
-                        "AND Rooms.roomTypeID = RoomTypes.roomTypeID AND hotelID=?;"
+                        "AND Rooms.roomTypeID = RoomTypes.roomTypeID AND hotelID=? and Rooms.availability=true;"
                     );
             preparedStatement.setInt(1, hotelID);
             resultSet = preparedStatement.executeQuery();
@@ -277,7 +322,7 @@ public class Room
                         "WHERE (roomNo, hotelID) NOT IN (SELECT Rooms.roomNo, Rooms.hotelID " +
                                               "FROM Rooms, CheckIns " +
                                               "WHERE Rooms.roomNo=CheckIns.roomNo AND Rooms.hotelID = CheckIns.hotelID AND (CheckIns.checkOutDateTime IS NULL OR CheckIns.checkOutDateTime=\"0000-00-00 00:00:00\") ) "+
-                        "AND Rooms.roomTypeID = RoomTypes.roomTypeID AND hotelID=? AND Rooms.roomTypeID=?;"
+                        "AND Rooms.roomTypeID = RoomTypes.roomTypeID AND hotelID=? AND Rooms.roomTypeID=? AND and Rooms.availability=true;"
                     );
             preparedStatement.setInt(1, hotelID);
             preparedStatement.setInt(2, roomTypeID);
