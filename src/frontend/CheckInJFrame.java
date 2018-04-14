@@ -9,9 +9,12 @@ import backend.CheckIn;
 import backend.Customer;
 import backend.Hotel;
 import backend.Staff;
+import backend.*;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import java.sql.Connection;
+import java.sql.Savepoint;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.JFrame;
@@ -239,9 +242,38 @@ public class CheckInJFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_closeButtonMouseClicked
 
+        private boolean statusCode;
+
+    /**
+     * Get the value of statusCode
+     *
+     * @return the value of statusCode
+     */
+    public boolean isStatusCode() {
+        return statusCode;
+    }
+
+    /**
+     * Set the value of statusCode
+     *
+     * @param statusCode new value of statusCode
+     */
+    public void setStatusCode(boolean statusCode) {
+        this.statusCode = statusCode;
+    }
+
     private void checkInJButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkInJButtonMouseClicked
         Customer selectedCutomer = (Customer) customerJComboBox.getSelectedItem();
         Staff selectedStaff = (Staff) staffJComboBox.getSelectedItem();
+        Savepoint s;
+        Connection conn = null;
+        try{
+            conn = Connect.connection;
+            conn.setAutoCommit(false);
+            s = conn.setSavepoint();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         
         
         int newCheckInCreated = CheckIn.createCheckIn(selectedCutomer.getCustomerID(), this.roomNo, this.hotelID, selectedStaff.getStaffID(), Integer.parseInt(noGuestsJTextField.getText()));
@@ -257,7 +289,7 @@ public class CheckInJFrame extends javax.swing.JFrame {
         
         
         //Open Bill Window
-        CreateBillingInfoJFrame billinInfoJFrame = new CreateBillingInfoJFrame(newCheckInCreated);
+        CreateBillingInfoJFrame billinInfoJFrame = new CreateBillingInfoJFrame(newCheckInCreated,this);
         billinInfoJFrame.setVisible(true);
         billinInfoJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -265,7 +297,26 @@ public class CheckInJFrame extends javax.swing.JFrame {
         int screenHeight = screenSize.height;
         int screenWidth = screenSize.width;
         billinInfoJFrame.setLocation(screenWidth/4,screenHeight/4);
-        
+        if(newCheckInCreated != -1 && this.statusCode == true){
+            try{
+                conn.commit();
+                JOptionPane.showMessageDialog(null, "Both transactions executed correctly");
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }else{
+            try{
+                conn.rollback();
+                JOptionPane.showMessageDialog(null, "One of the transactions did not execute");
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        try{
+            conn.setAutoCommit(true);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
     }//GEN-LAST:event_checkInJButtonMouseClicked

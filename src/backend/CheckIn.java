@@ -379,7 +379,7 @@ public class CheckIn {
         String tempCustomerName;
         
         try{
-            PreparedStatement ps = Connect.connection.prepareStatement("SELECT CheckIns.checkInID, Customers.customerFirstName, CheckIns.roomNo "+
+            PreparedStatement ps = Connect.connection.prepareStatement("SELECT DISTINCT CheckIns.checkInID, Customers.customerFirstName, CheckIns.roomNo "+
                     "FROM CheckIns, Customers, Rooms, RoomTypes "+
                     "WHERE CheckIns.hotelID = ? AND CheckIns.hotelID = Rooms.hotelID AND CheckIns.roomNo = Rooms.roomNo AND Rooms.roomTypeID = 4 AND CheckIns.customerID = Customers.customerID AND (CheckIns.checkOutDateTime =\"0000-00-00 00:00:00\" OR CheckIns.checkOutDateTime IS NULL)");
             ps.setInt(1, hotelID);
