@@ -265,7 +265,7 @@ public class CheckInJFrame extends javax.swing.JFrame {
     private void checkInJButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkInJButtonMouseClicked
         Customer selectedCutomer = (Customer) customerJComboBox.getSelectedItem();
         Staff selectedStaff = (Staff) staffJComboBox.getSelectedItem();
-        Savepoint s;
+        Savepoint s = null;
         Connection conn = null;
         try{
             conn = Connect.connection;
@@ -306,7 +306,7 @@ public class CheckInJFrame extends javax.swing.JFrame {
             }
         }else{
             try{
-                conn.rollback();
+                conn.rollback(s);
                 JOptionPane.showMessageDialog(null, "One of the transactions did not execute");
             }catch(Exception e){
                 e.printStackTrace();

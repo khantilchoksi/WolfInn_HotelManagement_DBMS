@@ -313,7 +313,7 @@ public class CheckOutJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         boolean statusCheckOut;
         boolean statusBilling;
-        Savepoint s;
+        Savepoint s = null;
         Connection conn = null;
         try{
             conn = Connect.connection;
