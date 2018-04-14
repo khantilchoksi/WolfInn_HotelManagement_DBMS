@@ -82,15 +82,16 @@ public class WolfInn {
 
                 // 5. Create the Rooms table
                 statement.executeUpdate("CREATE TABLE Rooms ("+
-										"roomNo INTEGER,"+
-										"roomTypeID INTEGER,"+
-										"hotelID INTEGER,"+
-										"roomRates DOUBLE NOT NULL,"+
-										"maxAllowedOccupancy SMALLINT NOT NULL,"+
-										"CONSTRAINT rooms_pk PRIMARY KEY(roomNo, hotelID),"+
-										"CONSTRAINT room_hotel_fk FOREIGN KEY(hotelID) REFERENCES Hotels(hotelID) ON DELETE CASCADE,"+
-										"CONSTRAINT room_roomtype_fk FOREIGN KEY(roomTypeID) REFERENCES RoomTypes(roomTypeID)"+
-										");"
+                                                            "roomNo INTEGER,"+
+                                                            "roomTypeID INTEGER,"+
+                                                            "hotelID INTEGER,"+
+                                                            "roomRates DOUBLE NOT NULL,"+
+                                                            "maxAllowedOccupancy SMALLINT NOT NULL,"+
+                                                            "availability BOOLEAN NOT NULL, "+
+                                                            "CONSTRAINT rooms_pk PRIMARY KEY(roomNo, hotelID),"+
+                                                            "CONSTRAINT room_hotel_fk FOREIGN KEY(hotelID) REFERENCES Hotels(hotelID) ON DELETE CASCADE,"+
+                                                            "CONSTRAINT room_roomtype_fk FOREIGN KEY(roomTypeID) REFERENCES RoomTypes(roomTypeID)"+
+                                                            ");"
 				);
 				
 				// 6. Create Staff Types Table
@@ -262,7 +263,7 @@ public class WolfInn {
                 );
 				
 				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/Rooms.csv\'"+
-                                        " INTO TABLE Rooms FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (roomNo, hotelID, roomTypeID, roomRates, maxAllowedOccupancy);"
+                                        " INTO TABLE Rooms FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (roomNo, hotelID, roomTypeID, roomRates, maxAllowedOccupancy, availability);"
                 );
 				
 				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/StaffTypes.csv\'"+

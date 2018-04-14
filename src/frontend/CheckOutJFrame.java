@@ -313,7 +313,7 @@ public class CheckOutJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         boolean statusCheckOut;
         boolean statusBilling;
-        Savepoint s;
+        Savepoint s = null;
         Connection conn = null;
         try{
             conn = Connect.connection;
@@ -332,7 +332,7 @@ public class CheckOutJFrame extends javax.swing.JFrame {
             }
         }else{
             try{
-                conn.rollback();
+                conn.rollback(s);
                 JOptionPane.showMessageDialog(null, "One of the transactions did not execute");
             }catch(Exception e){
                 e.printStackTrace();

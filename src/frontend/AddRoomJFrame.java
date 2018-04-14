@@ -48,6 +48,7 @@ public class AddRoomJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -58,6 +59,10 @@ public class AddRoomJFrame extends javax.swing.JFrame {
         maxOccupancy = new javax.swing.JTextField();
         roomTypes = new javax.swing.JComboBox<>();
         addRoom = new javax.swing.JButton();
+        availableJRadioButton = new javax.swing.JRadioButton();
+        notAvailableRadioButton = new javax.swing.JRadioButton();
+        jLabel6 = new javax.swing.JLabel();
+        closeJButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,12 +76,27 @@ public class AddRoomJFrame extends javax.swing.JFrame {
 
         jLabel5.setText("Maximum Allowed Occupancy");
 
-        addRoom.setText("Add");
+        addRoom.setText("Add Room");
         addRoom.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addRoomMouseClicked(evt);
             }
         });
+
+        buttonGroup1.add(availableJRadioButton);
+        availableJRadioButton.setText("Available");
+        availableJRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                availableJRadioButtonActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(notAvailableRadioButton);
+        notAvailableRadioButton.setText("Not Available");
+
+        jLabel6.setText("Select Availability of Room");
+
+        closeJButton.setText("Close");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,17 +113,27 @@ public class AddRoomJFrame extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel6))
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(roomNo)
-                            .addComponent(roomTypes, 0, 95, Short.MAX_VALUE)
+                            .addComponent(roomTypes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(maxOccupancy)
-                            .addComponent(roomRates)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(164, 164, 164)
-                        .addComponent(addRoom)))
-                .addContainerGap(80, Short.MAX_VALUE))
+                            .addComponent(roomRates)
+                            .addComponent(roomNo, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(137, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(notAvailableRadioButton)
+                    .addComponent(availableJRadioButton))
+                .addGap(206, 206, 206))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(addRoom)
+                .addGap(52, 52, 52)
+                .addComponent(closeJButton)
+                .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,10 +141,10 @@ public class AddRoomJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(roomNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(roomNo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
                     .addComponent(roomTypes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -126,8 +156,16 @@ public class AddRoomJFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(maxOccupancy, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(availableJRadioButton)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(notAvailableRadioButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(addRoom)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addRoom)
+                    .addComponent(closeJButton))
                 .addGap(25, 25, 25))
         );
 
@@ -142,7 +180,14 @@ public class AddRoomJFrame extends javax.swing.JFrame {
         double roomRatesVal = Double.parseDouble(roomRates.getText());
         short maxOcc = Short.parseShort(maxOccupancy.getText());
         int roomNum = Integer.parseInt(roomNo.getText());
-        boolean roomCreated = Room.createRoom(roomNum, roomTypeID, hotelID, roomRatesVal, maxOcc);
+        boolean availability = true;
+        if(availableJRadioButton.isSelected()){
+            availability = true;
+        }else{
+            availability = false;
+        }
+
+        boolean roomCreated = Room.createRoom(roomNum, roomTypeID, hotelID, roomRatesVal, maxOcc,availability);
         String showMessage = "";
         if(roomCreated){
             showMessage = "Selected Room has been successfully created!";
@@ -155,6 +200,10 @@ public class AddRoomJFrame extends javax.swing.JFrame {
         WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
     }//GEN-LAST:event_addRoomMouseClicked
+
+    private void availableJRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_availableJRadioButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_availableJRadioButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -193,12 +242,17 @@ public class AddRoomJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addRoom;
+    private javax.swing.JRadioButton availableJRadioButton;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton closeJButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField maxOccupancy;
+    private javax.swing.JRadioButton notAvailableRadioButton;
     private javax.swing.JTextField roomNo;
     private javax.swing.JTextField roomRates;
     private javax.swing.JComboBox<RoomType> roomTypes;
