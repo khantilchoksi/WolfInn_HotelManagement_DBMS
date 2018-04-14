@@ -108,9 +108,9 @@ public class AddServerJFrame extends javax.swing.JFrame {
         Staff staff = (Staff)selectServer.getSelectedItem();
         status = PresidentialServing.assignServer(checkIn.getCheckInID(), staff.getStaffID());
         if(status){
-            JOptionPane.showConfirmDialog(null, "Assigned successfully");
+            JOptionPane.showMessageDialog(null, "Assigned successfully");
         }else{
-            JOptionPane.showConfirmDialog(null, "Error while assigning");
+            JOptionPane.showMessageDialog(null, "Error while assigning");
         }
     }//GEN-LAST:event_addMouseClicked
 

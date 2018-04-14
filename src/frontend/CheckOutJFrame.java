@@ -10,9 +10,11 @@ import backend.*;
 import static frontend.ViewRoomTypesJFrame.buildTableModel;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Savepoint;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -309,9 +311,39 @@ public class CheckOutJFrame extends javax.swing.JFrame {
 
     private void checkOutJButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkOutJButtonMouseClicked
         // TODO add your handling code here:
-       CheckIn.doCheckOut(currentCheckIn.getCheckInID());
-       Bill.updateBill(currentCheckIn.getCheckInID(), currentCheckIn.getTotalCost());
-       JOptionPane.showConfirmDialog(null, "Successfully checked out");
+        boolean statusCheckOut;
+        boolean statusBilling;
+        Savepoint s;
+        Connection conn = null;
+        try{
+            conn = Connect.connection;
+            conn.setAutoCommit(false);
+            s = conn.setSavepoint();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        statusCheckOut = CheckIn.doCheckOut(currentCheckIn.getCheckInID());
+        statusBilling = Bill.updateBill(currentCheckIn.getCheckInID(), currentCheckIn.getTotalCost());
+        if(statusCheckOut && statusBilling){
+            try{
+                conn.commit();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }else{
+            try{
+                conn.rollback(s);
+                JOptionPane.showMessageDialog(null, "One of the transactions did not execute");
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        try{
+            conn.setAutoCommit(true);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        JOptionPane.showConfirmDialog(null, "Successfully checked out");
     }//GEN-LAST:event_checkOutJButtonMouseClicked
 
     private void closeJButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeJButtonMouseClicked

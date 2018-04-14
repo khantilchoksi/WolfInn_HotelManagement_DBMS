@@ -25,9 +25,11 @@ public class CreateBillingInfoJFrame extends javax.swing.JFrame {
      * Creates new form CreateBillingInfoJFrame
      */
     int checkInID;
-    public CreateBillingInfoJFrame(int checkInID) {
+    CheckInJFrame ci ;
+    public CreateBillingInfoJFrame(int checkInID, CheckInJFrame cFrame) {
         initComponents();
         this.checkInID = checkInID;
+        this.ci = cFrame;
         checkInIDJLabel.setText(String.valueOf(checkInID));
         populatePaymentMethods();
         populateStates();
@@ -292,8 +294,10 @@ public class CreateBillingInfoJFrame extends javax.swing.JFrame {
         String showMessage = "";
         if(newBillCreated){
             showMessage = "Your new bill has been successfully created!";
+            ci.setStatusCode(true);
         }else{
             showMessage = "Oops! Some error occured while inserting new bill!";
+            ci.setStatusCode(false);
         }
         
         JOptionPane.showMessageDialog(null,showMessage);

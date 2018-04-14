@@ -108,9 +108,9 @@ public class AddCatererJFrame extends javax.swing.JFrame {
         Staff staff = (Staff)selectCaterer.getSelectedItem();
         status = PresidentialRoomCatering.assignCaterer(checkIn.getCheckInID(), staff.getStaffID());
         if(status){
-            JOptionPane.showConfirmDialog(null, "Assigned successfully");
+            JOptionPane.showMessageDialog(null, "Assigned successfully");
         }else{
-            JOptionPane.showConfirmDialog(null, "Error while assigning");
+            JOptionPane.showMessageDialog(null, "Error while assigning");
         }
     }//GEN-LAST:event_addMouseClicked
 

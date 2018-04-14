@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  * @author khantil
  */
 public class Connect {
-    static Connection connection = null;
+    public static Connection connection = null;
     
     private static final String user = "root";
     private static final String password = "";
@@ -22,7 +22,6 @@ public class Connect {
     private static final boolean localdb = true; // Determine whether to use a local database or NCSU's DB.
 //    jdbc:mariadb://localhost:3306/DB?user=root&password=myPassword"
     private static final String jdbcURL = localdb
-
 			? "jdbc:mariadb://localhost/wolfinn?user=root&password=&createDatabaseIfNotExist=true" // If using a local database
 			: "jdbc:mariadb://classdb2.csc.ncsu.edu:3306/$USER$"; // If using NCSU's DB
     
