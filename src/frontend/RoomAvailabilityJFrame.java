@@ -179,11 +179,11 @@ public class RoomAvailabilityJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         Room selectedRoom = (Room) roomJComboBox.getSelectedItem();
         if(selectedRoom.isAvailability()){
-             System.out.println("\n Room is available");
+             //System.out.println("\n Room is available");
             availableJRadioButton.setSelected(true);
             //notAvailableJRadioButton.setSelected(false);
         }else{
-            System.out.println("\n Room is not available");
+            //System.out.println("\n Room is not available");
             //availableJRadioButton.setSelected(false);
             notAvailableJRadioButton.setSelected(true);
         }

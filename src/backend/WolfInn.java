@@ -69,7 +69,7 @@ public class WolfInn {
                                         "cityID INTEGER NOT NULL,"+
                                         "zipCode INTEGER NOT NULL,"+
                                         "phoneNumber VARCHAR(20),"+
-                                        "CONSTRAINT hotel_city_fk FOREIGN KEY(cityID) REFERENCES Cities(cityID)"+
+                                        "CONSTRAINT hotel_city_fk FOREIGN KEY(cityID) REFERENCES Cities(cityID) ON DELETE CASCADE"+
                                         ");"
                 );
 
@@ -90,7 +90,7 @@ public class WolfInn {
                                                             "availability BOOLEAN NOT NULL, "+
                                                             "CONSTRAINT rooms_pk PRIMARY KEY(roomNo, hotelID),"+
                                                             "CONSTRAINT room_hotel_fk FOREIGN KEY(hotelID) REFERENCES Hotels(hotelID) ON DELETE CASCADE,"+
-                                                            "CONSTRAINT room_roomtype_fk FOREIGN KEY(roomTypeID) REFERENCES RoomTypes(roomTypeID)"+
+                                                            "CONSTRAINT room_roomtype_fk FOREIGN KEY(roomTypeID) REFERENCES RoomTypes(roomTypeID) ON DELETE CASCADE"+
                                                             ");"
 				);
 				
@@ -120,10 +120,10 @@ public class WolfInn {
 										"streetAddress TEXT NOT NULL,"+
 										"cityID INTEGER NOT NULL,"+
 										"zipCode INTEGER NOT NULL,"+
-										"CONSTRAINT staffs_hotel_fk FOREIGN KEY(hotelID) REFERENCES Hotels(hotelID),"+
-										"CONSTRAINT staffs_stafftype_fk FOREIGN KEY(staffTypeID) REFERENCES StaffTypes(staffTypeID),"+
-                                                                                "CONSTRAINT staffs_department_fk FOREIGN KEY(departmentID) REFERENCES Departments(departmentID),"+
-										"CONSTRAINT staffs_city_fk FOREIGN KEY(cityID) REFERENCES Cities(cityID)"+
+										"CONSTRAINT staffs_hotel_fk FOREIGN KEY(hotelID) REFERENCES Hotels(hotelID) ON DELETE CASCADE,"+
+										"CONSTRAINT staffs_stafftype_fk FOREIGN KEY(staffTypeID) REFERENCES StaffTypes(staffTypeID) ON DELETE CASCADE,"+
+                                                                                "CONSTRAINT staffs_department_fk FOREIGN KEY(departmentID) REFERENCES Departments(departmentID) ON DELETE CASCADE,"+
+										"CONSTRAINT staffs_city_fk FOREIGN KEY(cityID) REFERENCES Cities(cityID) ON DELETE CASCADE"+
 										");"
 				);
 				
@@ -148,9 +148,9 @@ public class WolfInn {
 										"checkInDateTime DATETIME NOT NULL,"+
 										"checkOutDateTime DATETIME,"+
 										"numberOfGuests INTEGER NOT NULL,"+
-										"CONSTRAINT checkin_customer_fk FOREIGN KEY(customerID) REFERENCES Customers(customerID),"+
-										"CONSTRAINT checkin_room_fk FOREIGN KEY(roomNo, hotelID) REFERENCES Rooms(roomNo, hotelID),"+
-										"CONSTRAINT checkin_staff_fk FOREIGN KEY(staffID) REFERENCES Staffs(staffID)"+
+										"CONSTRAINT checkin_customer_fk FOREIGN KEY(customerID) REFERENCES Customers(customerID) ON DELETE CASCADE,"+
+										"CONSTRAINT checkin_room_fk FOREIGN KEY(roomNo, hotelID) REFERENCES Rooms(roomNo, hotelID) ON DELETE CASCADE,"+
+										"CONSTRAINT checkin_staff_fk FOREIGN KEY(staffID) REFERENCES Staffs(staffID) ON DELETE CASCADE"+
 										");"
 				);
 				
@@ -167,10 +167,10 @@ public class WolfInn {
 										"roomTypeID INTEGER NOT NULL,"+
 										"serviceID INTEGER NOT NULL,"+
 										"ratePerService DOUBLE NOT NULL,"+
-										"CONSTRAINT service_provides_pk PRIMARY KEY(hotelID, roomTypeID, serviceID),"+
-										"CONSTRAINT service_provides_hotel_fk FOREIGN KEY(hotelID) REFERENCES Hotels(hotelID),"+
-										"CONSTRAINT service_provides_roomtype_fk FOREIGN KEY(roomTypeID) REFERENCES RoomTypes(roomTypeID),"+
-										"CONSTRAINT service_provides_services_fk FOREIGN KEY(serviceID) REFERENCES Services(serviceID)"+
+										"CONSTRAINT service_provides_pk PRIMARY KEY(hotelID, roomTypeID, serviceID) ,"+
+										"CONSTRAINT service_provides_hotel_fk FOREIGN KEY(hotelID) REFERENCES Hotels(hotelID) ON DELETE CASCADE,"+
+										"CONSTRAINT service_provides_roomtype_fk FOREIGN KEY(roomTypeID) REFERENCES RoomTypes(roomTypeID) ON DELETE CASCADE,"+
+										"CONSTRAINT service_provides_services_fk FOREIGN KEY(serviceID) REFERENCES Services(serviceID) ON DELETE CASCADE"+
 										");"
 				);
 				
@@ -195,9 +195,9 @@ public class WolfInn {
 										"payerBillingAddress TEXT,"+
 										"cityID INTEGER,"+
 										"payerZipcode INTEGER,"+
-										"CONSTRAINT bill_checkin_fk FOREIGN KEY(checkInID) REFERENCES CheckIns(checkInID),"+
-										"CONSTRAINT bill_paymentmethod_fk FOREIGN KEY(paymentMethodID) REFERENCES PaymentMethods(paymentMethodID),"+
-										"CONSTRAINT bill_payer_city_fk FOREIGN KEY(cityID) REFERENCES Cities(cityID)"+
+										"CONSTRAINT bill_checkin_fk FOREIGN KEY(checkInID) REFERENCES CheckIns(checkInID) ON DELETE CASCADE,"+
+										"CONSTRAINT bill_paymentmethod_fk FOREIGN KEY(paymentMethodID) REFERENCES PaymentMethods(paymentMethodID) ON DELETE CASCADE,"+
+										"CONSTRAINT bill_payer_city_fk FOREIGN KEY(cityID) REFERENCES Cities(cityID) ON DELETE CASCADE"+
 										");"
 				);
 				
@@ -209,9 +209,9 @@ public class WolfInn {
                                         "staffID INTEGER,"+
 										"quantity INTEGER NOT NULL,"+
 										"dateTime DATETIME NOT NULL,"+
-										"CONSTRAINT service_record_checkin_fk FOREIGN KEY(checkInID) REFERENCES CheckIns(checkInID),"+
-                                        "CONSTRAINT service_record_services_fk FOREIGN KEY(serviceID) REFERENCES Services(serviceID),"+
-                                        "CONSTRAINT service_record_staffs_fk FOREIGN KEY(staffID) REFERENCES Staffs(staffID)"+
+										"CONSTRAINT service_record_checkin_fk FOREIGN KEY(checkInID) REFERENCES CheckIns(checkInID) ON DELETE CASCADE,"+
+                                        "CONSTRAINT service_record_services_fk FOREIGN KEY(serviceID) REFERENCES Services(serviceID) ON DELETE CASCADE,"+
+                                        "CONSTRAINT service_record_staffs_fk FOREIGN KEY(staffID) REFERENCES Staffs(staffID) ON DELETE CASCADE"+
 										");"
 				);
 				
@@ -219,9 +219,9 @@ public class WolfInn {
 				statement.executeUpdate("CREATE TABLE PresidentialRoomServing ("+
 										"checkInID INTEGER NOT NULL,"+
 										"staffID INTEGER NOT NULL,"+
-										"CONSTRAINT pres_room_serv_checkin_fk FOREIGN KEY(checkInID) REFERENCES CheckIns(checkInID),"+
-										"CONSTRAINT pres_room_serv_staff_fk FOREIGN KEY(staffID) REFERENCES Staffs(staffID),"+
-										"CONSTRAINT pres_room_serv_pk PRIMARY KEY(checkInID, staffID)"+
+										"CONSTRAINT pres_room_serv_checkin_fk FOREIGN KEY(checkInID) REFERENCES CheckIns(checkInID) ON DELETE CASCADE,"+
+										"CONSTRAINT pres_room_serv_staff_fk FOREIGN KEY(staffID) REFERENCES Staffs(staffID) ON DELETE CASCADE,"+
+										"CONSTRAINT pres_room_serv_pk PRIMARY KEY(checkInID, staffID) "+
 										");"
 				);
 				
@@ -229,8 +229,8 @@ public class WolfInn {
 				statement.executeUpdate("CREATE TABLE PresidentialCatering ("+
 										"checkInID INTEGER NOT NULL,"+
 										"staffID INTEGER NOT NULL,"+
-										"CONSTRAINT pres_cater_checkin_fk FOREIGN KEY(checkInID) REFERENCES CheckIns(checkInID),"+
-										"CONSTRAINT pres_cater_staff_fk FOREIGN KEY(staffID) REFERENCES Staffs(staffID),"+
+										"CONSTRAINT pres_cater_checkin_fk FOREIGN KEY(checkInID) REFERENCES CheckIns(checkInID) ON DELETE CASCADE,"+
+										"CONSTRAINT pres_cater_staff_fk FOREIGN KEY(staffID) REFERENCES Staffs(staffID) ON DELETE CASCADE,"+
 										"CONSTRAINT pres_cater_pk PRIMARY KEY(checkInID, staffID)"+
 										");"
 				);
@@ -246,71 +246,71 @@ public class WolfInn {
 				// );
 				
                 // Populate the CATS table
-                statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/States.csv\'"+
+                statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/States.csv\'"+
                                         " INTO TABLE States FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (stateName);"
                 );
 
-                statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/Cities.csv\' "+
+                statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/Cities.csv\' "+
                                         " INTO TABLE Cities FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (cityName, stateID);"
                 );
 				
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/Hotels.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/Hotels.csv\'"+
                                         " INTO TABLE Hotels FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (hotelName, hotelStreetAddress, cityID, zipCode, phoneNumber);"
                 );
 				
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/RoomTypes.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/RoomTypes.csv\'"+
                                         " INTO TABLE RoomTypes FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (roomTypeName);"
                 );
 				
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/Rooms.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/Rooms.csv\'"+
                                         " INTO TABLE Rooms FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (roomNo, hotelID, roomTypeID, roomRates, maxAllowedOccupancy, availability);"
                 );
 				
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/StaffTypes.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/StaffTypes.csv\'"+
                                         " INTO TABLE StaffTypes FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (staffTypeName);"
                 );
                                         
-                                statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/Departments.csv\'"+
+                                statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/Departments.csv\'"+
                                         " INTO TABLE Departments FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (departmentName);"
                 );
 				
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/Staffs.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/Staffs.csv\'"+
                                         " INTO TABLE Staffs FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (hotelID, staffTypeID, departmentID, staffFirstName, staffLastName, birthDate, phoneNumber, streetAddress, cityID, zipCode);"
                 );
 				
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/Customers.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/Customers.csv\'"+
                                         " INTO TABLE Customers FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (customerFirstName, customerLastName, birthDate, phoneNumber, emailAddress);"
                 );
 				
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/CheckIns.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/CheckIns.csv\'"+
                                         " INTO TABLE CheckIns FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (customerID, roomNo, hotelID, staffID, checkInDateTime, checkOutDateTime, numberOfGuests);"
                 );
 				
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/Services.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/Services.csv\'"+
                                         " INTO TABLE Services FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (serviceName);"
                 );
 				
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/ServicesProvides.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/ServiceProvides.csv\'"+
                                         " INTO TABLE ServiceProvides FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (hotelID, roomTypeID, serviceID, ratePerService);"
                 );
 				
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/PaymentMethods.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/PaymentMethods.csv\'"+
                                         " INTO TABLE PaymentMethods FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (paymentMethodName, discountPercent);"
                 );
 				
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/Bills.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/Bills.csv\'"+
                                         " INTO TABLE Bills FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (checkInID, paymentMethodID, totalAmount, payerFirstName, payerLastName, cardNumber, SSN, payerBillingAddress, cityID, payerZipcode);"
                 );
 			
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/ServicesRecords.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/ServiceRecords.csv\'"+
                                         " INTO TABLE ServiceRecords FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (checkInID, serviceID, staffID, quantity, dateTime);"
                 );
 				
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/PresidentialRoomServing.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/PresidentialRoomServing.csv\'"+
                                         " INTO TABLE PresidentialRoomServing FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (checkInID, staffID);"
                 );
 				
-				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/Data/PresidentialCatering.csv\'"+
+				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/PresidentialCatering.csv\'"+
                                         " INTO TABLE PresidentialCatering FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (checkInID, staffID);"
                 );
 				
