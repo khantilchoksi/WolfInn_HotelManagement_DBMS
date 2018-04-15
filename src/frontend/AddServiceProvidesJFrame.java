@@ -171,10 +171,13 @@ public class AddServiceProvidesJFrame extends javax.swing.JFrame {
         int roomTypeID = selectedRoomType.getRoomTypeID();
         int serviceID = selectedService.getServiceID();
         double ratePerService = Double.parseDouble(ratePerServiceTextField.getText());
+        System.out.println("Hotel:" + hotelID);
+        System.out.println("RoomType:" + roomTypeID);
+        System.out.println("Service:" + serviceID);
         
         boolean warning = false;
         
-        boolean newServiceProvide = ServiceProvides.createServiceProvides(hotelID, roomTypeID, serviceID, ratePerService);
+        boolean newServiceProvide = ServiceProvides.createServiceProvides(roomTypeID, hotelID , serviceID, ratePerService);
         String showMessage = "";
         if(newServiceProvide){
             showMessage = "New Service Provide has been successfully created!";

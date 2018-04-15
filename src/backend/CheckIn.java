@@ -275,7 +275,7 @@ public class CheckIn {
 
         
         try {
-            PreparedStatement pscreate = Connect.connection.prepareStatement("insert into CheckIns(customerID, roomNo, hotelID, staffID, checkInDateTime, numberOfGuests) values(?,?,?,?,NOW() ,?)",Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement pscreate = Connect.connection.prepareStatement("insert into CheckIns(customerID, roomNo, hotelID, staffID, checkInDateTime, numberOfGuests) values(?,?,?,?,NOW(),?)",Statement.RETURN_GENERATED_KEYS);
             pscreate.setInt(1, customerID);
             pscreate.setInt(2, roomNo);
             pscreate.setInt(3, hotelID);
