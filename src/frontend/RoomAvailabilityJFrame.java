@@ -26,6 +26,7 @@ public class RoomAvailabilityJFrame extends javax.swing.JFrame {
     public RoomAvailabilityJFrame(Hotel selectedHotel) {
         initComponents();
         this.selectedHotel = selectedHotel;
+        hotelJLabel.setText(this.selectedHotel.getHotelName());
         populateRooms();
     }
     

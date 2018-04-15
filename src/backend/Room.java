@@ -164,7 +164,7 @@ public class Room
             pscreate.setInt(3, hotelID);
             pscreate.setDouble(4, roomRates);
             pscreate.setInt(5, maxAllowedOccupancy);
-            pscreate.setBoolean(5, availability);
+            pscreate.setBoolean(6, availability);
 
             pscreate.executeUpdate();
             return true;
@@ -181,7 +181,7 @@ public class Room
 
         try {
             PreparedStatement pscreate = Connect.connection.prepareStatement("UPDATE Rooms "+
-                    "SET roomRates = ?, maxAllowedOccupancy = ?, roomTypeID = ? "+
+                    "SET roomRates = ?, maxAllowedOccupancy = ?, roomTypeID = ?,availability = ? "+
                     "WHERE (hotelID = ? and roomNo = ?)");
             pscreate.setDouble(1, roomRates);
             pscreate.setShort(2, maxAllowedOccupancy);
@@ -295,10 +295,10 @@ public class Room
                     Connect.connection.prepareStatement(
                         "SELECT roomNo, roomTypeName, roomRates, maxAllowedOccupancy " +
                         "From Rooms, RoomTypes " +
-                        "WHERE (roomNo, hotelID) NOT IN (SELECT Rooms.roomNo, Rooms.hotelID " +
+                        "WHERE( (roomNo, hotelID) NOT IN (SELECT Rooms.roomNo, Rooms.hotelID " +
                                               "FROM Rooms, CheckIns " +
-                                              "WHERE Rooms.roomNo=CheckIns.roomNo AND Rooms.hotelID = CheckIns.hotelID AND CheckIns.checkOutDateTime=\"0000-00-00 00:00:00\" ) "+
-                        "AND Rooms.roomTypeID = RoomTypes.roomTypeID AND hotelID=? and Rooms.availability=true;"
+                                              "WHERE Rooms.roomNo=CheckIns.roomNo AND Rooms.hotelID = CheckIns.hotelID AND (CheckIns.checkOutDateTime IS NULL OR CheckIns.checkOutDateTime=\"0000-00-00 00:00:00\" )) "+
+                        "AND Rooms.roomTypeID = RoomTypes.roomTypeID AND hotelID=? and Rooms.availability is true );"
                     );
             preparedStatement.setInt(1, hotelID);
             resultSet = preparedStatement.executeQuery();
@@ -319,10 +319,10 @@ public class Room
                     Connect.connection.prepareStatement(
                         "SELECT roomNo, roomTypeName, roomRates, maxAllowedOccupancy " +
                         "From Rooms, RoomTypes " +
-                        "WHERE (roomNo, hotelID) NOT IN (SELECT Rooms.roomNo, Rooms.hotelID " +
+                        "WHERE( (roomNo, hotelID) NOT IN (SELECT Rooms.roomNo, Rooms.hotelID " +
                                               "FROM Rooms, CheckIns " +
-                                              "WHERE Rooms.roomNo=CheckIns.roomNo AND Rooms.hotelID = CheckIns.hotelID AND (CheckIns.checkOutDateTime IS NULL OR CheckIns.checkOutDateTime=\"0000-00-00 00:00:00\") ) "+
-                        "AND Rooms.roomTypeID = RoomTypes.roomTypeID AND hotelID=? AND Rooms.roomTypeID=? AND and Rooms.availability=true;"
+                                              "WHERE Rooms.roomNo=CheckIns.roomNo AND Rooms.hotelID = CheckIns.hotelID AND (CheckIns.checkOutDateTime IS NULL OR CheckIns.checkOutDateTime=\"0000-00-00 00:00:00\" )) "+
+                        "AND Rooms.roomTypeID = RoomTypes.roomTypeID AND hotelID = ? AND Rooms.roomTypeID = ? AND Rooms.availability is true );"
                     );
             preparedStatement.setInt(1, hotelID);
             preparedStatement.setInt(2, roomTypeID);

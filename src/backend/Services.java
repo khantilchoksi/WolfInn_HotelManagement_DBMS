@@ -90,8 +90,8 @@ public class Services {
     public static boolean updateServiceDetails(int serviceID, String serviceName) {
 
         try {
-            PreparedStatement pscreate1 = Connect.connection.prepareStatement("UPDATE Services"+
-                    "SET serviceName = ?"+
+            PreparedStatement pscreate1 = Connect.connection.prepareStatement("UPDATE Services "+
+                    "SET serviceName = ? "+
                     "WHERE serviceID = ?");
             pscreate1.setString(1, serviceName);
             pscreate1.setInt(2, serviceID);
