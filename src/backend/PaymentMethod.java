@@ -81,18 +81,19 @@ public class PaymentMethod {
     }
     
     public static boolean updatePaymentMethod(int paymentMethodID, String paymentMethodName, double discountPercent){
+        boolean status = false;
         try {
             PreparedStatement psupdate = Connect.connection.prepareStatement("UPDATE PaymentMethods SET paymentMethodName = ?, discountPercent = ? WHERE paymentMethodID = ?");
             psupdate.setString(1, paymentMethodName);
             psupdate.setDouble(2, discountPercent);
             psupdate.setInt(3, paymentMethodID);
             
-            psupdate.executeUpdate();
-            return true;
+            status = psupdate.execute();
+            status = true;
         }catch(Exception ex){
             ex.printStackTrace();
-            return false;
         }
+        return status;
     }
     
     public static ResultSet viewAllPaymentMethods(){
