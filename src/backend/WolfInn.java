@@ -163,14 +163,14 @@ public class WolfInn {
 				
 				// 11. Create ServiceProvides Table
 				statement.executeUpdate("CREATE TABLE ServiceProvides ("+
-										"hotelID INTEGER NOT NULL,"+
-										"roomTypeID INTEGER NOT NULL,"+
-										"serviceID INTEGER NOT NULL,"+
-										"ratePerService DOUBLE NOT NULL,"+
-										"CONSTRAINT service_provides_pk PRIMARY KEY(hotelID, roomTypeID, serviceID) ,"+
-										"CONSTRAINT service_provides_hotel_fk FOREIGN KEY(hotelID) REFERENCES Hotels(hotelID) ON DELETE CASCADE,"+
-										"CONSTRAINT service_provides_roomtype_fk FOREIGN KEY(roomTypeID) REFERENCES RoomTypes(roomTypeID) ON DELETE CASCADE,"+
-										"CONSTRAINT service_provides_services_fk FOREIGN KEY(serviceID) REFERENCES Services(serviceID) ON DELETE CASCADE"+
+										"hotelID INTEGER NOT NULL, "+
+										"roomTypeID INTEGER NOT NULL, "+
+										"serviceID INTEGER NOT NULL, "+
+										"ratePerService DOUBLE NOT NULL, "+
+										"CONSTRAINT service_provides_pk PRIMARY KEY(hotelID, roomTypeID, serviceID) , "+
+										"CONSTRAINT service_provides_hotel_fk FOREIGN KEY(hotelID) REFERENCES Hotels(hotelID) ON DELETE CASCADE, "+
+										"CONSTRAINT service_provides_roomtype_fk FOREIGN KEY(roomTypeID) REFERENCES RoomTypes(roomTypeID) ON DELETE CASCADE, "+
+										"CONSTRAINT service_provides_services_fk FOREIGN KEY(serviceID) REFERENCES Services(serviceID) ON DELETE CASCADE "+
 										");"
 				);
 				
@@ -263,7 +263,7 @@ public class WolfInn {
                 );
 				
 				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/Rooms.csv\'"+
-                                        " INTO TABLE Rooms FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (roomNo, hotelID, roomTypeID, roomRates, maxAllowedOccupancy, availability);"
+                                        " INTO TABLE Rooms FIELDS TERMINATED BY \',\' LINES TERMINATED BY \'\n\' (roomNo, roomTypeID, hotelID, roomRates, maxAllowedOccupancy, availability);"
                 );
 				
 				statement.executeUpdate("LOAD DATA LOCAL INFILE \'./src/DemoData/StaffTypes.csv\'"+
