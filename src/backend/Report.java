@@ -142,4 +142,23 @@ public class Report {
         return resultSet;
     }
     
+    public static ResultSet staffGroupedByHotel(){
+        ResultSet resultSet = null;
+        try
+        {
+            Statement statement = Connect.connection.createStatement();
+            resultSet = statement.executeQuery("SELECT Staffs.hotelID, Hotels.hotelName, StaffTypes.staffTypeName, COUNT(*) AS Count "
+                    + "FROM Staffs, StaffTypes, Hotels "
+                    + "WHERE Staffs.staffTypeID = StaffTypes.staffTypeID AND Staffs.hotelID = Hotels.hotelID "
+                    + "GROUP BY Staffs.hotelID, StaffTypes.staffTypeName "
+                    + "ORDER BY Staffs.hotelID;");
+            
+        }catch(Exception ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null,ex);
+        }
+        
+        return resultSet;
+    }
+    
 }

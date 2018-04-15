@@ -39,6 +39,7 @@ public class ReportsJFrame extends javax.swing.JFrame {
         checkInsDateButton = new javax.swing.JButton();
         staffGroupedButton = new javax.swing.JButton();
         revenueButton = new javax.swing.JButton();
+        staffByRoleHotel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,6 +87,13 @@ public class ReportsJFrame extends javax.swing.JFrame {
             }
         });
 
+        staffByRoleHotel.setText("Staff Groped By Hotel & Role");
+        staffByRoleHotel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                staffByRoleHotelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -103,16 +111,23 @@ public class ReportsJFrame extends javax.swing.JFrame {
                             .addComponent(occupancyHotelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(checkInsDateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(OccupancyRoomTypeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(revenueButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(284, Short.MAX_VALUE))
+                            .addComponent(revenueButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(66, 66, 66)
+                        .addComponent(staffByRoleHotel, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(occupancyHotelButton)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(occupancyHotelButton))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(staffByRoleHotel)))
                 .addGap(31, 31, 31)
                 .addComponent(occupancyCityButton)
                 .addGap(31, 31, 31)
@@ -218,6 +233,18 @@ public class ReportsJFrame extends javax.swing.JFrame {
         dateForRevenueJFrame.setLocation(screenWidth/4,screenHeight/4);
     }//GEN-LAST:event_revenueButtonMouseClicked
 
+    private void staffByRoleHotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffByRoleHotelActionPerformed
+        // TODO add your handling code here:
+        StaffRoleHotelJFrame staffRoleHotelJFrame = new StaffRoleHotelJFrame();
+        staffRoleHotelJFrame.setVisible(true);
+        staffRoleHotelJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        staffRoleHotelJFrame.setLocation(screenWidth/4,screenHeight/4);
+    }//GEN-LAST:event_staffByRoleHotelActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -261,6 +288,7 @@ public class ReportsJFrame extends javax.swing.JFrame {
     private javax.swing.JButton occupancyCityButton;
     private javax.swing.JButton occupancyHotelButton;
     private javax.swing.JButton revenueButton;
+    private javax.swing.JButton staffByRoleHotel;
     private javax.swing.JButton staffGroupedButton;
     // End of variables declaration//GEN-END:variables
 }
