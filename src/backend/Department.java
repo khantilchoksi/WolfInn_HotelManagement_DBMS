@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -37,6 +38,39 @@ public class Department {
     int departmentID;
     String departmentName;
     
+        //Return Newly created hotel id or return -1 if error 
+    public static boolean createDepartment(String departmentName) {
+
+        try {
+            PreparedStatement pscreate = Connect.connection.prepareStatement("insert into Departments(departmentName) values(?)");
+            pscreate.setString(1, departmentName);
+            pscreate.executeUpdate();
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null,ex);
+            return false;
+        }
+
+        
+    }
+    
+    public static ResultSet viewAllDepartments(){
+        ResultSet resultSet = null;
+        try
+        {
+            Statement statement = Connect.connection.createStatement();
+            resultSet = statement.executeQuery("select * from Departments;");
+            
+        }catch(Exception ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null,ex);
+        }
+        
+        return resultSet;
+        
+    }
+        
     public static ArrayList<Department> getAllDepartmentList(){
         ResultSet resultSet = null;
         ArrayList<Department> departmentList = new ArrayList<Department>();

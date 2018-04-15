@@ -266,6 +266,7 @@ public class AddHotelJFrame extends javax.swing.JFrame {
         }
         
         JOptionPane.showMessageDialog(null,showMessage);
+        
         WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
         
