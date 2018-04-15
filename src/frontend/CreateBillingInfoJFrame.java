@@ -7,11 +7,12 @@ package frontend;
 
 import backend.Bill;
 import backend.City;
-import backend.Hotel;
+import backend.Connect;
 import backend.PaymentMethod;
 import backend.State;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import java.sql.Savepoint;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -26,9 +27,12 @@ public class CreateBillingInfoJFrame extends javax.swing.JFrame {
      */
     int checkInID;
     CheckInJFrame ci ;
-    public CreateBillingInfoJFrame(int checkInID, CheckInJFrame cFrame) {
+    Savepoint savepoint = null;
+    boolean newBillCreated = false;
+    public CreateBillingInfoJFrame(int checkInID, CheckInJFrame cFrame, Savepoint savepoint) {
         initComponents();
         this.checkInID = checkInID;
+        this.savepoint = savepoint;
         this.ci = cFrame;
         checkInIDJLabel.setText(String.valueOf(checkInID));
         populatePaymentMethods();
@@ -157,6 +161,11 @@ public class CreateBillingInfoJFrame extends javax.swing.JFrame {
         });
 
         closeButton.setText("Close");
+        closeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                closeButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -284,7 +293,7 @@ public class CreateBillingInfoJFrame extends javax.swing.JFrame {
        PaymentMethod selectedPaymentMethod = (PaymentMethod) paymentMethodJComboBox.getSelectedItem();
        City selectedCity = (City) cityJComboBox.getSelectedItem();
        
-       boolean newBillCreated = Bill.enterBillInfo(this.checkInID, selectedPaymentMethod.getPaymentMethodID() , 
+        this.newBillCreated = Bill.enterBillInfo(this.checkInID, selectedPaymentMethod.getPaymentMethodID() , 
                payerFirstNameJTextField.getText(), payerLastNameJTextField.getText(), 
                cardNumberJTextField.getText(), ssnJTextField.getText() , billingAddressJTextField.getText(), 
                selectedCity.getCityID(), Integer.parseInt(zipCodeJTextField.getText()));
@@ -294,22 +303,53 @@ public class CreateBillingInfoJFrame extends javax.swing.JFrame {
         String showMessage = "";
         if(newBillCreated){
             showMessage = "Your new bill has been successfully created!";
-            ci.setStatusCode(true);
+            newBillCreated = true;
         }else{
             showMessage = "Oops! Some error occured while inserting new bill!";
-            ci.setStatusCode(false);
+            newBillCreated = false;
         }
+        doCommitOrRollback();
+        
         
         JOptionPane.showMessageDialog(null,showMessage);
         WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
         
     }//GEN-LAST:event_enterBillDetailsButtonMouseClicked
-
+    public void doCommitOrRollback(){
+        if(this.checkInID != -1 && newBillCreated == true){
+            try{
+                Connect.connection.commit();
+                JOptionPane.showMessageDialog(null, "Both transactions executed correctly");
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }else{
+            try{
+                Connect.connection.rollback(this.savepoint);
+                JOptionPane.showMessageDialog(null, "One of the transactions did not execute");
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        try{
+            Connect.connection.setAutoCommit(true);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
     private void stateJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stateJComboBoxActionPerformed
         
         populateCities();
     }//GEN-LAST:event_stateJComboBoxActionPerformed
+
+    private void closeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeButtonMouseClicked
+        // TODO add your handling code here:
+        doCommitOrRollback();
+        WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+        
+    }//GEN-LAST:event_closeButtonMouseClicked
 
     /**
      * @param args the command line arguments
