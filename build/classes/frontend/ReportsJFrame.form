@@ -63,7 +63,10 @@
                               <Component id="revenueButton" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
-                          <Component id="staffByRoleHotel" min="-2" pref="192" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="staffByRoleHotel" pref="192" max="32767" attributes="0"/>
+                              <Component id="percentOccupancyButton" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                   <EmptySpace pref="105" max="32767" attributes="0"/>
@@ -86,7 +89,10 @@
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                  <Component id="occupancyCityButton" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="occupancyCityButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="percentOccupancyButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   <Component id="OccupancyRoomTypeButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
@@ -160,6 +166,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="staffByRoleHotelActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="percentOccupancyButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Percentage Occupancy"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="percentOccupancyButtonMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>

@@ -40,6 +40,7 @@ public class ReportsJFrame extends javax.swing.JFrame {
         staffGroupedButton = new javax.swing.JButton();
         revenueButton = new javax.swing.JButton();
         staffByRoleHotel = new javax.swing.JButton();
+        percentOccupancyButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,6 +95,13 @@ public class ReportsJFrame extends javax.swing.JFrame {
             }
         });
 
+        percentOccupancyButton.setText("Percentage Occupancy");
+        percentOccupancyButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                percentOccupancyButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -113,7 +121,9 @@ public class ReportsJFrame extends javax.swing.JFrame {
                             .addComponent(OccupancyRoomTypeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(revenueButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(66, 66, 66)
-                        .addComponent(staffByRoleHotel, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(staffByRoleHotel, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                            .addComponent(percentOccupancyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(105, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -129,7 +139,9 @@ public class ReportsJFrame extends javax.swing.JFrame {
                         .addGap(35, 35, 35)
                         .addComponent(staffByRoleHotel)))
                 .addGap(31, 31, 31)
-                .addComponent(occupancyCityButton)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(occupancyCityButton)
+                    .addComponent(percentOccupancyButton))
                 .addGap(31, 31, 31)
                 .addComponent(OccupancyRoomTypeButton)
                 .addGap(33, 33, 33)
@@ -245,6 +257,18 @@ public class ReportsJFrame extends javax.swing.JFrame {
         staffRoleHotelJFrame.setLocation(screenWidth/4,screenHeight/4);
     }//GEN-LAST:event_staffByRoleHotelActionPerformed
 
+    private void percentOccupancyButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_percentOccupancyButtonMouseClicked
+        // TODO add your handling code here:
+        PercentOccupancyJFrame percentOccupancyJFrame = new PercentOccupancyJFrame();
+        percentOccupancyJFrame.setVisible(true);
+        percentOccupancyJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        percentOccupancyJFrame.setLocation(screenWidth/4,screenHeight/4);
+    }//GEN-LAST:event_percentOccupancyButtonMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -287,6 +311,7 @@ public class ReportsJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton occupancyCityButton;
     private javax.swing.JButton occupancyHotelButton;
+    private javax.swing.JButton percentOccupancyButton;
     private javax.swing.JButton revenueButton;
     private javax.swing.JButton staffByRoleHotel;
     private javax.swing.JButton staffGroupedButton;
