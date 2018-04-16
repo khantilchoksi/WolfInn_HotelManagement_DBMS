@@ -200,6 +200,23 @@ public class Room
 
         
     }
+    
+    public static int getRoomTypeIDFromHotelRoomNo(int hotelID, int roomNo){
+        int roomTypeID = 0;
+        ResultSet rs = null;
+        try{
+            PreparedStatement ps = Connect.connection.prepareStatement("SELECT roomTypeID FROM Rooms WHERE (roomNo = ? AND hotelID = ?)");
+            ps.setInt(1,roomNo);
+            ps.setInt(2,hotelID);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                roomTypeID = rs.getInt("roomTypeID");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return roomTypeID;
+    }
 
     public static boolean updateRoomAvailability(int roomNo,  int hotelID, boolean availability) {
 

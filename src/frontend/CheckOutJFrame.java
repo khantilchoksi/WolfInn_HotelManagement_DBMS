@@ -311,8 +311,8 @@ public class CheckOutJFrame extends javax.swing.JFrame {
 
     private void checkOutJButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkOutJButtonMouseClicked
         // TODO add your handling code here:
-        boolean statusCheckOut;
-        boolean statusBilling;
+        boolean statusCheckOut = false;
+        boolean statusBilling = false;
         Savepoint s = null;
         Connection conn = null;
         try{
@@ -324,6 +324,8 @@ public class CheckOutJFrame extends javax.swing.JFrame {
         }
         statusCheckOut = CheckIn.doCheckOut(currentCheckIn.getCheckInID());
         statusBilling = Bill.updateBill(currentCheckIn.getCheckInID(), currentCheckIn.getTotalCost());
+        System.out.println("Status check out" + statusCheckOut);
+        System.out.println("Status Billing" + statusBilling);
         if(statusCheckOut && statusBilling){
             try{
                 conn.commit();
