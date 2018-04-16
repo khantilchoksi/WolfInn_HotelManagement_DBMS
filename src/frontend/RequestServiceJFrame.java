@@ -103,6 +103,11 @@ public class RequestServiceJFrame extends javax.swing.JFrame {
         });
 
         updateRequestButton.setText("Update");
+        updateRequestButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                updateRequestButtonMouseClicked(evt);
+            }
+        });
 
         deleteRequestButton.setText("Delete");
 
@@ -198,6 +203,18 @@ public class RequestServiceJFrame extends javax.swing.JFrame {
         int screenWidth = screenSize.width;
         viewServiceRequestJFrame.setLocation(screenWidth/4,screenHeight/4);
     }//GEN-LAST:event_viewRequestButtonMouseClicked
+
+    private void updateRequestButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateRequestButtonMouseClicked
+        // TODO add your handling code here:
+        UpdateServiceRequestJFrame updateServiceRequestJFrame = new UpdateServiceRequestJFrame((CheckIn) checkInComboBox.getSelectedItem());
+        updateServiceRequestJFrame.setVisible(true);
+        updateServiceRequestJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        updateServiceRequestJFrame.setLocation(screenWidth/4,screenHeight/4);
+    }//GEN-LAST:event_updateRequestButtonMouseClicked
 
     /**
      * @param args the command line arguments
