@@ -7,10 +7,8 @@ package frontend;
 
 import backend.CheckIn;
 import backend.Hotel;
-import backend.ServiceRecord;
-import backend.Services;
 import backend.Staff;
-import static frontend.ViewServicesJFrame.buildTableModel;
+import static frontend.ViewStaffForCheckInJFrame.buildTableModel;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -23,16 +21,16 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author patel
  */
-public class ViewStaffForCheckInJFrame extends javax.swing.JFrame {
+public class ViewCheckInsForHotelJFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form ViewStaffForCheckInJFrame
+     * Creates new form ViewCheckInsForHotelJFrame
      */
-    public ViewStaffForCheckInJFrame() {
+    public ViewCheckInsForHotelJFrame() {
         initComponents();
         populateHotels();
     }
-
+    
     public void populateHotels(){
         selectHotel.removeAllItems();
         try{
@@ -42,20 +40,9 @@ public class ViewStaffForCheckInJFrame extends javax.swing.JFrame {
             }
         }catch(Exception e){
             e.printStackTrace();
-        }   
-    }
-    
-    public void populateCheckIns(int hotelID){
-        selectCheckIn.removeAllItems();
-        try{
-            ArrayList<CheckIn> checkInList = CheckIn.getAllCheckIns(hotelID);
-            for(CheckIn checkIn : checkInList){
-                selectCheckIn.addItem(checkIn);
-            }
-        }catch(Exception e){
-            e.printStackTrace();
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -68,30 +55,28 @@ public class ViewStaffForCheckInJFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         selectHotel = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        selectCheckIn = new javax.swing.JComboBox<>();
+        getActiveCheckInsJButton = new javax.swing.JButton();
+        getAllCheckInsJButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        viewStaffJButton = new javax.swing.JButton();
-        viewServiceRecordsJButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("View Staff For CheckIn");
+        jLabel1.setText("View CheckIns");
 
         jLabel2.setText("Select Hotel");
 
-        selectHotel.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                selectHotelItemStateChanged(evt);
+        getActiveCheckInsJButton.setText("Get Active CheckIns");
+        getActiveCheckInsJButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                getActiveCheckInsJButtonMouseClicked(evt);
             }
         });
 
-        jLabel3.setText("Select CheckIn");
-
-        selectCheckIn.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                selectCheckInItemStateChanged(evt);
+        getAllCheckInsJButton.setText("Get All CheckIns");
+        getAllCheckInsJButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                getAllCheckInsJButtonMouseClicked(evt);
             }
         });
 
@@ -108,93 +93,58 @@ public class ViewStaffForCheckInJFrame extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        viewStaffJButton.setText("View Staffs");
-        viewStaffJButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                viewStaffJButtonMouseClicked(evt);
-            }
-        });
-
-        viewServiceRecordsJButton.setText("View Service Records");
-        viewServiceRecordsJButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                viewServiceRecordsJButtonMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(selectHotel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(selectCheckIn, 0, 82, Short.MAX_VALUE))
-                .addGap(74, 74, 74))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jScrollPane1)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(128, 128, 128)
+                .addGap(413, 413, 413)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(viewStaffJButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(viewServiceRecordsJButton)
-                .addGap(65, 65, 65))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(278, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(getActiveCheckInsJButton)
+                    .addComponent(jLabel2))
+                .addGap(84, 84, 84)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(selectHotel, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(getAllCheckInsJButton))
+                .addGap(318, 318, 318))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(selectHotel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(selectCheckIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(viewStaffJButton)
-                    .addComponent(viewServiceRecordsJButton))
-                .addGap(42, 42, 42)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(getActiveCheckInsJButton)
+                    .addComponent(getAllCheckInsJButton))
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void selectHotelItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_selectHotelItemStateChanged
+    private void getAllCheckInsJButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_getAllCheckInsJButtonMouseClicked
         // TODO add your handling code here:
         Hotel hotel = (Hotel)selectHotel.getSelectedItem();
-        populateCheckIns(hotel.getHotelID());
-    }//GEN-LAST:event_selectHotelItemStateChanged
-
-    private void selectCheckInItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_selectCheckInItemStateChanged
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_selectCheckInItemStateChanged
-
-    private void viewServiceRecordsJButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewServiceRecordsJButtonMouseClicked
-        // TODO add your handling code here:
-        CheckIn checkIn = (CheckIn)selectCheckIn.getSelectedItem();
         try{
-            if(checkIn != null){
-                ResultSet showServicesResultSet = ServiceRecord.getServiceRecordsForCheckIns(checkIn.getCheckInID());
-                if(showServicesResultSet!= null){
-                    jTable1.setModel(buildTableModel(showServicesResultSet));
+            if(hotel != null){
+                ResultSet showAllCheckIn = CheckIn.getAllCheckInsRS(hotel.getHotelID());
+                if(showAllCheckIn!= null){
+                    jTable1.setModel(buildTableModel(showAllCheckIn));
                     jScrollPane1.setViewportView(jTable1);
                     pack();
                 }else{
@@ -211,16 +161,16 @@ public class ViewStaffForCheckInJFrame extends javax.swing.JFrame {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null,ex);
         }
-    }//GEN-LAST:event_viewServiceRecordsJButtonMouseClicked
+    }//GEN-LAST:event_getAllCheckInsJButtonMouseClicked
 
-    private void viewStaffJButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewStaffJButtonMouseClicked
+    private void getActiveCheckInsJButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_getActiveCheckInsJButtonMouseClicked
         // TODO add your handling code here:
-        CheckIn checkIn = (CheckIn)selectCheckIn.getSelectedItem();
+        Hotel hotel = (Hotel)selectHotel.getSelectedItem();
         try{
-            if(checkIn != null){
-                ResultSet showStaffResultSet = Staff.getAllStaffsForCheckIn(checkIn.getCheckInID());
-                if(showStaffResultSet!= null){
-                    jTable1.setModel(buildTableModel(showStaffResultSet));
+            if(hotel != null){
+                ResultSet showAllCheckIn = CheckIn.getActiveCheckInsRS(hotel.getHotelID());
+                if(showAllCheckIn!= null){
+                    jTable1.setModel(buildTableModel(showAllCheckIn));
                     jScrollPane1.setViewportView(jTable1);
                     pack();
                 }else{
@@ -237,7 +187,7 @@ public class ViewStaffForCheckInJFrame extends javax.swing.JFrame {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null,ex);
         }
-    }//GEN-LAST:event_viewStaffJButtonMouseClicked
+    }//GEN-LAST:event_getActiveCheckInsJButtonMouseClicked
 
     public static DefaultTableModel buildTableModel(ResultSet rs)
             throws SQLException {
@@ -264,6 +214,7 @@ public class ViewStaffForCheckInJFrame extends javax.swing.JFrame {
         return new DefaultTableModel(data, columnNames);
 
     }
+    
     /**
      * @param args the command line arguments
      */
@@ -281,33 +232,31 @@ public class ViewStaffForCheckInJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewStaffForCheckInJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewCheckInsForHotelJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewStaffForCheckInJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewCheckInsForHotelJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewStaffForCheckInJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewCheckInsForHotelJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewStaffForCheckInJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewCheckInsForHotelJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewStaffForCheckInJFrame().setVisible(true);
+                new ViewCheckInsForHotelJFrame().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton getActiveCheckInsJButton;
+    private javax.swing.JButton getAllCheckInsJButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JComboBox<CheckIn> selectCheckIn;
     private javax.swing.JComboBox<Hotel> selectHotel;
-    private javax.swing.JButton viewServiceRecordsJButton;
-    private javax.swing.JButton viewStaffJButton;
     // End of variables declaration//GEN-END:variables
 }

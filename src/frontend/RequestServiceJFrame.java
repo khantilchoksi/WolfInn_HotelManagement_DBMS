@@ -78,7 +78,6 @@ public class RequestServiceJFrame extends javax.swing.JFrame {
         checkInComboBox = new javax.swing.JComboBox();
         createRequestButton = new javax.swing.JButton();
         updateRequestButton = new javax.swing.JButton();
-        deleteRequestButton = new javax.swing.JButton();
         viewRequestButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -108,8 +107,6 @@ public class RequestServiceJFrame extends javax.swing.JFrame {
                 updateRequestButtonMouseClicked(evt);
             }
         });
-
-        deleteRequestButton.setText("Delete");
 
         viewRequestButton.setText("View");
         viewRequestButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -143,9 +140,7 @@ public class RequestServiceJFrame extends javax.swing.JFrame {
                                     .addComponent(checkInComboBox, 0, 141, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(74, 74, 74)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(viewRequestButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(deleteRequestButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                .addComponent(viewRequestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(143, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -161,9 +156,7 @@ public class RequestServiceJFrame extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(checkInComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(createRequestButton)
-                    .addComponent(deleteRequestButton))
+                .addComponent(createRequestButton)
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(updateRequestButton)
@@ -254,7 +247,6 @@ public class RequestServiceJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox checkInComboBox;
     private javax.swing.JButton createRequestButton;
-    private javax.swing.JButton deleteRequestButton;
     private javax.swing.JComboBox hotelComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

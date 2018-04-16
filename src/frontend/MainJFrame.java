@@ -47,6 +47,7 @@ public class MainJFrame extends javax.swing.JFrame {
         presidentialCatering = new javax.swing.JButton();
         presidentialServing = new javax.swing.JButton();
         viewStaffForCheckIn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,7 +93,7 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        makeReservationButton.setText("Make Reservation");
+        makeReservationButton.setText("Make Reservation/CheckIn");
         makeReservationButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 makeReservationButtonMouseClicked(evt);
@@ -153,10 +154,17 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        viewStaffForCheckIn.setText("View Staff For CheckIn");
+        viewStaffForCheckIn.setText("View Staff, Records For CheckIn");
         viewStaffForCheckIn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 viewStaffForCheckInMouseClicked(evt);
+            }
+        });
+
+        jButton1.setText("View Active CheckIns");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
             }
         });
 
@@ -177,7 +185,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(roomTypes)
                     .addComponent(makeReservationButton)
                     .addComponent(service))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(serviceProvides, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(requestServiceButton)
@@ -187,12 +195,13 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(79, 79, 79)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(presidentialServing, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(presidentialCatering)
-                        .addGap(113, 113, 113)
-                        .addComponent(viewStaffForCheckIn)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(presidentialCatering)
+                    .addComponent(presidentialServing, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(viewStaffForCheckIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(61, 61, 61))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,9 +230,11 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(presidentialCatering)
                     .addComponent(viewStaffForCheckIn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addComponent(presidentialServing)
-                .addContainerGap())
+                .addGap(41, 41, 41)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(presidentialServing)
+                    .addComponent(jButton1))
+                .addContainerGap(227, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -431,6 +442,18 @@ public class MainJFrame extends javax.swing.JFrame {
         viewStaffForCheckInJFrame.setLocation(screenWidth/4,screenHeight/4);
     }//GEN-LAST:event_viewStaffForCheckInMouseClicked
 
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        ViewCheckInsForHotelJFrame viewCheckInsForHotelJFrame  = new ViewCheckInsForHotelJFrame();
+        viewCheckInsForHotelJFrame.setVisible(true);
+        viewCheckInsForHotelJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        viewCheckInsForHotelJFrame.setLocation(screenWidth/4,screenHeight/4);
+    }//GEN-LAST:event_jButton1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -470,6 +493,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton checkOutButton;
     private javax.swing.JButton customers;
     private javax.swing.JButton hotels;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton makeReservationButton;
     private javax.swing.JButton paymentMethodButton;

@@ -61,7 +61,7 @@
                       <Component id="makeReservationButton" min="-2" max="-2" attributes="0"/>
                       <Component id="service" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="159" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="serviceProvides" max="32767" attributes="0"/>
                       <Component id="requestServiceButton" min="-2" max="-2" attributes="0"/>
@@ -73,14 +73,15 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="presidentialServing" min="-2" pref="187" max="-2" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Component id="presidentialCatering" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
-                          <Component id="viewStaffForCheckIn" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="presidentialCatering" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="presidentialServing" alignment="1" min="-2" pref="187" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="22" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="viewStaffForCheckIn" max="32767" attributes="0"/>
+                      <Component id="jButton1" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -116,9 +117,12 @@
                       <Component id="presidentialCatering" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="viewStaffForCheckIn" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="37" max="32767" attributes="0"/>
-                  <Component id="presidentialServing" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="presidentialServing" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="227" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -174,7 +178,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="makeReservationButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Make Reservation"/>
+            <Property name="text" type="java.lang.String" value="Make Reservation/CheckIn"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="makeReservationButtonMouseClicked"/>
@@ -239,10 +243,18 @@
         </Component>
         <Component class="javax.swing.JButton" name="viewStaffForCheckIn">
           <Properties>
-            <Property name="text" type="java.lang.String" value="View Staff For CheckIn"/>
+            <Property name="text" type="java.lang.String" value="View Staff, Records For CheckIn"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="viewStaffForCheckInMouseClicked"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="View Active CheckIns"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
           </Events>
         </Component>
       </SubComponents>
