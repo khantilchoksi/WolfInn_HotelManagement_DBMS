@@ -29,7 +29,7 @@ public class AddCatererJFrame extends javax.swing.JFrame {
     public void populateCaterer(){
         ArrayList<Staff> arrayListStaff = new ArrayList<Staff>();
         try{
-            arrayListStaff = Staff.getAllCateringStaffsList(hotel.getHotelID());
+            arrayListStaff = Staff.getAllStaffsList(hotel.getHotelID());
             for(Staff staff : arrayListStaff){
                 selectCaterer.addItem(staff);
             }
