@@ -140,9 +140,12 @@ public class Staff {
         ResultSet resultSet = null;
         try
         {
-            PreparedStatement psshow = Connect.connection.prepareStatement("SELECT * "+
-                    "FROM Staffs "+
-                    "WHERE hotelID = ?");
+            PreparedStatement psshow = Connect.connection.prepareStatement("SELECT Staffs.staffFirstName, Staffs.staffLastName, StaffTypes.staffTypeName, Departments.departmentName, Staffs.birthDate, Staffs.phoneNumber, Staffs.streetAddress, Cities.cityName, Staffs.zipCode "+
+                    "FROM Staffs, StaffTypes, Cities, Departments "+
+                    "WHERE hotelID = ? AND "
+                    + "Staffs.staffTypeID = StaffTypes.staffTypeID AND "
+                    + "Staffs.departmentID = Departments.departmentID AND "
+                    + "Staffs.cityID = Cities.cityID");
             psshow.setInt(1, hotelID);
             resultSet = psshow.executeQuery();
             

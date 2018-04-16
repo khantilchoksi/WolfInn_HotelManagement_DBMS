@@ -323,6 +323,25 @@ public class CheckInJFrame extends javax.swing.JFrame {
 //        }catch(Exception e){
 //            e.printStackTrace();
 //        }
+        if(Room.getRoomTypeIDFromHotelRoomNo(this.hotelID, this.roomNo) == 4){
+            AddCatererJFrame addCatererJFrame = new AddCatererJFrame(Hotel.getHotelFromID(hotelID),CheckIn.getCheckInFromID(newCheckInCreated));
+            addCatererJFrame.setVisible(true);
+            addCatererJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            Toolkit tk1 = Toolkit.getDefaultToolkit();
+            Dimension screenSize1 = tk1.getScreenSize();
+            int screenHeight1 = screenSize1.height;
+            int screenWidth1 = screenSize1.width;
+            addCatererJFrame.setLocation(screenWidth1/4,screenHeight1/4);
+
+            AddServerJFrame addServerJFrame = new AddServerJFrame(Hotel.getHotelFromID(hotelID),CheckIn.getCheckInFromID(newCheckInCreated));
+            addServerJFrame.setVisible(true);
+            addServerJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            Toolkit tk2 = Toolkit.getDefaultToolkit();
+            Dimension screenSize2 = tk2.getScreenSize();
+            int screenHeight2 = screenSize2.height;
+            int screenWidth2 = screenSize2.width;
+            addServerJFrame.setLocation(screenWidth2/4,screenHeight2/4);
+        }
         WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
     }//GEN-LAST:event_checkInJButtonMouseClicked

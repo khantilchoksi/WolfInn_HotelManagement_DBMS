@@ -146,8 +146,8 @@ public class EditPMJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         PaymentMethod selectedPaymentMethod = (PaymentMethod)selectPMComboBox.getSelectedItem();
         int paymentMethodID = selectedPaymentMethod.getPaymentMethodID();
-        String paymentMethodName = selectedPaymentMethod.getPaymentMethodName();
-        double discountPercent = selectedPaymentMethod.getDiscountPercent();
+        String paymentMethodName = PMnameTextField.getText();
+        double discountPercent = Double.parseDouble(discountTextField.getText());
         
         boolean pmupdated = PaymentMethod.updatePaymentMethod(paymentMethodID, paymentMethodName, discountPercent);
         

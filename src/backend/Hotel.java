@@ -87,6 +87,25 @@ public class Hotel {
         
     }
     
+    public static Hotel getHotelFromID(int hotelID){
+        Hotel hotel = null;
+        ResultSet rs = null;
+        try{
+            PreparedStatement psget = Connect.connection.prepareStatement("SELECT * FROM Hotels where hotelID = ?");
+            psget.setInt(1, hotelID);
+            rs = psget.executeQuery();
+            hotel.cityID = rs.getInt("cityID");
+            hotel.hotelID = rs.getInt("hotelID");
+            hotel.hotelName = rs.getString("hotelName");
+            hotel.hotelStreetAddress = rs.getString("hotelStreetAddress");
+            hotel.phoneNumber = rs.getString("phoneNumber");
+            hotel.zipCode = rs.getInt("zipCode");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return hotel;
+    }
+    
     public static boolean updateHotelDetails(int hotelID, String hotelName, String hotelStreetAddress, int cityID, int zipCode, String phoneNumber) {
 
         try {

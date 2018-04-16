@@ -78,6 +78,7 @@ public class Bill {
             ps.setInt(2, checkInID);
             ps.setDouble(1, totalAmount);
             status = ps.execute();
+            status = true;
         }catch(Exception e){
             e.printStackTrace();
         }

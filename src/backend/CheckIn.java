@@ -366,10 +366,32 @@ public class CheckIn {
                         "WHERE checkInID = ?");
                 psupdate.setInt(1, checkInID);
                 status = psupdate.execute();
+                status = true;
         }catch(Exception e){
             e.printStackTrace();
         }
         return status;
+    }
+    
+    public static CheckIn getCheckInFromID(int checkInID){
+        CheckIn checkIn = null;
+        ResultSet rs = null;
+        try{
+            PreparedStatement psget = Connect.connection.prepareStatement("Select * FROM CheckIns WHERE checkInID = ?");
+            psget.setInt(1, checkInID);
+            rs = psget.executeQuery();
+            checkIn.setCheckInID(rs.getInt("checkInID"));
+            checkIn.setCheckOutDateTime(rs.getDate("checkOutDateTime"));
+            checkIn.setCheckInDateTime(rs.getDate("checkInDateTime"));
+            checkIn.setCustomerID(rs.getInt("customerID"));
+            checkIn.setHotelID(rs.getInt("hotelID"));
+            checkIn.setNumberOfGuests(rs.getInt("numberOfGuests"));
+            checkIn.setRoomNo(rs.getInt("roomNo"));
+            checkIn.setStaffID(rs.getInt("staffID"));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return checkIn;
     }
     
     public static ArrayList<CheckIn> getActiveCheckIns(int hotelID){
