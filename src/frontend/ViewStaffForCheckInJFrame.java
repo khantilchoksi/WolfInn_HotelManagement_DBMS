@@ -159,9 +159,22 @@ public class ViewStaffForCheckInJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         CheckIn checkIn = (CheckIn)selectCheckIn.getSelectedItem();
         try{
-            jTable1.setModel(buildTableModel(Staff.getAllStaffsForCheckIn(checkIn.getCheckInID())));
-            jScrollPane1.setViewportView(jTable1);
-            pack();
+            if(checkIn != null){
+                ResultSet showServicesResultSet = Staff.getAllStaffsForCheckIn(checkIn.getCheckInID());
+                if(showServicesResultSet!= null){
+                    jTable1.setModel(buildTableModel(showServicesResultSet));
+                    jScrollPane1.setViewportView(jTable1);
+                    pack();
+                }else{
+                    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                    model.setRowCount(0);
+                }
+                
+            }else{
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                    model.setRowCount(0);
+            }
+            
         }catch(Exception ex){
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null,ex);

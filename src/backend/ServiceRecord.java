@@ -18,13 +18,15 @@ import java.util.*;
  */
 public class ServiceRecord {
     
-    public ServiceRecord(int recordID, int checkInID, int serviceID, int staffID, int quantity, Date datetime) {
+    public ServiceRecord(int recordID, int checkInID, int serviceID, int staffID, int quantity, Date datetime, String serviceName) {
         this.recordID = recordID;
         this.checkInID = checkInID;
         this.serviceID = serviceID;
         this.staffID = staffID;
         this.quantity = quantity;
         this.datetime = datetime;
+        this.serviceName = serviceName;
+                
     }
 
     public ServiceRecord(String serviceName, double totalCost, int quantity, Date datetime) {
@@ -198,7 +200,7 @@ public class ServiceRecord {
     
     @Override
     public String toString() {
-        return "" + recordID + " - " + serviceID + "-" + quantity;
+        return "" + recordID + " - " + serviceName + ": Qty-" + quantity;
     }
 
     public static boolean createServiceRecords(int checkInID, int serviceID, int quantity) {
@@ -260,6 +262,22 @@ public class ServiceRecord {
         return false;
     }
     
+    public static boolean updateServiceRecords(int serviceRecordID, int serviceID, int quantity){
+        try{
+            PreparedStatement ps = Connect.connection.prepareStatement("Update ServiceRecords "+
+                    "SET quantity = ?, serviceID = ? "+ 
+                    "WHERE (recordID = ?)");
+            ps.setDouble(1, quantity);
+            ps.setInt(3, serviceRecordID);
+            ps.setInt(2, serviceID);
+            ps.executeQuery();
+            return(true);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
     public static ResultSet viewServices(int hotelID, int checkInID){
         ResultSet resultSet = null;
         try
@@ -307,14 +325,15 @@ public class ServiceRecord {
         int tempCheckInID;
         int tempQuantity;
         int tempStaffID;
+        String tempServiceName;
         Date tempDateTime;
         ArrayList<ServiceRecord> serviceRecordList = new ArrayList<ServiceRecord>();
         
         try
         {
-            PreparedStatement preparedStatement = Connect.connection.prepareStatement("SELECT * FROM ServiceRecords  "
-                    + "WHERE checkInID = ? "
-                    + "ORDER BY dateTime DESC");
+            PreparedStatement preparedStatement = Connect.connection.prepareStatement("SELECT * FROM ServiceRecords, Services  "
+                    + "WHERE ServiceRecords.checkInID = ? AND ServiceRecords.serviceID = Services.serviceID "
+                    + "ORDER BY ServiceRecords.dateTime DESC");
             preparedStatement.setInt(1, checkInID);
             resultSet = preparedStatement.executeQuery();
             
@@ -325,8 +344,8 @@ public class ServiceRecord {
                 tempStaffID = resultSet.getInt("staffID");
                 tempQuantity = resultSet.getInt("quantity");
                 tempDateTime = resultSet.getDate("dateTime");
-                
-                serviceRecordList.add(new ServiceRecord(tempRecordID, tempCheckInID, tempServiceID, tempStaffID, tempQuantity, tempDateTime));
+                tempServiceName = resultSet.getString("serviceName");
+                serviceRecordList.add(new ServiceRecord(tempRecordID, tempCheckInID, tempServiceID, tempStaffID, tempQuantity, tempDateTime,tempServiceName));
             }
         }catch(Exception ex){
             ex.printStackTrace();

@@ -57,16 +57,14 @@ public class CreateRequestServiceJFrame extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         serviceComboBox = new javax.swing.JComboBox();
-        quantityComboBox = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         requestButton = new javax.swing.JButton();
         closeButton = new javax.swing.JButton();
+        quantityJTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Select Service:");
-
-        quantityComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
 
         jLabel2.setText("Quantity:");
 
@@ -97,8 +95,8 @@ public class CreateRequestServiceJFrame extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(quantityComboBox, 0, 143, Short.MAX_VALUE)
-                            .addComponent(serviceComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(serviceComboBox, 0, 143, Short.MAX_VALUE)
+                            .addComponent(quantityJTextField)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(74, 74, 74)
                         .addComponent(requestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -113,11 +111,11 @@ public class CreateRequestServiceJFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(serviceComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(quantityComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(53, 53, 53)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(quantityJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(requestButton)
                     .addComponent(closeButton))
@@ -134,11 +132,11 @@ public class CreateRequestServiceJFrame extends javax.swing.JFrame {
         int serviceID = selectedService.getServiceID();
         int hotelID = selectedHotel.getHotelID();
         int checkInID = selectedCheckIn.getCheckInID();
-        Object quantity = quantityComboBox.getSelectedItem();
-        String selectedQuantity = quantity.toString();
-        int selectedQuantityInt = Integer.parseInt(selectedQuantity);
+        int quantity = Integer.parseInt(quantityJTextField.getText());
+        //String selectedQuantity = quantity.toString();
+        //int selectedQuantityInt = Integer.parseInt(selectedQuantity);
         
-        boolean newServiceRecord = ServiceRecord.createServiceRecords(checkInID, serviceID, selectedQuantityInt);
+        boolean newServiceRecord = ServiceRecord.createServiceRecords(checkInID, serviceID, quantity);
         String showMessage = "";
         if(newServiceRecord){
             showMessage = "New Service Requested Successfully!";
@@ -196,7 +194,7 @@ public class CreateRequestServiceJFrame extends javax.swing.JFrame {
     private javax.swing.JButton closeButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JComboBox quantityComboBox;
+    private javax.swing.JTextField quantityJTextField;
     private javax.swing.JButton requestButton;
     private javax.swing.JComboBox serviceComboBox;
     // End of variables declaration//GEN-END:variables
