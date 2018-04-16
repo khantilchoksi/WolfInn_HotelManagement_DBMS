@@ -196,7 +196,10 @@ public class ServiceRecord {
         this.datetime = datetime;
     }
     
-
+    @Override
+    public String toString() {
+        return "" + recordID + " - " + serviceID + "-" + quantity;
+    }
 
     public static boolean createServiceRecords(int checkInID, int serviceID, int quantity) {
         try {
@@ -295,6 +298,41 @@ public class ServiceRecord {
             e.printStackTrace();
         }
         return rs;
+    }
+    
+    public static ArrayList<ServiceRecord> getServiceRecordsList(int checkInID){
+        ResultSet resultSet = null;
+        int tempRecordID;
+        int tempServiceID;
+        int tempCheckInID;
+        int tempQuantity;
+        int tempStaffID;
+        Date tempDateTime;
+        ArrayList<ServiceRecord> serviceRecordList = new ArrayList<ServiceRecord>();
+        
+        try
+        {
+            PreparedStatement preparedStatement = Connect.connection.prepareStatement("SELECT * FROM ServiceRecords  "
+                    + "WHERE checkInID = ? "
+                    + "ORDER BY dateTime DESC");
+            preparedStatement.setInt(1, checkInID);
+            resultSet = preparedStatement.executeQuery();
+            
+            while(resultSet.next()){
+                tempRecordID = resultSet.getInt("recordID");
+                tempServiceID = resultSet.getInt("serviceID");
+                tempCheckInID = resultSet.getInt("checkInID");
+                tempStaffID = resultSet.getInt("staffID");
+                tempQuantity = resultSet.getInt("quantity");
+                tempDateTime = resultSet.getDate("dateTime");
+                
+                serviceRecordList.add(new ServiceRecord(tempRecordID, tempCheckInID, tempServiceID, tempStaffID, tempQuantity, tempDateTime));
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        
+        return serviceRecordList;
     }
     
     public static double getTotalServiceCost(int checkInID){

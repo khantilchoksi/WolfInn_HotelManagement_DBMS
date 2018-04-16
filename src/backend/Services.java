@@ -67,8 +67,6 @@ public class Services {
     }
 
     
-    
-    
     //Return Newly created room Type id or return -1 if error  
     public static boolean createService(String serviceName) {
 
@@ -165,7 +163,31 @@ public class Services {
         
     }
     
-    
-    
+    public static Services getService(int serviceID){
+        int tempServiceID;
+        String tempServiceName;
+        ResultSet resultSet = null;
+        try
+        {
+            PreparedStatement preparedStatement = Connect.connection.prepareStatement("select * from Services where serviceID = ? ");
+            preparedStatement.setInt(1, serviceID);
+            resultSet = preparedStatement.executeQuery();
+            
+            while(resultSet.next()){
+                
+                tempServiceID = resultSet.getInt("serviceID");
+                tempServiceName = resultSet.getString("serviceName");
+                return (new Services(tempServiceID, tempServiceName));
+            }
+            
+        }catch(Exception ex){
+            ex.printStackTrace();
+            //JOptionPane.showMessageDialog(null,ex);
+        }
+        return null;
+    }
     
 }
+    
+    
+
