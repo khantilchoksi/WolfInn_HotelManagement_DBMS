@@ -128,6 +128,10 @@ public class Report {
                     + "AND (CheckIns.checkOutDateTime BETWEEN ? AND ?) "
                     + "GROUP BY CheckIns.hotelID "
                     + "ORDER BY CheckIns.hotelID;");
+            //PreparedStatement pstatement = Connect.connection.prepareStatement("SELECT CheckIns.hotelID, Hotels.hotelName, SUM(Bills.totalAmount) AS TotalRevenue FROM Hotels LEFT JOIN CheckIns ON CheckIns.hotelID = Hotels.hotelID, Bills WHERE Bills.checkInID = CheckIns.checkInID AND (CheckIns.checkOutDateTime BETWEEN ? AND ?) GROUP BY Hotels.hotelID ORDER BY Hotels.hotelID;");
+            
+            
+            
             
             pstatement.setDate(1, sqlStartDate);
             pstatement.setDate(2, sqlEndDate);
@@ -141,6 +145,27 @@ public class Report {
         
         return resultSet;
     }
+    
+        public static ResultSet getAllRevenue(){
+       
+        ResultSet resultSet = null;
+        try
+        {
+            //PreparedStatement pstatement = Connect.connection.prepareStatement("SELECT CheckIns.hotelID, Hotels.hotelName, SUM(Bills.totalAmount) AS TotalRevenue FROM Hotels LEFT JOIN CheckIns ON CheckIns.hotelID = Hotels.hotelID, Bills WHERE Bills.checkInID = CheckIns.checkInID GROUP BY Hotels.hotelID ORDER BY Hotels.hotelID;");
+            PreparedStatement pstatement = Connect.connection.prepareStatement("SELECT Hotels.hotelID, Hotels.hotelName, SUM(Bills.totalAmount) AS TotalRevenue FROM Hotels LEFT JOIN (CheckIns LEFT JOIN Bills ON Bills.checkInID = CheckIns.checkInID) ON CheckIns.hotelID = Hotels.hotelID GROUP BY Hotels.hotelID ORDER BY Hotels.hotelID;");
+            //SELECT Hotels.hotelID, Hotels.hotelName, SUM(Bills.totalAmount) AS TotalRevenue FROM Hotels LEFT JOIN (CheckIns LEFT JOIN Bills ON Bills.checkInID = CheckIns.checkInID) ON CheckIns.hotelID = Hotels.hotelID GROUP BY Hotels.hotelID ORDER BY Hotels.hotelID;
+            
+            resultSet = pstatement.executeQuery();
+            //System.out.println("\n DAX COUNT: ",resultSet.)
+        }catch(Exception ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null,ex);
+        }
+        
+        return resultSet;
+    }
+    
+    
     
     public static ResultSet staffGroupedByHotel(){
         ResultSet resultSet = null;
