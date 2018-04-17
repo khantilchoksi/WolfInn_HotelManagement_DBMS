@@ -79,7 +79,7 @@
                   <EmptySpace pref="22" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="viewStaffForCheckIn" max="32767" attributes="0"/>
-                      <Component id="jButton1" max="32767" attributes="0"/>
+                      <Component id="showCheckInsButton" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
               </Group>
@@ -120,7 +120,7 @@
                   <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="presidentialServing" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="showCheckInsButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="227" max="32767" attributes="0"/>
               </Group>
@@ -249,12 +249,12 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="viewStaffForCheckInMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="showCheckInsButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="View Active CheckIns"/>
+            <Property name="text" type="java.lang.String" value="View All CheckIns"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="showCheckInsButtonMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>

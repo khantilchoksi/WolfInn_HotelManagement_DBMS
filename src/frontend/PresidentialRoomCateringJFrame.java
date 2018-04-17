@@ -197,7 +197,7 @@ public class PresidentialRoomCateringJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         Hotel h = (Hotel)selectHotel.getSelectedItem();
         CheckIn ci = (CheckIn)selectPresidentialCheckIn.getSelectedItem();
-        AddCatererJFrame addCatererJFrame = new AddCatererJFrame(h, ci);
+        AddCatererJFrame addCatererJFrame = new AddCatererJFrame(h, ci.getCheckInID());
         addCatererJFrame.setVisible(true);
         addCatererJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         Toolkit tk = Toolkit.getDefaultToolkit();

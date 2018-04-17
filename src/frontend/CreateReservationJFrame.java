@@ -253,7 +253,7 @@ public class CreateReservationJFrame extends javax.swing.JFrame {
         
         Hotel selectedHotel  = (Hotel) hotelsJComboBox.getSelectedItem();
         
-        CheckInJFrame checkInJFrame = new CheckInJFrame(selectedHotel.getHotelID(), selectedHotel.getHotelName(), roomNo);
+        CheckInJFrame checkInJFrame = new CheckInJFrame(selectedHotel, selectedHotel.getHotelName(), roomNo);
         checkInJFrame.setVisible(true);
         checkInJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         Toolkit tk = Toolkit.getDefaultToolkit();

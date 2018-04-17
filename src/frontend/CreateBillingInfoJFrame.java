@@ -6,14 +6,19 @@
 package frontend;
 
 import backend.Bill;
+import backend.CheckIn;
 import backend.City;
 import backend.Connect;
+import backend.Hotel;
 import backend.PaymentMethod;
+import backend.Room;
 import backend.State;
+import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.sql.Savepoint;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -29,9 +34,13 @@ public class CreateBillingInfoJFrame extends javax.swing.JFrame {
     CheckInJFrame ci ;
     Savepoint savepoint = null;
     boolean newBillCreated = false;
-    public CreateBillingInfoJFrame(int checkInID, CheckInJFrame cFrame, Savepoint savepoint) {
+    Hotel selectedHotel;
+    int selectedRoomNo;
+    public CreateBillingInfoJFrame(int checkInID , Hotel selectedHotel, int selectedRoomNo, CheckInJFrame cFrame, Savepoint savepoint) {
         initComponents();
         this.checkInID = checkInID;
+        this.selectedHotel = selectedHotel;
+        this.selectedRoomNo = selectedRoomNo;
         this.savepoint = savepoint;
         this.ci = cFrame;
         checkInIDJLabel.setText(String.valueOf(checkInID));
@@ -319,8 +328,31 @@ public class CreateBillingInfoJFrame extends javax.swing.JFrame {
     public void doCommitOrRollback(){
         if(this.checkInID != -1 && newBillCreated == true){
             try{
+                System.out.println("\n Before commit of presidential suit checkin id: "+this.checkInID);
                 Connect.connection.commit();
-                JOptionPane.showMessageDialog(null, "Both transactions executed correctly");
+                JOptionPane.showMessageDialog(null, "Both transactions executed correctly!");
+                Connect.connection.setAutoCommit(true);
+                
+                if(Room.getRoomTypeIDFromHotelRoomNo(this.selectedHotel.getHotelID(), this.selectedRoomNo) == 4){
+                    AddCatererJFrame addCatererJFrame = new AddCatererJFrame(this.selectedHotel,this.checkInID);
+                    addCatererJFrame.setVisible(true);
+                    addCatererJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    Toolkit tk1 = Toolkit.getDefaultToolkit();
+                    Dimension screenSize1 = tk1.getScreenSize();
+                    int screenHeight1 = screenSize1.height;
+                    int screenWidth1 = screenSize1.width;
+                    addCatererJFrame.setLocation(screenWidth1/4,screenHeight1/4);
+
+                    AddServerJFrame addServerJFrame = new AddServerJFrame(this.selectedHotel,this.checkInID);
+                    addServerJFrame.setVisible(true);
+                    addServerJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    Toolkit tk2 = Toolkit.getDefaultToolkit();
+                    Dimension screenSize2 = tk2.getScreenSize();
+                    int screenHeight2 = screenSize2.height;
+                    int screenWidth2 = screenSize2.width;
+                    addServerJFrame.setLocation(screenWidth2/4,screenHeight2/4);
+                }
+                
             }catch(Exception e){
                 e.printStackTrace();
             }

@@ -47,7 +47,7 @@ public class MainJFrame extends javax.swing.JFrame {
         presidentialCatering = new javax.swing.JButton();
         presidentialServing = new javax.swing.JButton();
         viewStaffForCheckIn = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        showCheckInsButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -161,10 +161,10 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("View Active CheckIns");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        showCheckInsButton.setText("View All CheckIns");
+        showCheckInsButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                showCheckInsButtonMouseClicked(evt);
             }
         });
 
@@ -200,7 +200,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(viewStaffForCheckIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(showCheckInsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(61, 61, 61))
         );
         jPanel1Layout.setVerticalGroup(
@@ -233,7 +233,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGap(41, 41, 41)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(presidentialServing)
-                    .addComponent(jButton1))
+                    .addComponent(showCheckInsButton))
                 .addContainerGap(227, Short.MAX_VALUE))
         );
 
@@ -442,7 +442,7 @@ public class MainJFrame extends javax.swing.JFrame {
         viewStaffForCheckInJFrame.setLocation(screenWidth/4,screenHeight/4);
     }//GEN-LAST:event_viewStaffForCheckInMouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void showCheckInsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showCheckInsButtonMouseClicked
         // TODO add your handling code here:
         ViewCheckInsForHotelJFrame viewCheckInsForHotelJFrame  = new ViewCheckInsForHotelJFrame();
         viewCheckInsForHotelJFrame.setVisible(true);
@@ -452,7 +452,7 @@ public class MainJFrame extends javax.swing.JFrame {
         int screenHeight = screenSize.height;
         int screenWidth = screenSize.width;
         viewCheckInsForHotelJFrame.setLocation(screenWidth/4,screenHeight/4);
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_showCheckInsButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -493,7 +493,6 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton checkOutButton;
     private javax.swing.JButton customers;
     private javax.swing.JButton hotels;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton makeReservationButton;
     private javax.swing.JButton paymentMethodButton;
@@ -505,6 +504,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton rooms;
     private javax.swing.JButton service;
     private javax.swing.JButton serviceProvides;
+    private javax.swing.JButton showCheckInsButton;
     private javax.swing.JButton staffs;
     private javax.swing.JButton viewStaffForCheckIn;
     // End of variables declaration//GEN-END:variables

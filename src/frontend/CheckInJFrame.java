@@ -29,13 +29,13 @@ public class CheckInJFrame extends javax.swing.JFrame {
     /**
      * Creates new form CheckInJFrame
      */
-    int hotelID;
+    Hotel selectedHotel;
     int roomNo;
-    public CheckInJFrame(int hotelID, String hotelName, int roomNo) {
+    public CheckInJFrame(Hotel selectedHotel, String hotelName, int roomNo) {
         initComponents();
-        this.hotelID = hotelID;
+        this.selectedHotel = selectedHotel;
         this.roomNo = roomNo;
-        hotelLabel.setText(""+hotelID+" - "+hotelName);
+        hotelLabel.setText(""+selectedHotel.getHotelID()+" - "+hotelName);
         roomNoLabel.setText(""+roomNo);
         populateCustomers();
         populateStaffs();
@@ -64,7 +64,7 @@ public class CheckInJFrame extends javax.swing.JFrame {
         //statesJComboBox.addItem("All States");
 
         try {
-            ArrayList<Staff> staffsList = Staff.getAllStaffsList(this.hotelID);
+            ArrayList<Staff> staffsList = Staff.getAllStaffsList(selectedHotel.getHotelID());
             for (Staff staff : staffsList) {
                 staffJComboBox.addItem(staff);
             }
@@ -276,9 +276,9 @@ public class CheckInJFrame extends javax.swing.JFrame {
         }
         int newCheckInCreated;
         if(staffJComboBox.getItemCount()==0){
-           newCheckInCreated = CheckIn.createCheckIn(selectedCutomer.getCustomerID(), this.roomNo, this.hotelID, Integer.parseInt(noGuestsJTextField.getText()));
+           newCheckInCreated = CheckIn.createCheckIn(selectedCutomer.getCustomerID(), this.roomNo, this.selectedHotel.getHotelID(), Integer.parseInt(noGuestsJTextField.getText()));
         }else{
-            newCheckInCreated = CheckIn.createCheckIn(selectedCutomer.getCustomerID(), this.roomNo, this.hotelID, selectedStaff.getStaffID(), Integer.parseInt(noGuestsJTextField.getText()));
+            newCheckInCreated = CheckIn.createCheckIn(selectedCutomer.getCustomerID(), this.roomNo, this.selectedHotel.getHotelID(), selectedStaff.getStaffID(), Integer.parseInt(noGuestsJTextField.getText()));
         }
         
          
@@ -286,6 +286,11 @@ public class CheckInJFrame extends javax.swing.JFrame {
         if(newCheckInCreated != -1){
             showMessage = "Customer's ne check-in has been successfully created with Check-In ID = "+newCheckInCreated;
             //this.statusCode = 
+            
+            
+            
+            
+            
         }else{
             showMessage = "Oops! Some error occured while creating new checkin!";
         }
@@ -295,7 +300,7 @@ public class CheckInJFrame extends javax.swing.JFrame {
         
         
         //Open Bill Window
-        CreateBillingInfoJFrame billinInfoJFrame = new CreateBillingInfoJFrame(newCheckInCreated,this,s);
+        CreateBillingInfoJFrame billinInfoJFrame = new CreateBillingInfoJFrame(newCheckInCreated,this.selectedHotel, this.roomNo,this,s);
         billinInfoJFrame.setVisible(true);
         billinInfoJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -323,25 +328,7 @@ public class CheckInJFrame extends javax.swing.JFrame {
 //        }catch(Exception e){
 //            e.printStackTrace();
 //        }
-        if(Room.getRoomTypeIDFromHotelRoomNo(this.hotelID, this.roomNo) == 4){
-            AddCatererJFrame addCatererJFrame = new AddCatererJFrame(Hotel.getHotelFromID(hotelID),CheckIn.getCheckInFromID(newCheckInCreated));
-            addCatererJFrame.setVisible(true);
-            addCatererJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            Toolkit tk1 = Toolkit.getDefaultToolkit();
-            Dimension screenSize1 = tk1.getScreenSize();
-            int screenHeight1 = screenSize1.height;
-            int screenWidth1 = screenSize1.width;
-            addCatererJFrame.setLocation(screenWidth1/4,screenHeight1/4);
 
-            AddServerJFrame addServerJFrame = new AddServerJFrame(Hotel.getHotelFromID(hotelID),CheckIn.getCheckInFromID(newCheckInCreated));
-            addServerJFrame.setVisible(true);
-            addServerJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            Toolkit tk2 = Toolkit.getDefaultToolkit();
-            Dimension screenSize2 = tk2.getScreenSize();
-            int screenHeight2 = screenSize2.height;
-            int screenWidth2 = screenSize2.width;
-            addServerJFrame.setLocation(screenWidth2/4,screenHeight2/4);
-        }
         WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
     }//GEN-LAST:event_checkInJButtonMouseClicked
