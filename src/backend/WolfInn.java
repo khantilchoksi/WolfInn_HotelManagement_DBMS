@@ -190,7 +190,7 @@ public class WolfInn {
 										"totalAmount DOUBLE,"+
 										"payerFirstName VARCHAR(100) NOT NULL,"+
 										"payerLastName VARCHAR(100),"+
-										"cardNumber VARCHAR(20) NOT NULL,"+
+										"cardNumber VARCHAR(20),"+
 										"SSN VARCHAR(11) NOT NULL,"+
 										"payerBillingAddress TEXT,"+
 										"cityID INTEGER,"+
