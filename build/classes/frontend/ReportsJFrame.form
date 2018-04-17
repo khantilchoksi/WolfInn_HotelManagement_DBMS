@@ -55,12 +55,15 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="staffGroupedButton" max="32767" attributes="0"/>
-                              <Component id="occupancyCityButton" alignment="0" max="32767" attributes="0"/>
-                              <Component id="occupancyHotelButton" alignment="0" max="32767" attributes="0"/>
-                              <Component id="checkInsDateButton" alignment="0" max="32767" attributes="0"/>
-                              <Component id="OccupancyRoomTypeButton" alignment="0" max="32767" attributes="0"/>
-                              <Component id="revenueButton" max="32767" attributes="0"/>
+                              <Component id="allRevenueButton" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="staffGroupedButton" max="32767" attributes="0"/>
+                                  <Component id="occupancyCityButton" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="occupancyHotelButton" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="checkInsDateButton" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="OccupancyRoomTypeButton" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="revenueButton" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -101,7 +104,9 @@
                   <Component id="staffGroupedButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   <Component id="revenueButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="71" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="allRevenueButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="30" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -154,7 +159,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="revenueButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Revenue"/>
+            <Property name="text" type="java.lang.String" value="Revenue by Dates"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="revenueButtonMouseClicked"/>
@@ -174,6 +179,14 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="percentOccupancyButtonMouseClicked"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="allRevenueButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Revenue All"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="allRevenueButtonMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>

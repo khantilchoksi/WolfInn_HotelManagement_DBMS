@@ -41,6 +41,7 @@ public class ReportsJFrame extends javax.swing.JFrame {
         revenueButton = new javax.swing.JButton();
         staffByRoleHotel = new javax.swing.JButton();
         percentOccupancyButton = new javax.swing.JButton();
+        allRevenueButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,7 +82,7 @@ public class ReportsJFrame extends javax.swing.JFrame {
             }
         });
 
-        revenueButton.setText("Revenue");
+        revenueButton.setText("Revenue by Dates");
         revenueButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 revenueButtonMouseClicked(evt);
@@ -102,6 +103,13 @@ public class ReportsJFrame extends javax.swing.JFrame {
             }
         });
 
+        allRevenueButton.setText("Revenue All");
+        allRevenueButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                allRevenueButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -114,15 +122,17 @@ public class ReportsJFrame extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(staffGroupedButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(occupancyCityButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(occupancyHotelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(checkInsDateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(OccupancyRoomTypeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(revenueButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(allRevenueButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(staffGroupedButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(occupancyCityButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(occupancyHotelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(checkInsDateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(OccupancyRoomTypeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(revenueButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(66, 66, 66)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(staffByRoleHotel, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                            .addComponent(staffByRoleHotel, javax.swing.GroupLayout.PREFERRED_SIZE, 192, Short.MAX_VALUE)
                             .addComponent(percentOccupancyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(105, Short.MAX_VALUE))
         );
@@ -150,7 +160,9 @@ public class ReportsJFrame extends javax.swing.JFrame {
                 .addComponent(staffGroupedButton)
                 .addGap(36, 36, 36)
                 .addComponent(revenueButton)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(allRevenueButton)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -269,6 +281,18 @@ public class ReportsJFrame extends javax.swing.JFrame {
         percentOccupancyJFrame.setLocation(screenWidth/4,screenHeight/4);
     }//GEN-LAST:event_percentOccupancyButtonMouseClicked
 
+    private void allRevenueButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_allRevenueButtonMouseClicked
+        // TODO add your handling code here:
+        AllRevenueJFrame allRevenueJFrame = new AllRevenueJFrame();
+        allRevenueJFrame.setVisible(true);
+        allRevenueJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        allRevenueJFrame.setLocation(screenWidth/4,screenHeight/4);
+    }//GEN-LAST:event_allRevenueButtonMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -306,6 +330,7 @@ public class ReportsJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton OccupancyRoomTypeButton;
+    private javax.swing.JButton allRevenueButton;
     private javax.swing.JButton checkInsDateButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
