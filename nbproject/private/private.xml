@@ -3,20 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/NCSU/Sem%20II/DBMS/DBMS_WolfInn/src/backend/PresidentialRoomCatering.java</file>
-            <file>file:/D:/NCSU/Sem%20II/DBMS/DBMS_WolfInn/src/backend/Hotel.java</file>
-            <file>file:/D:/NCSU/Sem%20II/DBMS/DBMS_WolfInn/src/frontend/CheckOutJFrame.java</file>
-            <file>file:/D:/NCSU/Sem%20II/DBMS/DBMS_WolfInn/src/backend/ServiceRecord.java</file>
-            <file>file:/D:/NCSU/Sem%20II/DBMS/DBMS_WolfInn/src/backend/RoomType.java</file>
-            <file>file:/D:/NCSU/Sem%20II/DBMS/DBMS_WolfInn/src/backend/PresidentialServing.java</file>
-            <file>file:/D:/NCSU/Sem%20II/DBMS/DBMS_WolfInn/src/backend/CheckIn.java</file>
-            <file>file:/D:/NCSU/Sem%20II/DBMS/DBMS_WolfInn/src/frontend/CheckInJFrame.java</file>
-            <file>file:/D:/NCSU/Sem%20II/DBMS/DBMS_WolfInn/src/backend/Customer.java</file>
-            <file>file:/D:/NCSU/Sem%20II/DBMS/DBMS_WolfInn/src/backend/Bill.java</file>
-            <file>file:/D:/NCSU/Sem%20II/DBMS/DBMS_WolfInn/src/backend/DropWolfInn.java</file>
-            <file>file:/D:/NCSU/Sem%20II/DBMS/DBMS_WolfInn/src/backend/PaymentMethod.java</file>
-            <file>file:/D:/NCSU/Sem%20II/DBMS/DBMS_WolfInn/src/backend/State.java</file>
-            <file>file:/D:/NCSU/Sem%20II/DBMS/DBMS_WolfInn/src/backend/Services.java</file>
+            <file>file:/D:/NCSU/Sem%20II/DBMS/DBMS_WolfInn/src/frontend/UpdateServiceRequestJFrame.java</file>
+            <file>file:/D:/NCSU/Sem%20II/DBMS/DBMS_WolfInn/src/backend/Report.java</file>
+            <file>file:/D:/NCSU/Sem%20II/DBMS/DBMS_WolfInn/src/frontend/PercentOccupancyJFrame.java</file>
         </group>
     </open-files>
 </project-private>
