@@ -109,4 +109,18 @@ public class PresidentialServing {
         return rs;
     }
     
+    public static ResultSet getServerHotelDetails(int hotelID){
+        ResultSet rs = null;
+        try{
+            PreparedStatement ps = Connect.connection.prepareStatement("SELECT  CheckIns.roomNo, Staffs.staffFirstName, Staffs.staffLastName "
+                    + "FROM PresidentialRoomServing, Staffs, CheckIns "
+                    + "WHERE CheckIns.hotelID = ? AND CheckIns.checkInID = PresidentialRoomServing.checkInID AND PresidentialRoomServing.staffID = Staffs.staffID AND (CheckIns.checkOutDateTime =\"0000-00-00 00:00:00\" OR CheckIns.checkOutDateTime IS NULL)");
+            ps.setInt(1, hotelID);
+            rs = ps.executeQuery();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return rs;
+    }
+    
 }

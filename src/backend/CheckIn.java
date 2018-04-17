@@ -420,6 +420,70 @@ public class CheckIn {
         return activeCheckIns;
     }
     
+    public static ResultSet getActiveCheckInsRS(int hotelID){
+        //ArrayList<CheckIn> activeCheckIns = new ArrayList<CheckIn>();
+        ResultSet rs = null;
+        //int tempcheckInID,tempRoomNo;
+        //String tempCustomerName;
+        
+        try{
+            PreparedStatement ps = Connect.connection.prepareStatement("SELECT CheckIns.checkInID, Customers.customerFirstName, CheckIns.roomNo, Bills.* "+
+                    "FROM CheckIns, Customers, Bills "+
+                    "WHERE CheckIns.hotelID = ? AND CheckIns.checkInID = Bills.checkInID AND CheckIns.customerID = Customers.customerID AND (CheckIns.checkOutDateTime =\"0000-00-00 00:00:00\" OR CheckIns.checkOutDateTime IS NULL)");
+            ps.setInt(1, hotelID);
+            rs = ps.executeQuery();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return rs;
+    }
+    
+    public static ArrayList<CheckIn> getAllCheckIns(int hotelID){
+        ArrayList<CheckIn> activeCheckIns = new ArrayList<CheckIn>();
+        ResultSet rs = null;
+        int tempcheckInID,tempRoomNo;
+        String tempCustomerName;
+        
+        try{
+            PreparedStatement ps = Connect.connection.prepareStatement("SELECT CheckIns.checkInID, Customers.customerFirstName, CheckIns.roomNo "+
+                    "FROM CheckIns, Customers "+
+                    "WHERE CheckIns.hotelID = ? AND CheckIns.customerID = Customers.customerID ");
+            ps.setInt(1, hotelID);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                tempcheckInID = rs.getInt("checkInID");
+                tempRoomNo = rs.getInt("roomNo");
+                tempCustomerName = rs.getString("customerFirstName");
+                activeCheckIns.add(new CheckIn(tempcheckInID, tempRoomNo, tempCustomerName));
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return activeCheckIns;
+    }
+    
+    public static ResultSet getAllCheckInsRS(int hotelID){
+        //ArrayList<CheckIn> activeCheckIns = new ArrayList<CheckIn>();
+        ResultSet rs = null;
+        //int tempcheckInID,tempRoomNo;
+        //String tempCustomerName;
+        
+        try{
+            PreparedStatement ps = Connect.connection.prepareStatement("SELECT CheckIns.checkInID, Customers.customerFirstName, CheckIns.roomNo, Bills.* "+
+                    "FROM CheckIns, Customers, Bills "+
+                    "WHERE CheckIns.hotelID = ? AND CheckIns.checkInID = Bills.checkInID AND CheckIns.customerID = Customers.customerID ");
+            ps.setInt(1, hotelID);
+            rs = ps.executeQuery();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return rs;
+    }
+    
     public static ArrayList<CheckIn> getActivePresidentialCheckIns(int hotelID){
         ArrayList<CheckIn> activeCheckIns = new ArrayList<CheckIn>();
         ResultSet rs = null;

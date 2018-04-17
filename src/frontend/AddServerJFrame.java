@@ -31,7 +31,7 @@ public class AddServerJFrame extends javax.swing.JFrame {
     public void populateServer(){
         ArrayList<Staff> arrayListStaff = new ArrayList<Staff>();
         try{
-            arrayListStaff = Staff.getAllCateringStaffsList(hotel.getHotelID());
+            arrayListStaff = Staff.getAllStaffsList(hotel.getHotelID());
             for(Staff staff : arrayListStaff){
                 selectServer.addItem(staff);
             }

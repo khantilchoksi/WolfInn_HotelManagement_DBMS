@@ -8,7 +8,10 @@ package frontend;
 import backend.CheckIn;
 import backend.ServiceRecord;
 import backend.Services;
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -71,9 +74,9 @@ public class UpdateServiceRequestJFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         selectServiceComboBox = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
-        quantityComboBox = new javax.swing.JComboBox();
         updateButton = new javax.swing.JButton();
         closeButton = new javax.swing.JButton();
+        quantityJTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,11 +92,19 @@ public class UpdateServiceRequestJFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Quantity:");
 
-        quantityComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-
         updateButton.setText("Update");
+        updateButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                updateButtonMouseClicked(evt);
+            }
+        });
 
         closeButton.setText("close");
+        closeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                closeButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -110,15 +121,15 @@ public class UpdateServiceRequestJFrame extends javax.swing.JFrame {
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(31, 31, 31)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(serviceRecordComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(serviceRecordComboBox, 0, 484, Short.MAX_VALUE)
                             .addComponent(selectServiceComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(quantityComboBox, 0, 172, Short.MAX_VALUE)))
+                            .addComponent(quantityJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(139, 139, 139)
                         .addComponent(updateButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 425, Short.MAX_VALUE)
                         .addComponent(closeButton)))
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addContainerGap(169, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,15 +142,15 @@ public class UpdateServiceRequestJFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(selectServiceComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(36, 36, 36)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(quantityComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(79, 79, 79)
+                    .addComponent(quantityJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(82, 82, 82)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(updateButton)
                     .addComponent(closeButton))
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(201, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -168,10 +179,31 @@ public class UpdateServiceRequestJFrame extends javax.swing.JFrame {
         
         Services selectedService = Services.getService(selectedRecord.getServiceID());
         System.out.println(selectedService);
-        //Integer quantity = new Integer(selectedRecord.getQuantity());
+        Integer quantity = new Integer(selectedRecord.getQuantity());
         selectServiceComboBox.setSelectedItem(selectedService);
-        //quantityComboBox.setSelectedItem(quantity);
+        quantityJTextField.setText(quantity.toString());
     }//GEN-LAST:event_serviceRecordComboBoxActionPerformed
+
+    private void updateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateButtonMouseClicked
+        // TODO add your handling code here:
+        ServiceRecord serviceRecord = (ServiceRecord)serviceRecordComboBox.getSelectedItem();
+        Services service = (Services)selectServiceComboBox.getSelectedItem();
+        int quantity = Integer.parseInt(quantityJTextField.getText().toString());
+        boolean status = ServiceRecord.updateServiceRecords(serviceRecord.getRecordID(), service.getServiceID(), quantity);
+        if(status){
+            JOptionPane.showMessageDialog(null, "Successfully updated");
+        }else{
+            JOptionPane.showMessageDialog(null, "Error while update");
+        }
+        WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+    }//GEN-LAST:event_updateButtonMouseClicked
+
+    private void closeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeButtonMouseClicked
+        // TODO add your handling code here:
+        WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+    }//GEN-LAST:event_closeButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -214,7 +246,7 @@ public class UpdateServiceRequestJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JComboBox quantityComboBox;
+    private javax.swing.JTextField quantityJTextField;
     private javax.swing.JComboBox selectServiceComboBox;
     private javax.swing.JComboBox serviceRecordComboBox;
     private javax.swing.JButton updateButton;

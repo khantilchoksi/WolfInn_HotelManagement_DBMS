@@ -24,7 +24,7 @@ public class Report {
             Statement statement = Connect.connection.createStatement();
             resultSet = statement.executeQuery("SELECT CheckIns.hotelID, Hotels.hotelName, COUNT(*) AS TotalRoomsOccupied "
                     + "FROM CheckIns, Hotels "
-                    + "WHERE CheckIns.hotelID = Hotels.hotelID AND (checkOutDateTime = '0000-00-00 00:00:00' OR checkOutDateTime = NULL) "
+                    + "WHERE CheckIns.hotelID = Hotels.hotelID AND (checkOutDateTime = '0000-00-00 00:00:00' OR checkOutDateTime IS NULL) "
                     + "GROUP BY CheckIns.hotelID;");
             
         }catch(Exception ex){
@@ -43,7 +43,7 @@ public class Report {
             resultSet = statement.executeQuery("SELECT RoomTypes.roomTypeName, COUNT(*) AS TotalOccupied "
                     + "FROM CheckIns, RoomTypes, Rooms "
                     + "WHERE CheckIns.hotelID = Rooms.hotelID AND CheckIns.roomNo = Rooms.roomNo "
-                    + "AND Rooms.roomTypeID = RoomTypes.roomTypeID AND (checkOutDateTime = '0000-00-00 00:00:00' OR checkOutDateTime = NULL) "
+                    + "AND Rooms.roomTypeID = RoomTypes.roomTypeID AND (checkOutDateTime = '0000-00-00 00:00:00' OR checkOutDateTime IS NULL) "
                     + "GROUP BY RoomTypes.roomTypeName "
                     + "ORDER BY RoomTypes.roomTypeName;");
             
@@ -63,7 +63,7 @@ public class Report {
             resultSet = statement.executeQuery("SELECT Cities.cityName, COUNT(*) AS TotalOccupied "
                     + "FROM CheckIns, Hotels, Cities "
                     + "WHERE CheckIns.hotelID = Hotels.hotelID AND Hotels.cityID = Cities.cityID "
-                    + "AND (checkOutDateTime = '0000-00-00 00:00:00' OR checkOutDateTime = NULL) "
+                    + "AND (checkOutDateTime = '0000-00-00 00:00:00' OR checkOutDateTime IS NULL) "
                     + "GROUP BY Cities.cityID "
                     + "ORDER BY Cities.cityName;");
             

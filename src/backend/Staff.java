@@ -296,6 +296,24 @@ public class Staff {
         return staffList;
     }
     
-    
+    public static ResultSet getAllStaffsForCheckIn(int checkInID){
+        ResultSet rs = null;
+        try{
+            PreparedStatement psget = Connect.connection.prepareStatement("SELECT Staffs.staffFirstName, Staffs.staffLastName, StaffTypes.staffTypeName "
+                    + "FROM CheckIns,Staffs, StaffTypes "
+                    + "WHERE CheckIns.checkInID = ? AND CheckIns.staffID = Staffs.staffID AND Staffs.staffTypeID = StaffTypes.staffTypeID "
+                    + "UNION "
+                    + "SELECT Staffs.staffFirstName, Staffs.staffLastName, StaffTypes.staffTypeName "
+                    + "FROM ServiceRecords, Staffs, StaffTypes "
+                    + "WHERE ServiceRecords.checkInID = ? AND ServiceRecords.staffID = Staffs.staffID AND Staffs.staffTypeID = StaffTypes.staffTypeID ");
+            psget.setInt(1,checkInID);
+            psget.setInt(2,checkInID);
+            rs = psget.executeQuery();
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return rs;
+    }
     
 }
