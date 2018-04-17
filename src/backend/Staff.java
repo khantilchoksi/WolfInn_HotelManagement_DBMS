@@ -74,7 +74,7 @@ public class Staff {
     
     @Override
     public String toString() {
-        return "" + staffID + " - " + staffFirstName + " " + staffLastName;
+        return "" + staffID + " - " + staffFirstName + " " + staffLastName ;
     }
     
     public Staff(int staffID, int hotelID, int staffTypeID, int departmentID, String staffFirstName, String staffLastName, Date birthDate,

@@ -87,8 +87,8 @@ public class PresidentialServing {
             PreparedStatement pscreate = Connect.connection.prepareStatement("INSERT INTO PresidentialRoomServing(checkInID, staffID) VALUES(?,?)");
             pscreate.setInt(1, checkInID);
             pscreate.setInt(2, staffID);
-            status = pscreate.execute();
-                    
+            pscreate.execute();
+            status = true;     
         }catch(Exception e){
             e.printStackTrace();
         }

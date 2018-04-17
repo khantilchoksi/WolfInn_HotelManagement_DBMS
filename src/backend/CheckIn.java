@@ -326,8 +326,9 @@ public class CheckIn {
     public static double getRoomCost(int checkInID){
         ResultSet rs = null;
         double roomCost = 0;
+        double tempDailyCost = 0;
         try{
-            PreparedStatement pstotal = Connect.connection.prepareStatement("SELECT DATEDIFF( NOW(), CheckIns.checkInDateTime)*Rooms.roomRates AS totalStayCost " +
+            PreparedStatement pstotal = Connect.connection.prepareStatement("SELECT DATEDIFF( NOW(), CheckIns.checkInDateTime)*Rooms.roomRates AS totalStayCost, Rooms.roomRates AS singleDayRate " +
                 "FROM CheckIns,Rooms " +
                 "WHERE CheckIns.checkInID = ? " +
                     "AND CheckIns.roomNo = Rooms.roomNo " +
@@ -336,6 +337,11 @@ public class CheckIn {
             rs = pstotal.executeQuery();
             if(rs.next()){
                 roomCost = rs.getDouble("totalStayCost");
+                tempDailyCost = rs.getDouble("singleDayRate");
+            }
+            if(roomCost == 0){
+                roomCost = tempDailyCost;
+                System.out.println("\n CheckedOut in less than a day!");
             }
         }catch(Exception e){
             e.printStackTrace();
